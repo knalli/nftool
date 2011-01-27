@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_fhkoeln_edb_nftool_TableColumn" object="${tablecolumn}" path="/tablecolumns" z="cmdqS5p7a5y28M9ZEcq8jPWV5MM=">
+        <field:display field="name" id="s_fhkoeln_edb_nftool_TableColumn_name" object="${tablecolumn}" z="h0ZwnVHNVUhCuk4i1OttsfwXRms="/>
+        <field:display field="locale" id="s_fhkoeln_edb_nftool_TableColumn_locale" object="${tablecolumn}" z="oGAG1RQoFClGNvbbjYyqy/zwJCk="/>
+        <field:display field="keyColumn" id="s_fhkoeln_edb_nftool_TableColumn_keyColumn" object="${tablecolumn}" z="rvMvucp3aL58z5JCpWwaYifA0tM="/>
+        <field:display field="tableRows" id="s_fhkoeln_edb_nftool_TableColumn_tableRows" object="${tablecolumn}" z="NT8fNaIFrqdQG60jLqRxzfyeAXU="/>
+        
+    </page:show>
+</div>

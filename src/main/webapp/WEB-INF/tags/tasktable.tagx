@@ -1,0 +1,66 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:form="http://www.springframework.org/tags/form" version="2.0">
+	<jsp:output omit-xml-declaration="yes"/>
+	
+	<jsp:directive.attribute name="tables" type="java.util.Set" required="true" description="The table(s) to be printed."/>
+	<jsp:directive.attribute name="controls" type="java.lang.Boolean" required="true" description="Add header controls?"/>
+	<jsp:directive.attribute name="locked" type="java.lang.Boolean" description="Allow control modification?"/>
+	
+	<spring:theme code="keyColumnClass" var="keyClass"/>
+	<spring:theme code="keyHeaderClass" var="keyHeadClass"/>
+	<spring:theme code="headerControlClass" var="headerControlClass"/>
+	
+	<c:forEach var="table" items="${tables}">
+		<table class="exercise" width="100%">
+			<caption><c:out value="${i18nService.getText(table, 'description', locale)}" /></caption>
+			<thead>
+				<tr>
+					<c:forEach var="column" items="${table.tableColumns}">
+						<th class="${column.keyColumn ? keyHeadClass : ''} ${controls ? headerControlClass : ''} blue-gradient">
+							<c:if test="${column.keyColumn}">
+								<span class="${keyClass}">&#160;</span>							
+							</c:if>
+							<c:choose>
+								<c:when test="${controls}">
+									<c:set var="colName" value="${i18nService.getText(column, 'name', locale)}" />
+									<label for="lbl${colName}"><c:out value="${colName}" /></label>
+									<c:choose>
+										<c:when test="${locked}">
+											<form:checkbox path="columns" id="lbl${colName}" value="${colName}" disabled="true" />						
+										</c:when>
+										<c:otherwise>
+											<form:checkbox path="columns" id="lbl${colName}" value="${colName}" />
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+								<c:otherwise>
+									<c:out value="${i18nService.getText(column, 'name', locale)}" />
+								</c:otherwise>
+							</c:choose>
+						</th>
+					</c:forEach>
+				</tr>
+			</thead>
+			<tbody>
+				<c:set var="rowNumber" value="1" />
+				<c:set var="rowSeperator"><![CDATA[</tr><tr>]]></c:set>
+				<tr>
+					<c:forEach var="row" items="${table.tableRows}">
+						<c:if test="${row.rowNumber gt rowNumber}">
+							<c:set var="rowNumber" value="${rowNumber + 1}"/>
+							${rowSeperator}
+						</c:if>
+						<td>
+							<c:if test="${row.texts['en_EN'].content eq ''}">
+								&#160;
+							</c:if>
+							<c:if test="${row.texts['en_EN'].content eq null}">
+								<em>NULL</em>
+							</c:if>
+							<c:out value="${row.texts['en_EN'].content}" />
+						</td>
+					</c:forEach>
+				</tr>
+			</tbody>
+		</table>
+	</c:forEach>
+ </jsp:root>

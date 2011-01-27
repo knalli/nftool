@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="localizedlabels/list">
+        <put-attribute name="body" value="/WEB-INF/views/localizedlabels/list.jspx"/>
+    </definition>
+<definition extends="default" name="localizedlabels/show">
+        <put-attribute name="body" value="/WEB-INF/views/localizedlabels/show.jspx"/>
+    </definition>
+<definition extends="default" name="localizedlabels/create">
+        <put-attribute name="body" value="/WEB-INF/views/localizedlabels/create.jspx"/>
+    </definition>
+<definition extends="default" name="localizedlabels/update">
+        <put-attribute name="body" value="/WEB-INF/views/localizedlabels/update.jspx"/>
+    </definition>
+<definition extends="default" name="localizedlabels/findLocalizedLabelsByEntityNameAndAttributeIdAndLocale">
+        <put-attribute name="body" value="/WEB-INF/views/localizedlabels/findLocalizedLabelsByEntityNameAndAttributeIdAndLocale.jspx"/>
+    </definition>
+<definition extends="default" name="localizedlabels/findLocalizedLabelsByEntityNameAndAttributeNameAndLocale">
+        <put-attribute name="body" value="/WEB-INF/views/localizedlabels/findLocalizedLabelsByEntityNameAndAttributeNameAndLocale.jspx"/>
+    </definition>
+</tiles-definitions>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_fhkoeln_edb_nftool_Task" object="${task}" path="/tasks" z="KzoTLmGKxcl/peSSk3NnqwinWyM=">
+        <field:display field="ordering" id="s_fhkoeln_edb_nftool_Task_ordering" object="${task}" z="FKMD0ZQIXm/9c0ZWsGz7uNw3xWs="/>
+        <field:display field="description" id="s_fhkoeln_edb_nftool_Task_description" object="${task}" z="mfRbHiPiBd2V3nEJ14dthieY4HA="/>
+        
+        
+        
+        
+    <field:display field="taskTables" id="s_fhkoeln_edb_nftool_Task_taskTables" object="${task}" z="r6ciH5V6/aEDp/0ZFmltBIVsja8="/>
+    <field:display field="solved" id="s_fhkoeln_edb_nftool_Task_solved" object="${task}" z="rhNkuWhdg+OJ4DK4AvXKJPEOySw="/>
+    <field:display field="state" id="s_fhkoeln_edb_nftool_Task_state" object="${task}" z="08pWWa1qLj2+OqRFLT0Oij05yrE="/>
+    <field:display field="exercise" id="s_fhkoeln_edb_nftool_Task_exercise" object="${task}" z="U7i516QoPaF+TSbTQHBGRJrh6E8="/>
+    </page:show>
+</div>

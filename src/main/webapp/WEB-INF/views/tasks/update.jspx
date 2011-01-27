@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_fhkoeln_edb_nftool_Task" modelAttribute="task" path="/tasks" z="hTSAIxP/msc3inq4A4TRLcYAiHE=">
+        <field:input field="ordering" id="c_fhkoeln_edb_nftool_Task_ordering" required="true" z="4liTgybrNyinIu22S4bH5W5nBpg="/>
+        <field:textarea field="description" id="c_fhkoeln_edb_nftool_Task_description" required="true" z="i3Bt7Qw8elaBaSWTQM+DDa1lPys="/>
+        
+        
+        
+        
+    <field:simple field="taskTables" id="c_fhkoeln_edb_nftool_Task_taskTables" messageCode="entity_reference_not_managed" messageCodeAttribute="Task Table" z="+hiMQWpG3ejHMZKDhHdCOMMmVPo="/>
+    <field:checkbox field="solved" id="c_fhkoeln_edb_nftool_Task_solved" z="zrlSulsLMI4SqmdT4C63/cylpYo="/>
+    <field:select field="state" id="c_fhkoeln_edb_nftool_Task_state" items="${exercisestates}" path="exercisestates" z="a196lskMMwofQU5uWIx4VZnV0o4="/>
+    <field:select field="exercise" id="c_fhkoeln_edb_nftool_Task_exercise" itemValue="id" items="${exercises}" path="/exercises" z="MOzCOjYatGF1MjEQzcOsz81zbqY="/>
+    </form:update>
+</div>

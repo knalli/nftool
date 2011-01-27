@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_fhkoeln_edb_nftool_Points" modelAttribute="points" path="/pointses" z="dgTUnu6yuDJUK7xpxv0g/vu/N9Y=">
+        
+        <field:datetime dateTimePattern="${points_gamedate_date_format}" field="gameDate" id="c_fhkoeln_edb_nftool_Points_gameDate" z="HaYfemMscRHDFwDWOjKAxRhIOWQ="/>
+        <field:input field="points" id="c_fhkoeln_edb_nftool_Points_points" min="0" required="true" validationMessageCode="field_invalid_integer" z="x4zZf2cPBPvcL0uwBsTY8QdAjEg="/>
+        <field:input field="appKey" id="c_fhkoeln_edb_nftool_Points_appKey" max="10" required="true" z="AD2OAaZGJwosPBPfbyfMiXC2fBI="/>
+        
+    
+    <field:input field="username" id="c_fhkoeln_edb_nftool_Points_username" required="true" z="5ulKeW6LwNU5HRJwW/BAnu/8ARQ="/>
+    </form:update>
+</div>

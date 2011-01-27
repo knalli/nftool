@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:find finderName="ByEntityNameAndAttributeNameAndLocale" id="ff_fhkoeln_edb_nftool_service_LocalizedLabel" path="/localizedlabels" z="DvW7PPwQZ8dEytFH+MUFVO0D0pI=">
+        <field:input disableFormBinding="true" field="entityName" id="f_fhkoeln_edb_nftool_service_LocalizedLabel_entityName" max="20" required="true" z="d1U1ANTzs9iKAHPOPGX4/b2/oB8="/>
+        <field:input disableFormBinding="true" field="attributeName" id="f_fhkoeln_edb_nftool_service_LocalizedLabel_attributeName" z="3QYxdBjj7bCwOKE0XoymsATxqcs="/>
+        <field:input disableFormBinding="true" field="locale" id="f_fhkoeln_edb_nftool_service_LocalizedLabel_locale" z="X+O+T1vIbLfSd7wO6s/EgiNq8To="/>
+    </form:find>
+</div>

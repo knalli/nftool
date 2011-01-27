@@ -1,0 +1,19 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:form="http://www.springframework.org/tags/form" version="2.0">
+	<jsp:output omit-xml-declaration="yes"/>
+	<div id="_title">
+		<h1>${Exercise.texts['en'].title}</h1>
+		<p class="description yellow-gradient">${task.texts['en'].description}</p>
+		
+		<form method="POST">
+			<div class="tables">
+				<roo:tasktable tables="${task.tables}" controls="false"/>
+			</div>
+			<div class="submit">
+				<spring:message var="finish" code="button.finish" />
+				<spring:message var="back" code="button.back" />
+				<input type="submit" id="back" name="_eventId_back" value="${back}"/>
+				<input type="submit" id="success" name="_eventId_success" value="${finish}" />
+			</div>		
+		</form>
+	</div>
+</div>

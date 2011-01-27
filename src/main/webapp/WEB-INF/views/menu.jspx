@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+	<jsp:output omit-xml-declaration="yes"/>
+
+<menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+        <menu:category id="c_flows" z="5igpkb/e+HPIN8iUErvmM38Eqqk=">
+	        <menu:item id="i_flows_doexercise" messageCode="webflow_menu_enter" url="/doexercise" z="sEg9iqk/1gL/tEYwxZerKxYWa6E="/>
+        </menu:category>
+    <menu:category id="c_tasktable" z="6Bj0v6UVpoC4zLSttD0g+eZ0U2w=">
+            <menu:item id="i_tasktable_new" messageCode="global_menu_new" url="/tasktables?form" z="1+lSZ8b1/0blSuMmbfPLiKdcENM="/>
+        <menu:item id="i_tasktable_list" messageCode="global_menu_list" url="/tasktables?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="axJaSVaXOYbofDquS5f1q+Pdo6E="/>
+        </menu:category>
+    <menu:category id="c_tablecolumn" z="/q+4s1sB0q1raOVcCAB8Vm2iWxo=">
+            <menu:item id="i_tablecolumn_new" messageCode="global_menu_new" url="/tablecolumns?form" z="c/rPKxUMY5Fe0aAD4mHRfe9199M="/>
+        <menu:item id="i_tablecolumn_list" messageCode="global_menu_list" url="/tablecolumns?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="Za7hft+joYm6ZLbwBQw05oy+Wkc="/>
+        
+        
+        </menu:category>
+    <menu:category id="c_points" z="larJLAyrJlbryM4DCIVB+/21n2I=">
+            <menu:item id="i_points_new" messageCode="global_menu_new" url="/pointses?form" z="OB3O9BSUc1kI18dg4WKJrJRc0ZM="/>
+        <menu:item id="i_points_list" messageCode="global_menu_list" url="/pointses?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="qd7MhBhHzPdSaWvdIgefQioI91o="/>
+        </menu:category>
+    <menu:category id="c_tablerow" z="fTlR2necPCv39/gX+lwKUoBBhbY=">
+            <menu:item id="i_tablerow_new" messageCode="global_menu_new" url="/tablerows?form" z="4RYKfSngo+wgEZn1hdxMePrP/zY="/>
+        <menu:item id="i_tablerow_list" messageCode="global_menu_list" url="/tablerows?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="pFPZvtZeCqHDpJoCXayCvYN8uIc="/>
+        </menu:category>
+    <menu:category id="c_localizedlabel" z="T9fbCcnN88ryeVj3yL/4fQwI/8c=">
+            <menu:item id="i_localizedlabel_new" messageCode="global_menu_new" url="/localizedlabels?form" z="lWDtPwhBUXlRR5NGAuAjvSIsYIw="/>
+        <menu:item id="i_localizedlabel_list" messageCode="global_menu_list" url="/localizedlabels?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="YhgPjTSUS2/zqW/35ltpPGhuj3M="/>
+        
+        <menu:item id="fi_localizedlabel_entitynameandattributenameandlocale" messageCode="global_menu_find" url="/localizedlabels?find=ByEntityNameAndAttributeNameAndLocale&amp;form" z="eA/+Oaq2rfXRHIJoueFTbPEJDX0="/>
+        </menu:category>
+    <menu:category id="c_exercise" z="jmRqJenbh5VLkH+bwtkuITAti7w=">
+            <menu:item id="i_exercise_new" messageCode="global_menu_new" url="/exercises?form" z="EQjQ7NFz2FdX+yL922dJHnOE/H8="/>
+        <menu:item id="i_exercise_list" messageCode="global_menu_list" url="/exercises?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="kV4/kOJVBqzme7yxoQezRLZ77TY="/>
+        </menu:category>
+    <menu:category id="c_task" z="5/YEXemVsbl4iFvHS/UosIk5vGA=">
+            <menu:item id="i_task_new" messageCode="global_menu_new" url="/tasks?form" z="YotbILlsjTB2PtR5PNSnTnvYdJ4="/>
+        <menu:item id="i_task_list" messageCode="global_menu_list" url="/tasks?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="xEhnZSL1vTk7LN2+wWpHvSC2mFA="/>
+        
+        
+        <menu:item id="fi_task_state" messageCode="global_menu_find" url="/tasks?find=ByState&amp;form" z="jRHXwEjASnKasF+4IVf223H2Nlw="/>
+        
+        <menu:item id="fi_task_exerciseandstate" messageCode="global_menu_find" url="/tasks?find=ByExerciseAndState&amp;form" z="Tdfn4aZzPyHvxBBuIvjdTUVRY5w="/>
+        </menu:category>
+    </menu:menu>
+</div>

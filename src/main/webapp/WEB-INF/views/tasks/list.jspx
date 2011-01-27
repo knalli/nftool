@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_fhkoeln_edb_nftool_Task" items="${tasks}" z="M0lhWhfoYz3AuS5E7Pvzn57+cS4=">
+        <table:table data="${tasks}" id="l_fhkoeln_edb_nftool_Task" path="/tasks" z="TZ7H1+xHY+j0KYyS8cbhG8fZEB4=">
+            <table:column id="c_fhkoeln_edb_nftool_Task_ordering" property="ordering" z="GZblm4KCLRFku+b07h/rrMTDZ3s="/>
+            <table:column id="c_fhkoeln_edb_nftool_Task_description" property="description" z="ghkwLLYlBE8PbcDbXTXALQNdeJc="/>
+            
+            
+            
+            
+        <table:column id="c_fhkoeln_edb_nftool_Task_taskTables" property="taskTables" z="sL0rakHTnHJR6EsKH3PCIHqD70Q="/>
+        <table:column id="c_fhkoeln_edb_nftool_Task_solved" property="solved" z="pjSe4NtAIGyBhnPq0SqRb/FS3H0="/>
+        <table:column id="c_fhkoeln_edb_nftool_Task_state" property="state" z="zq6QG6/TC6IqJlowg42aqdySBz4="/>
+            
+        <table:column id="c_fhkoeln_edb_nftool_Task_exercise" property="exercise" z="tMWdUxs3cnK2A9iDpHaVOw3fhxg="/>
+        </table:table>
+    </page:list>
+</div>

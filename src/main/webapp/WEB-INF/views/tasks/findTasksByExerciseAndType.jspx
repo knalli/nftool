@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:find finderName="ByExerciseAndType" id="ff_fhkoeln_edb_nftool_Task" path="/tasks" z="kAb02S7koO4kZ6wi5O+cXuuQ0tY=">
+        <field:select disableFormBinding="true" field="exercise" id="f_fhkoeln_edb_nftool_Task_exercise" itemValue="id" items="${exercises}" path="/exercises" z="JASxZAr7NjepQrexJY0iws/Lg8s="/>
+        <field:select disableFormBinding="true" field="type" id="f_fhkoeln_edb_nftool_Task_type" items="${exercisestates}" path="/exercisestates" z="s+HQ11/BCkfyKaHp/S2ZXfH2KPY="/>
+    </form:find>
+</div>
