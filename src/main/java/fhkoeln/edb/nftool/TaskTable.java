@@ -11,6 +11,8 @@ import java.io.Serializable;
 import java.util.Set;
 import fhkoeln.edb.nftool.TableColumn;
 import java.util.HashSet;
+
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import fhkoeln.edb.nftool.TableRow;
@@ -31,9 +33,11 @@ public class TaskTable implements Serializable {
 	private String description;
 
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "tableColumn")
 	private Set<TableColumn> tableColumns = new HashSet<TableColumn>();
 
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "taskTable")
 	private Set<TableRow> tableRows = new HashSet<TableRow>();
 
 	// @ManyToOne

@@ -35,8 +35,7 @@ public class Exercise implements Serializable {
 	@NotNull
 	private String description;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "exercise")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "exercise")
 	private Set<Task> tasks = new HashSet<Task>();
 
 	/**

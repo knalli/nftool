@@ -33,5 +33,5 @@ public class TableRow implements Serializable {
 	// private TaskTable taskTable;
 
 	@ManyToOne(optional = false)
-	private TableColumn taskColumn;
+	private TableColumn tableColumn;
 }

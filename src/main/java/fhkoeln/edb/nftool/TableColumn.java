@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -35,8 +36,7 @@ public class TableColumn implements Serializable {
 	private Boolean keyColumn;
 
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "taskColumn")
 	private Set<TableRow> tableRows = new HashSet<TableRow>();
 
-	// @ManyToOne
-	// private TaskTable taskTable;
 }

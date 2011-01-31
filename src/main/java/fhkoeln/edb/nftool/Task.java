@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -47,6 +48,7 @@ public class Task implements Serializable {
 	private boolean solved;
 
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "task")
 	private Set<TaskTable> taskTables = new HashSet<TaskTable>();
 
 	@ManyToOne
