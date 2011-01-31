@@ -34,7 +34,7 @@ privileged aspect TableRowDataOnDemand_Roo_DataOnDemand {
             locale  = locale.substring(0, 2);
         }
         obj.setLocale(locale);
-        obj.setTaskColumn(tableColumnDataOnDemand.getRandomTableColumn());
+        obj.setTableColumn(tableColumnDataOnDemand.getRandomTableColumn());
         return obj;
     }
     
