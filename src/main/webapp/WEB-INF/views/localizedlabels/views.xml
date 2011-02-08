@@ -19,4 +19,7 @@
 <definition extends="default" name="localizedlabels/findLocalizedLabelsByEntityNameAndAttributeNameAndLocale">
         <put-attribute name="body" value="/WEB-INF/views/localizedlabels/findLocalizedLabelsByEntityNameAndAttributeNameAndLocale.jspx"/>
     </definition>
+<definition extends="default" name="localizedlabels/findLocalizedLabelsByEntityUriAndAttributeNameAndLocale">
+        <put-attribute name="body" value="/WEB-INF/views/localizedlabels/findLocalizedLabelsByEntityUriAndAttributeNameAndLocale.jspx"/>
+    </definition>
 </tiles-definitions>

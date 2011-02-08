@@ -28,7 +28,8 @@
             <menu:item id="i_localizedlabel_new" messageCode="global_menu_new" url="/localizedlabels?form" z="lWDtPwhBUXlRR5NGAuAjvSIsYIw="/>
         <menu:item id="i_localizedlabel_list" messageCode="global_menu_list" url="/localizedlabels?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="YhgPjTSUS2/zqW/35ltpPGhuj3M="/>
         
-        <menu:item id="fi_localizedlabel_entitynameandattributenameandlocale" messageCode="global_menu_find" url="/localizedlabels?find=ByEntityNameAndAttributeNameAndLocale&amp;form" z="eA/+Oaq2rfXRHIJoueFTbPEJDX0="/>
+        
+        <menu:item id="fi_localizedlabel_entityuriandattributenameandlocale" messageCode="global_menu_find" url="/localizedlabels?find=ByEntityUriAndAttributeNameAndLocale&amp;form" z="riF4mDxYoz7RJbbn7s0AGQcO2Hg="/>
         </menu:category>
     <menu:category id="c_exercise" z="jmRqJenbh5VLkH+bwtkuITAti7w=">
             <menu:item id="i_exercise_new" messageCode="global_menu_new" url="/exercises?form" z="EQjQ7NFz2FdX+yL922dJHnOE/H8="/>

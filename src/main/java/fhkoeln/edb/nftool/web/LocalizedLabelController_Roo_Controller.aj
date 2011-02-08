@@ -82,14 +82,14 @@ privileged aspect LocalizedLabelController_Roo_Controller {
         return "redirect:/localizedlabels?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());
     }
     
-    @RequestMapping(params = { "find=ByEntityNameAndAttributeNameAndLocale", "form" }, method = RequestMethod.GET)
-    public String LocalizedLabelController.findLocalizedLabelsByEntityNameAndAttributeNameAndLocaleForm(Model model) {
-        return "localizedlabels/findLocalizedLabelsByEntityNameAndAttributeNameAndLocale";
+    @RequestMapping(params = { "find=ByEntityUriAndAttributeNameAndLocale", "form" }, method = RequestMethod.GET)
+    public String LocalizedLabelController.findLocalizedLabelsByEntityUriAndAttributeNameAndLocaleForm(Model model) {
+        return "localizedlabels/findLocalizedLabelsByEntityUriAndAttributeNameAndLocale";
     }
     
-    @RequestMapping(params = "find=ByEntityNameAndAttributeNameAndLocale", method = RequestMethod.GET)
-    public String LocalizedLabelController.findLocalizedLabelsByEntityNameAndAttributeNameAndLocale(@RequestParam("entityName") String entityName, @RequestParam("attributeName") String attributeName, @RequestParam("locale") Locale locale, Model model) {
-        model.addAttribute("localizedlabels", LocalizedLabel.findLocalizedLabelsByEntityNameAndAttributeNameAndLocale(entityName, attributeName, locale).getResultList());
+    @RequestMapping(params = "find=ByEntityUriAndAttributeNameAndLocale", method = RequestMethod.GET)
+    public String LocalizedLabelController.findLocalizedLabelsByEntityUriAndAttributeNameAndLocale(@RequestParam("entityUri") String entityUri, @RequestParam("attributeName") String attributeName, @RequestParam("locale") Locale locale, Model model) {
+        model.addAttribute("localizedlabels", LocalizedLabel.findLocalizedLabelsByEntityUriAndAttributeNameAndLocale(entityUri, attributeName, locale).getResultList());
         return "localizedlabels/list";
     }
     

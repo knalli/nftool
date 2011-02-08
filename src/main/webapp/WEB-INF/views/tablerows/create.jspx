@@ -6,7 +6,8 @@
         <field:textarea field="content" id="c_fhkoeln_edb_nftool_TableRow_content" required="true" z="Sr6ehztqokV5lgDHJMRz1/5g1pk="/>
         <field:input field="locale" id="c_fhkoeln_edb_nftool_TableRow_locale" max="2" min="2" required="true" z="KxRWKqE66vJ6WC2tF5p+/ttA2b4="/>
         
-        <field:select field="taskColumn" id="c_fhkoeln_edb_nftool_TableRow_taskColumn" itemValue="id" items="${tablecolumns}" path="/tablecolumns" z="Tjk3eDm5pGrQa+sQV0MlL6UAezs="/>
+        
+    <field:select field="tableColumn" id="c_fhkoeln_edb_nftool_TableRow_tableColumn" itemValue="id" items="${tablecolumns}" path="/tablecolumns" z="2opb1Sl7U36coKeR7Xp4ZmVHql4="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_fhkoeln_edb_nftool_TableRow" render="${not empty dependencies}" z="U6HI6kkLYp7YbJIwfVmkJcFWtCg="/>
 </div>

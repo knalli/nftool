@@ -2,16 +2,15 @@ package fhkoeln.edb.nftool.service;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
 import org.apache.log4j.Logger;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.stereotype.Component;
@@ -20,9 +19,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-//@Service
+import fhkoeln.edb.nftool.ExerciseEntity;
+
 @Service("internationalizationService")
-@Component
+// @Component
 @Scope(value = "singleton")
 @RooSerializable
 public class InternationalizationService implements Serializable {
@@ -30,97 +30,94 @@ public class InternationalizationService implements Serializable {
 	private static final Logger logger = Logger.getLogger(InternationalizationService.class);
 
 	private static final Locale FALLBACK_LOCALE = Locale.ENGLISH;
-
-	private static Map<String, List<LocalizedLabel>> labels;
+	private static final String LOCALE_ERROR = "TRANSLATION NOT FOUND";
 
 	/**
-	 * On construction we load all localized labels from LocalizedLabel and
-	 * chache it static in this instance. This is why this service is a
-	 * singleton, see getInstance(). Why we do this? Because getText is called
-	 * while another transaction is active. getText has been annotated, that a
-	 * new Transcation is neccessary, but some Persistence Providers can't
-	 * handle this. Ugly, but how to do this better?
-	 * 
+	 * These labels are filled in initialize() after construction. The key of the map is the entity
+	 * name like "Exercise", the value is a List of i18ns for this Entity. Each of them contains an
+	 * attributeName, a locale and content.
 	 */
-	private InternationalizationService() {
-
-	}
+	private static Map<String, List<LocalizedLabel>> labels;
 
 	@PostConstruct
 	public void initialize() {
-		if (labels == null) {
+		if (labels == null || labels.isEmpty()) {
 			List<LocalizedLabel> labelsList = LocalizedLabel.findAllLocalizedLabels();
-			System.out.println("Labels: " + labelsList);
-			labels = new HashMap<String, List<LocalizedLabel>>();
+			labels = new HashMap<String, List<LocalizedLabel>>(labelsList.size() / 2);
 
+			List<LocalizedLabel> entityLabels;
 			for (LocalizedLabel label : labelsList) {
-				String key = label.getEntityName();
-				List<LocalizedLabel> entityLabels = labels.get(key);
-				if (entityLabels == null) {
+				String uri = label.getEntityUri();
+				if (labels.containsKey(uri)) {
+					entityLabels = labels.get(uri);
+				} else {
 					entityLabels = new ArrayList<LocalizedLabel>();
-					labels.put(key, entityLabels);
+					labels.put(uri, entityLabels);
 				}
 				entityLabels.add(label);
 			}
 		}
-		System.out.println("Dobe");
+		if (logger.isDebugEnabled()) {
+			logger.debug("Generated Labels Map: " + labels);
+		}
 	}
 
 	/**
 	 * Based on a Table with unique key of "entityName" and "id"
 	 * 
-	 * @param entityName Name of the Entity to look translation for, e.g. "Exercise"
-	 * @param id The Field-ID, unique for this entity.
+	 * @param entityUri Name of the Entity to look translation for, e.g. "Exercise"
+	 * @param attributeName The Field-ID, unique for this entity.
 	 * @param obj An locale
 	 * @return The translation or it's fallback.
 	 */
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public String getText(String entityName, Long id, Object localeObj) {
-		Locale locale = FALLBACK_LOCALE;
-		if (!(localeObj instanceof Locale)) {
-			if (!(localeObj instanceof String))
-				throw new IllegalArgumentException("No Locale given!");
-			else {
-				locale = new Locale((String) localeObj);
-			}
-		} else {
-			locale = (Locale) localeObj;
+	public String getText(String entityUri, String attributeName, Object localeObj) {
+		if (entityUri == null) {
+			logger.warn("You queried for Translation with no Entity Identifier");
+			return LOCALE_ERROR;
 		}
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format("Locale is detected as %s.", locale));
+			logger.debug(String.format(
+					"The Service was asked about an i18n for %s and id %s. Target locale: %s",
+					entityUri, attributeName, localeObj));
+		}
+		if (labels == null || labels.isEmpty()) {
+			logger.error("No locales available in i18nService!");
+			return LOCALE_ERROR;
 		}
 
-		if (labels == null)
-			throw new IllegalArgumentException("No Locales loaded in constructor!");
+		Assert.isInstanceOf(Locale.class, localeObj, "That was not a locale object!!");
+		Locale locale = (Locale) localeObj;
 
-		logger.info("id: " + id);
-		logger.info("The Service was asked about an i18n for " + entityName);
+		String result = null, fallback_result = LOCALE_ERROR;
 
-		/*
-		 * LocalizedLabel label = LocalizedLabel
-		 * .findLocalizedLabelsByEntityNameAndAttributeIdAndLocale(entityName,
-		 * id, locale) .getSingleResult(); if (label == null) { label =
-		 * LocalizedLabel
-		 * .findLocalizedLabelsByEntityNameAndAttributeIdAndLocale( entityName,
-		 * id, FALLBACK_LOCALE).getSingleResult(); } return label.getValue();
-		 */
-
-		String result = null, fallback_result = "TRANSLATION NOT FOUND";
-
-		List<LocalizedLabel> entityLabels = labels.get(entityName);
-		for (LocalizedLabel localizedLabel : entityLabels) {
-			if (localizedLabel.getAttributeName().equals(id)) {
-				if (localizedLabel.getLocale().equals(locale)) {
-					result = localizedLabel.getContent();
-					break;
-				} else if (localizedLabel.getLocale().equals(FALLBACK_LOCALE)) {
-					fallback_result = localizedLabel.getContent();
+		if (labels.containsKey(entityUri)) {
+			List<LocalizedLabel> entityLabels = labels.get(entityUri);
+			for (LocalizedLabel localizedLabel : entityLabels) {
+				if (localizedLabel.getAttributeName().equals(attributeName)) {
+					if (localizedLabel.getLocale().equals(locale)) {
+						result = localizedLabel.getContent();
+						break;
+					} else if (localizedLabel.getLocale().equals(FALLBACK_LOCALE)) {
+						fallback_result = localizedLabel.getContent();
+					}
 				}
 			}
+			return result == null ? fallback_result : result;
+		} else {
+			logger.warn("Locales did not contain a Translation for the identifier " + entityUri);
 		}
-		return result == null ? fallback_result : result;
+		return LOCALE_ERROR;
 	}
 
+	/**
+	 * Helper for SpeEL-Expressions, which give us an Object instead of a Locale.
+	 * Throws IllegalArgumentException if localeObj was not a Locale.
+	 * 
+	 * @see getAllTexts()
+	 * @param entityName Name of the Entity, e.g.
+	 * @param localeObj Locale Object
+	 */
 	public Map<String, String> getAllTexts(String entityName, Object localeObj) {
 		Assert.isInstanceOf(Locale.class, localeObj, "That was not a locale object!!");
 		return getAllTexts(entityName, (Locale) localeObj);
@@ -131,7 +128,8 @@ public class InternationalizationService implements Serializable {
 	 * 
 	 * @param entityName
 	 * @param locale
-	 * @return
+	 * @return All translations for this Entity and the specified locale as Map<Attribute Name,
+	 *         Content>.
 	 */
 	public Map<String, String> getAllTexts(String entityName, Locale locale) {
 		Map<String, String> result = new HashMap<String, String>();
@@ -142,7 +140,26 @@ public class InternationalizationService implements Serializable {
 			}
 		}
 		return result;
+	}
 
-		// return labels.get(entityName);
+	public String getText(Object entityObj, String attributeName, Object localeObj) {
+		Assert.isInstanceOf(ExerciseEntity.class, entityObj,
+				"You did not gave me an ExerciseEntity to resolve!");
+		return getText(createUri((ExerciseEntity) entityObj), attributeName, localeObj);
+	}
+
+	public static String createUri(ExerciseEntity... entities) {
+		StringBuilder sb = new StringBuilder();
+		Assert.notNull(entities);
+		for (ExerciseEntity e : entities) {
+			if (sb.capacity() > 0) {
+				sb.append('/');
+			}
+			sb.append(e.getClass().getSimpleName()).append(':').append(e.getId());
+		}
+		if (logger.isDebugEnabled()) {
+			logger.debug("Created i18n-URI " + sb.toString());
+		}
+		return sb.toString();
 	}
 }

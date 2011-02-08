@@ -3,12 +3,12 @@
 	
 	
 	<div id="_title">
-		<h1><c:out value="${ExerciseTexts['title']}"/></h1>
-		<p><c:out value="${ExerciseTexts['description']}"/></p>
+		<h1><c:out value="${i18nService.getText(Exercise, 'title', locale) }"/></h1>
+		<p><c:out value="${i18nService.getText(Exercise, 'description', locale) }"/></p>
 		
 		
 		Anders:
-		<c:out value="${i18nService.getAllTexts('Exercise', locale) }"/> 
+		<c:out value="${i18nService.getText(Exercise, 'title', locale) }"/> 
 
 <!--		<util:i18n content="${Exercise.title}" entity="Exercise" field="title"/>-->
 	</div>

@@ -9,7 +9,7 @@ privileged aspect LocalizedLabel_Roo_ToString {
     
     public String LocalizedLabel.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("EntityName: ").append(getEntityName()).append(", ");
+        sb.append("EntityUri: ").append(getEntityUri()).append(", ");
         sb.append("AttributeName: ").append(getAttributeName()).append(", ");
         sb.append("Locale: ").append(getLocale()).append(", ");
         sb.append("Content: ").append(getContent());

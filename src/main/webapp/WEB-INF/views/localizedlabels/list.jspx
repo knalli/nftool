@@ -4,11 +4,12 @@
     
 <page:list id="pl_fhkoeln_edb_nftool_service_LocalizedLabel" items="${localizedlabels}" z="K+Y0K4qDtYgy5fWd29thqcPfeWQ=">
         <table:table data="${localizedlabels}" id="l_fhkoeln_edb_nftool_service_LocalizedLabel" path="/localizedlabels" z="FnFHIZ0X4XejCVkvRAVb1FMIiww=">
-            <table:column id="c_fhkoeln_edb_nftool_service_LocalizedLabel_entityName" property="entityName" z="O8DL5kTWRPoQVh2XsiGYIoF99BU="/>
+            
             
             <table:column id="c_fhkoeln_edb_nftool_service_LocalizedLabel_locale" property="locale" z="PixMDvZXRfLhQX4V4IMtCD5KbNo="/>
             <table:column id="c_fhkoeln_edb_nftool_service_LocalizedLabel_content" property="content" z="OOT/A+GLx10BHGyyL4mDOA1gt0c="/>
         <table:column id="c_fhkoeln_edb_nftool_service_LocalizedLabel_attributeName" property="attributeName" z="Xa1jxez2fsoEI5vLg84/EluulTg="/>
+        <table:column id="c_fhkoeln_edb_nftool_service_LocalizedLabel_entityUri" property="entityUri" z="BIGiHsig9zpQ16HZVcFslUqzadc="/>
         </table:table>
     </page:list>
 </div>

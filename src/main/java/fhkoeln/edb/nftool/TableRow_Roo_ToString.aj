@@ -12,7 +12,7 @@ privileged aspect TableRow_Roo_ToString {
         sb.append("RowNumber: ").append(getRowNumber()).append(", ");
         sb.append("Content: ").append(getContent()).append(", ");
         sb.append("Locale: ").append(getLocale()).append(", ");
-        sb.append("TaskColumn: ").append(getTaskColumn());
+        sb.append("TableColumn: ").append(getTableColumn());
         return sb.toString();
     }
     

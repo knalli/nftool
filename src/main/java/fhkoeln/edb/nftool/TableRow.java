@@ -16,7 +16,7 @@ import fhkoeln.edb.nftool.TableColumn;
 @RooEntity(table = "TABLE_ROWS")
 @RooSerializable
 @SuppressWarnings("serial")
-public class TableRow implements Serializable {
+public class TableRow implements Serializable, ExerciseEntity {
 
 	@NotNull
 	private Integer rowNumber;

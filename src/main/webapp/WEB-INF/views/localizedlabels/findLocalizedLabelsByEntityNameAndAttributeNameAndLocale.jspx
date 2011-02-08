@@ -3,8 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:find finderName="ByEntityNameAndAttributeNameAndLocale" id="ff_fhkoeln_edb_nftool_service_LocalizedLabel" path="/localizedlabels" z="DvW7PPwQZ8dEytFH+MUFVO0D0pI=">
-        <field:input disableFormBinding="true" field="entityName" id="f_fhkoeln_edb_nftool_service_LocalizedLabel_entityName" max="20" required="true" z="d1U1ANTzs9iKAHPOPGX4/b2/oB8="/>
-        <field:input disableFormBinding="true" field="attributeName" id="f_fhkoeln_edb_nftool_service_LocalizedLabel_attributeName" z="3QYxdBjj7bCwOKE0XoymsATxqcs="/>
-        <field:input disableFormBinding="true" field="locale" id="f_fhkoeln_edb_nftool_service_LocalizedLabel_locale" z="X+O+T1vIbLfSd7wO6s/EgiNq8To="/>
+        <field:input disableFormBinding="true" field="entityName" id="f_fhkoeln_edb_nftool_service_LocalizedLabel_entityName" max="20" min="3" required="true" z="Pa4vbmUZWILDiqMSa2evp8ymyZA="/>
+        <field:input disableFormBinding="true" field="attributeName" id="f_fhkoeln_edb_nftool_service_LocalizedLabel_attributeName" max="30" min="3" required="true" z="0MLFV2RyPkWkhPMsatoE6RXsL3k="/>
+        <field:input disableFormBinding="true" field="locale" id="f_fhkoeln_edb_nftool_service_LocalizedLabel_locale" required="true" z="3BEjNeU6mTwPp1TzmO7Hf28Zwt4="/>
     </form:find>
 </div>

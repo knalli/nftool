@@ -22,7 +22,7 @@ import fhkoeln.edb.nftool.TableRow;
 @RooEntity(table = "TASK_TABLES")
 @RooSerializable
 @SuppressWarnings("serial")
-public class TaskTable implements Serializable {
+public class TaskTable implements Serializable, ExerciseEntity {
 
 	private short ordering;
 
@@ -40,6 +40,4 @@ public class TaskTable implements Serializable {
 	@JoinColumn(name = "taskTable")
 	private Set<TableRow> tableRows = new HashSet<TableRow>();
 
-	// @ManyToOne
-	// private Task task;
 }

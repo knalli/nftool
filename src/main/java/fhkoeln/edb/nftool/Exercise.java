@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 // @RooToString
 @RooEntity(table = "EXERCISES")
 @RooSerializable
-public class Exercise implements Serializable {
+public class Exercise implements Serializable, ExerciseEntity {
 	private transient static final Logger logger = Logger.getLogger(Exercise.class);
 
 	// @Type(type = "fhkoeln.edb.nftool.i18n.LocalizedLabelUserType")
@@ -62,24 +62,16 @@ public class Exercise implements Serializable {
 			logger.warn("There are no Tasks defined for this Exercise! " + tasks);
 			return null;
 		}
-		if (logger.isDebugEnabled()) {
-			logger.debug("Searching Task for state " + es.name());
-		}
+		logger.warn("Searching Task for state " + es.name());
 
 		for (Task t : tasks) {
+			if (logger.isTraceEnabled()) {
+				logger.trace("Found Task " + t.getState());
+			}
 			if (es.equals(t.getState()))
 				return t;
 		}
 		logger.warn("No Task found for state " + es.name());
-
-		if (logger.isDebugEnabled()) {
-			StringBuilder sb = new StringBuilder();
-			for (Task t : tasks) {
-				sb.append(t.getState());
-			}
-			logger.debug("Available states are: " + sb.toString());
-		}
-
 		return null;
 
 	}

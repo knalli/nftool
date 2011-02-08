@@ -3,10 +3,11 @@
     <jsp:output omit-xml-declaration="yes"/>
     
 <form:update id="fu_fhkoeln_edb_nftool_service_LocalizedLabel" modelAttribute="localizedLabel" path="/localizedlabels" z="uJ0l6ZefTAmZl28C5Edg+CiXSuw=">
-        <field:input field="entityName" id="c_fhkoeln_edb_nftool_service_LocalizedLabel_entityName" max="20" required="true" z="KzR0y1F+WFe1g9ltREHEPxggXu0="/>
         
-        <field:input field="locale" id="c_fhkoeln_edb_nftool_service_LocalizedLabel_locale" z="s4hkiD9dumlWq9R23v4AksJxv/Q="/>
+        
+        <field:input field="locale" id="c_fhkoeln_edb_nftool_service_LocalizedLabel_locale" required="true" z="EEP8QIolespGl9mY04/whae3I1M="/>
         <field:input field="content" id="c_fhkoeln_edb_nftool_service_LocalizedLabel_content" required="true" z="HUhlZH3H6APREOhymnR2JcBvH9o="/>
-    <field:input field="attributeName" id="c_fhkoeln_edb_nftool_service_LocalizedLabel_attributeName" z="Lqjf+D90dz5ZVVJHsXhKfJKmVqE="/>
+    <field:input field="attributeName" id="c_fhkoeln_edb_nftool_service_LocalizedLabel_attributeName" max="30" min="3" required="true" z="1L8FziynWR8pHIYh9MvMlQjUxO4="/>
+    <field:input field="entityUri" id="c_fhkoeln_edb_nftool_service_LocalizedLabel_entityUri" min="1" required="true" z="ylpXz40FAIFYx1HcBVWjQjcOE+0="/>
     </form:update>
 </div>

@@ -7,7 +7,8 @@
             <table:column id="c_fhkoeln_edb_nftool_TableRow_content" property="content" z="kxw3ReAigIznOmh/e4BckdhQ6xo="/>
             <table:column id="c_fhkoeln_edb_nftool_TableRow_locale" property="locale" z="/FoTmYQpwfFewLMZckMMeJ1jEv0="/>
             
-            <table:column id="c_fhkoeln_edb_nftool_TableRow_taskColumn" property="taskColumn" z="4J2LjPpfrgEFuUVkUp1CHvhwkcg="/>
+            
+        <table:column id="c_fhkoeln_edb_nftool_TableRow_tableColumn" property="tableColumn" z="c70gICbeD4P4XhkNHiitl/c+Otw="/>
         </table:table>
     </page:list>
 </div>

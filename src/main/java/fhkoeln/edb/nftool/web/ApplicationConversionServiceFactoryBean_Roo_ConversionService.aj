@@ -67,7 +67,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     Converter<LocalizedLabel, String> ApplicationConversionServiceFactoryBean.getLocalizedLabelConverter() {
         return new Converter<LocalizedLabel, String>() {
             public String convert(LocalizedLabel source) {
-                return new StringBuilder().append(source.getEntityName()).append(" ").append(source.getAttributeName()).append(" ").append(source.getLocale()).toString();
+                return new StringBuilder().append(source.getEntityUri()).append(" ").append(source.getAttributeName()).append(" ").append(source.getLocale()).toString();
             }
         };
     }

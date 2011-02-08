@@ -46,8 +46,11 @@ public class LocalizedLabelUserType implements UserType, Serializable {
 		long textId = rs.getLong(names[0]);
 		if (rs.wasNull())
 			return null;
-		return internationalizationService
-				.getText(owner.getClass().getSimpleName(), textId, locale);
+		return null;
+		/*
+		 * return internationalizationService
+		 * .getText(owner.getClass().getSimpleName(), textId, locale);
+		 */
 
 	}
 

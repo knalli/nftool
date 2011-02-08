@@ -33,12 +33,12 @@ privileged aspect TableRow_Roo_JavaBean {
         this.locale = locale;
     }
     
-    public TableColumn TableRow.getTaskColumn() {
-        return this.taskColumn;
+    public TableColumn TableRow.getTableColumn() {
+        return this.tableColumn;
     }
     
-    public void TableRow.setTaskColumn(TableColumn taskColumn) {
-        this.taskColumn = taskColumn;
+    public void TableRow.setTableColumn(TableColumn tableColumn) {
+        this.tableColumn = tableColumn;
     }
     
 }

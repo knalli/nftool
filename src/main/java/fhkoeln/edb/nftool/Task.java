@@ -24,7 +24,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooSerializable
 @SuppressWarnings("serial")
 @RooEntity(table = "TASKS", finders = { "findTasksByState", "findTasksByExerciseAndState" })
-public class Task implements Serializable {
+public class Task implements Serializable, ExerciseEntity {
 
 	@NotNull
 	private short ordering;

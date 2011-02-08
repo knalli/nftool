@@ -8,12 +8,12 @@ import java.util.Locale;
 
 privileged aspect LocalizedLabel_Roo_JavaBean {
     
-    public String LocalizedLabel.getEntityName() {
-        return this.entityName;
+    public String LocalizedLabel.getEntityUri() {
+        return this.entityUri;
     }
     
-    public void LocalizedLabel.setEntityName(String entityName) {
-        this.entityName = entityName;
+    public void LocalizedLabel.setEntityUri(String entityUri) {
+        this.entityUri = entityUri;
     }
     
     public String LocalizedLabel.getAttributeName() {

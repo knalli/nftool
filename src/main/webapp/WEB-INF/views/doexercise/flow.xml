@@ -25,7 +25,7 @@
 	<view-state id="intro">
 		<on-entry>
 			<evaluate expression="Exercise.getTaskByState('INTRO')" result="viewScope.task" />
-			<evaluate expression="i18nService.getAllTexts('Exercise', externalContext.locale)" result="viewScope.ExerciseTexts"/>
+<!--			<evaluate expression="i18nService.getAllTexts('Exercise', externalContext.locale)" result="viewScope.ExerciseTexts"/>-->
 		</on-entry>
 		<on-render>
 			<evaluate expression="externalContext.locale" result="viewScope.locale" />

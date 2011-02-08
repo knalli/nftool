@@ -22,7 +22,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooEntity(table = "TABLE_COLUMNS")
 // , finders = { "findTableColumnsByTaskTableAndKeyColumn",
 // "findTableColumnsByKeyColumn" })
-public class TableColumn implements Serializable {
+public class TableColumn implements Serializable, ExerciseEntity {
 
 	@NotNull
 	@Size(min = 1, max = 60)
