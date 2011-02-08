@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-    <jsp:output omit-xml-declaration="yes"/>
-    <form:find finderName="ByKeyColumn" id="ff_fhkoeln_edb_nftool_TableColumn" path="/tablecolumns" z="wXeRhihPVQjZY+jbQK0LbMsXwFo=">
-        <field:checkbox disableFormBinding="true" field="keyColumn" id="f_fhkoeln_edb_nftool_TableColumn_keyColumn" z="SXHkvRX7I6a6Bd8S6Wy0aMvueg4="/>
-    </form:find>
-</div>

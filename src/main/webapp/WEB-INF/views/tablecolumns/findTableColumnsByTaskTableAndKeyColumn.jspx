@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-    <jsp:output omit-xml-declaration="yes"/>
-    <form:find finderName="ByTaskTableAndKeyColumn" id="ff_fhkoeln_edb_nftool_TableColumn" path="/tablecolumns" z="7Mul4DknVDhOKpzEyyuQIZsuAwc=">
-        <field:select disableFormBinding="true" field="taskTable" id="f_fhkoeln_edb_nftool_TableColumn_taskTable" itemValue="id" items="${tasktables}" path="/tasktables" z="7fgVHEA9YWE931mLlQkO60+CWSE="/>
-        <field:checkbox disableFormBinding="true" field="keyColumn" id="f_fhkoeln_edb_nftool_TableColumn_keyColumn" z="SXHkvRX7I6a6Bd8S6Wy0aMvueg4="/>
-    </form:find>
-</div>
