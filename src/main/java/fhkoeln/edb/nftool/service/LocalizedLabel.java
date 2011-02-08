@@ -1,17 +1,18 @@
 package fhkoeln.edb.nftool.service;
 
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.roo.addon.entity.RooEntity;
+import java.io.Serializable;
+import java.util.Locale;
 
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import java.io.Serializable;
-import java.util.Locale;
+import org.hibernate.annotations.Index;
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.serializable.RooSerializable;
+import org.springframework.roo.addon.tostring.RooToString;
 
 /**
  * Bean to store an translation of an entity field.
@@ -33,6 +34,7 @@ public class LocalizedLabel implements Serializable {
 	 */
 	@NotNull
 	@Size(min = 1)
+	@Index(name = "index-entityuri")
 	private String entityUri;
 
 	/**

@@ -24,16 +24,6 @@ privileged aspect TableRowDataOnDemand_Roo_DataOnDemand {
     public TableRow TableRowDataOnDemand.getNewTransientTableRow(int index) {
         fhkoeln.edb.nftool.TableRow obj = new fhkoeln.edb.nftool.TableRow();
         obj.setRowNumber(new Integer(index));
-        java.lang.String content = "content_" + index;
-        if (content.length() > 100) {
-            content  = content.substring(0, 100);
-        }
-        obj.setContent(content);
-        java.lang.String locale = "_" + index;
-        if (locale.length() > 2) {
-            locale  = locale.substring(0, 2);
-        }
-        obj.setLocale(locale);
         obj.setTableColumn(tableColumnDataOnDemand.getRandomTableColumn());
         return obj;
     }

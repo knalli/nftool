@@ -3,8 +3,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_fhkoeln_edb_nftool_TableRow" object="${tablerow}" path="/tablerows" z="vgaU8vLdxgkel8gh2ma++7rTTfo=">
         <field:display field="rowNumber" id="s_fhkoeln_edb_nftool_TableRow_rowNumber" object="${tablerow}" z="sXNpJCJyg+6rkXi5MgRuj2V4M2I="/>
-        <field:display field="content" id="s_fhkoeln_edb_nftool_TableRow_content" object="${tablerow}" z="6+DAdKQVpI3O6YRj+mewftYla/s="/>
-        <field:display field="locale" id="s_fhkoeln_edb_nftool_TableRow_locale" object="${tablerow}" z="kHJAd4Y9f0nRNzbFk6LMKT3Th98="/>
+        
+        
         
         
     <field:display field="tableColumn" id="s_fhkoeln_edb_nftool_TableRow_tableColumn" object="${tablerow}" z="Rlitr148Z0X83/o9JlDHTRKP0oM="/>

@@ -3,7 +3,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_fhkoeln_edb_nftool_Task" object="${task}" path="/tasks" z="KzoTLmGKxcl/peSSk3NnqwinWyM=">
         <field:display field="ordering" id="s_fhkoeln_edb_nftool_Task_ordering" object="${task}" z="FKMD0ZQIXm/9c0ZWsGz7uNw3xWs="/>
-        <field:display field="description" id="s_fhkoeln_edb_nftool_Task_description" object="${task}" z="mfRbHiPiBd2V3nEJ14dthieY4HA="/>
+        
         
         
         

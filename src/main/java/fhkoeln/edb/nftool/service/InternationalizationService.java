@@ -2,7 +2,6 @@ package fhkoeln.edb.nftool.service;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -13,7 +12,6 @@ import javax.annotation.PostConstruct;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,12 +19,11 @@ import org.springframework.util.Assert;
 
 import fhkoeln.edb.nftool.ExerciseEntity;
 
+@SuppressWarnings("serial")
 @Service("internationalizationService")
-// @Component
 @Scope(value = "singleton")
 @RooSerializable
 public class InternationalizationService implements Serializable {
-	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(InternationalizationService.class);
 
 	private static final Locale FALLBACK_LOCALE = Locale.ENGLISH;

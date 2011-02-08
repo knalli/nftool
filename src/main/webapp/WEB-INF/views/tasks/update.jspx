@@ -3,7 +3,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_fhkoeln_edb_nftool_Task" modelAttribute="task" path="/tasks" z="hTSAIxP/msc3inq4A4TRLcYAiHE=">
         <field:input field="ordering" id="c_fhkoeln_edb_nftool_Task_ordering" required="true" z="4liTgybrNyinIu22S4bH5W5nBpg="/>
-        <field:textarea field="description" id="c_fhkoeln_edb_nftool_Task_description" required="true" z="i3Bt7Qw8elaBaSWTQM+DDa1lPys="/>
+        
         
         
         

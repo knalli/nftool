@@ -4,7 +4,7 @@
     <page:list id="pl_fhkoeln_edb_nftool_Task" items="${tasks}" z="M0lhWhfoYz3AuS5E7Pvzn57+cS4=">
         <table:table data="${tasks}" id="l_fhkoeln_edb_nftool_Task" path="/tasks" z="TZ7H1+xHY+j0KYyS8cbhG8fZEB4=">
             <table:column id="c_fhkoeln_edb_nftool_Task_ordering" property="ordering" z="GZblm4KCLRFku+b07h/rrMTDZ3s="/>
-            <table:column id="c_fhkoeln_edb_nftool_Task_description" property="description" z="ghkwLLYlBE8PbcDbXTXALQNdeJc="/>
+            
             
             
             

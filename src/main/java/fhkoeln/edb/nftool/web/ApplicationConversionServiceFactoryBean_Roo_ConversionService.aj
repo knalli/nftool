@@ -19,7 +19,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     Converter<TableRow, String> ApplicationConversionServiceFactoryBean.getTableRowConverter() {
         return new Converter<TableRow, String>() {
             public String convert(TableRow source) {
-                return new StringBuilder().append(source.getRowNumber()).append(" ").append(source.getContent()).append(" ").append(source.getLocale()).toString();
+                return new StringBuilder().append(source.getRowNumber()).toString();
             }
         };
     }
@@ -43,7 +43,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     Converter<TableColumn, String> ApplicationConversionServiceFactoryBean.getTableColumnConverter() {
         return new Converter<TableColumn, String>() {
             public String convert(TableColumn source) {
-                return new StringBuilder().append(source.getName()).append(" ").append(source.getLocale()).toString();
+                return new StringBuilder().append(source.toString()).toString();
             }
         };
     }
@@ -51,7 +51,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     Converter<Task, String> ApplicationConversionServiceFactoryBean.getTaskConverter() {
         return new Converter<Task, String>() {
             public String convert(Task source) {
-                return new StringBuilder().append(source.getOrdering()).append(" ").append(source.getDescription()).toString();
+                return new StringBuilder().append(source.getOrdering()).toString();
             }
         };
     }

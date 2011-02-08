@@ -4,8 +4,8 @@
     <page:list id="pl_fhkoeln_edb_nftool_TableRow" items="${tablerows}" z="LJL+GFXfrEQkOoCOVf+F5ULSl5I=">
         <table:table data="${tablerows}" id="l_fhkoeln_edb_nftool_TableRow" path="/tablerows" z="EWMyz9fePkPEdGlDnviscg+lUw0=">
             <table:column id="c_fhkoeln_edb_nftool_TableRow_rowNumber" property="rowNumber" z="8wARLnsIfeHGlllKiqCyoVvymYg="/>
-            <table:column id="c_fhkoeln_edb_nftool_TableRow_content" property="content" z="kxw3ReAigIznOmh/e4BckdhQ6xo="/>
-            <table:column id="c_fhkoeln_edb_nftool_TableRow_locale" property="locale" z="/FoTmYQpwfFewLMZckMMeJ1jEv0="/>
+            
+            
             
             
         <table:column id="c_fhkoeln_edb_nftool_TableRow_tableColumn" property="tableColumn" z="c70gICbeD4P4XhkNHiitl/c+Otw="/>

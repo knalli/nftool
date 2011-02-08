@@ -19,11 +19,6 @@ privileged aspect TaskDataOnDemand_Roo_DataOnDemand {
     public Task TaskDataOnDemand.getNewTransientTask(int index) {
         fhkoeln.edb.nftool.Task obj = new fhkoeln.edb.nftool.Task();
         obj.setOrdering(new Integer(index).shortValue());
-        java.lang.String description = "description_" + index;
-        if (description.length() > 200) {
-            description  = description.substring(0, 200);
-        }
-        obj.setDescription(description);
         obj.setState(null);
         obj.setExercise(null);
         return obj;

@@ -5,7 +5,6 @@ package fhkoeln.edb.nftool;
 
 import fhkoeln.edb.nftool.TableColumn;
 import java.lang.Integer;
-import java.lang.String;
 
 privileged aspect TableRow_Roo_JavaBean {
     
@@ -15,22 +14,6 @@ privileged aspect TableRow_Roo_JavaBean {
     
     public void TableRow.setRowNumber(Integer rowNumber) {
         this.rowNumber = rowNumber;
-    }
-    
-    public String TableRow.getContent() {
-        return this.content;
-    }
-    
-    public void TableRow.setContent(String content) {
-        this.content = content;
-    }
-    
-    public String TableRow.getLocale() {
-        return this.locale;
-    }
-    
-    public void TableRow.setLocale(String locale) {
-        this.locale = locale;
     }
     
     public TableColumn TableRow.getTableColumn() {

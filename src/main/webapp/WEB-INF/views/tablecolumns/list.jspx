@@ -3,8 +3,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_fhkoeln_edb_nftool_TableColumn" items="${tablecolumns}" z="RfA/5LKV75SkpSwPcEtM/U4ket8=">
         <table:table data="${tablecolumns}" id="l_fhkoeln_edb_nftool_TableColumn" path="/tablecolumns" z="2ggANsAJJTz4fYFM0Lju2Nps7go=">
-            <table:column id="c_fhkoeln_edb_nftool_TableColumn_name" property="name" z="7JCDfuNACvnzzlfEiqreBZH1jYc="/>
-            <table:column id="c_fhkoeln_edb_nftool_TableColumn_locale" property="locale" z="AyDtRBwDh8+hVFZ97OmAZKDClPY="/>
+            
+            
             <table:column id="c_fhkoeln_edb_nftool_TableColumn_keyColumn" property="keyColumn" z="K94OK/GnK9UCFt9pf9QaPnyP/MU="/>
             <table:column id="c_fhkoeln_edb_nftool_TableColumn_tableRows" property="tableRows" z="VJ7SLp4hmFoLgqq/ezcmhmf6W7k="/>
             
