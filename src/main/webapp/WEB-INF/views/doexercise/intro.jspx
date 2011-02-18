@@ -12,7 +12,7 @@
 		<form method="POST" >
 			<form:errors cssClass="errors" delimiter="&lt;p/&gt;" path="*"/>
 			<div class="tables">
-<!--				<roo:tasktable tables="${task.taskTables}" controls="false"/>-->
+				<roo:tasktable tables="${task.taskTables}" controls="false"/>
 			</div>
 		
 			<div class="submit">

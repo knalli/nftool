@@ -5,7 +5,6 @@ package fhkoeln.edb.nftool;
 
 import fhkoeln.edb.nftool.TableColumn;
 import fhkoeln.edb.nftool.TableRow;
-import java.lang.String;
 import java.util.Set;
 
 privileged aspect TaskTable_Roo_JavaBean {
@@ -24,14 +23,6 @@ privileged aspect TaskTable_Roo_JavaBean {
     
     public void TaskTable.setNormalform(short normalform) {
         this.normalform = normalform;
-    }
-    
-    public String TaskTable.getDescription() {
-        return this.description;
-    }
-    
-    public void TaskTable.setDescription(String description) {
-        this.description = description;
     }
     
     public Set<TableColumn> TaskTable.getTableColumns() {

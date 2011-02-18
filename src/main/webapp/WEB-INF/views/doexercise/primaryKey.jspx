@@ -1,9 +1,9 @@
 <div xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:form="http://www.springframework.org/tags/form" version="2.0">
 	<jsp:output omit-xml-declaration="yes"/>
 	<div>
-		<h1>${exerciseTexts.title}</h1>
+		<h1><c:out value="${i18nService.getText(task, 'title', locale) }"/></h1>
 		<p class="points"><spring:message code="webflow.results.points.intermediate" arguments="${Points.points}" /></p>
-		<p class="description yellow-gradient">${taskTexts.description}</p>
+		<p class="description yellow-gradient">${i18nService(task, 'description', locale)}</p>
 		
 		<form:form method="POST" commandName="answerColumnsPK">
 			<form:errors cssClass="errors red-gradient" path="*" />

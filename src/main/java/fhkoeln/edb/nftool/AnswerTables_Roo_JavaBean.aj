@@ -4,6 +4,7 @@
 package fhkoeln.edb.nftool;
 
 import fhkoeln.edb.nftool.Exercise;
+import fhkoeln.edb.nftool.service.InternationalizationService;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Long;
@@ -13,6 +14,14 @@ import java.util.Map;
 import java.util.Set;
 
 privileged aspect AnswerTables_Roo_JavaBean {
+    
+    public InternationalizationService AnswerTables.getI18nService() {
+        return this.i18nService;
+    }
+    
+    public void AnswerTables.setI18nService(InternationalizationService i18nService) {
+        this.i18nService = i18nService;
+    }
     
     public Map<Long, List<String>> AnswerTables.getColumns() {
         return this.columns;

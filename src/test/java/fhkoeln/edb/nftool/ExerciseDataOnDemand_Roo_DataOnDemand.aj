@@ -18,8 +18,6 @@ privileged aspect ExerciseDataOnDemand_Roo_DataOnDemand {
     
     public Exercise ExerciseDataOnDemand.getNewTransientExercise(int index) {
         fhkoeln.edb.nftool.Exercise obj = new fhkoeln.edb.nftool.Exercise();
-        obj.setTitle("title_" + index);
-        obj.setDescription("description_" + index);
         return obj;
     }
     

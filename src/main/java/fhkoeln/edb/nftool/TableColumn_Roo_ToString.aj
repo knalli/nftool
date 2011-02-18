@@ -9,8 +9,6 @@ privileged aspect TableColumn_Roo_ToString {
     
     public String TableColumn.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Name: ").append(getName()).append(", ");
-        sb.append("Locale: ").append(getLocale()).append(", ");
         sb.append("KeyColumn: ").append(getKeyColumn()).append(", ");
         sb.append("TableRows: ").append(getTableRows() == null ? "null" : getTableRows().size());
         return sb.toString();

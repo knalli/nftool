@@ -50,13 +50,14 @@
 							${rowSeperator}
 						</c:if>
 						<td>
-							<c:if test="${row.texts['en_EN'].content eq ''}">
+							<c:set var="rowContent" value="${i18nService.getText(row, 'content', locale)"/>
+							<c:if test="${rowContent eq ''}">
 								&#160;
 							</c:if>
-							<c:if test="${row.texts['en_EN'].content eq null}">
+							<c:if test="${rowContent eq null}">
 								<em>NULL</em>
 							</c:if>
-							<c:out value="${row.texts['en_EN'].content}" />
+							<c:out value="${rowContent}" />
 						</td>
 					</c:forEach>
 				</tr>

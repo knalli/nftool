@@ -20,11 +20,6 @@ privileged aspect TaskTableDataOnDemand_Roo_DataOnDemand {
         fhkoeln.edb.nftool.TaskTable obj = new fhkoeln.edb.nftool.TaskTable();
         obj.setOrdering(new Integer(index).shortValue());
         obj.setNormalform(new Integer(index).shortValue());
-        java.lang.String description = "description_" + index;
-        if (description.length() > 150) {
-            description  = description.substring(0, 150);
-        }
-        obj.setDescription(description);
         return obj;
     }
     

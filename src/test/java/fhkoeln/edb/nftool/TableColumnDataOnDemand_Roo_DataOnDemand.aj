@@ -18,16 +18,6 @@ privileged aspect TableColumnDataOnDemand_Roo_DataOnDemand {
     
     public TableColumn TableColumnDataOnDemand.getNewTransientTableColumn(int index) {
         fhkoeln.edb.nftool.TableColumn obj = new fhkoeln.edb.nftool.TableColumn();
-        java.lang.String name = "name_" + index;
-        if (name.length() > 60) {
-            name  = name.substring(0, 60);
-        }
-        obj.setName(name);
-        java.lang.String locale = "_" + index;
-        if (locale.length() > 2) {
-            locale  = locale.substring(0, 2);
-        }
-        obj.setLocale(locale);
         obj.setKeyColumn(Boolean.TRUE);
         return obj;
     }

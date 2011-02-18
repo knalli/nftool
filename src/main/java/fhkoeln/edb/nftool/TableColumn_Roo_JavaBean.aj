@@ -5,26 +5,9 @@ package fhkoeln.edb.nftool;
 
 import fhkoeln.edb.nftool.TableRow;
 import java.lang.Boolean;
-import java.lang.String;
 import java.util.Set;
 
 privileged aspect TableColumn_Roo_JavaBean {
-    
-    public String TableColumn.getName() {
-        return this.name;
-    }
-    
-    public void TableColumn.setName(String name) {
-        this.name = name;
-    }
-    
-    public String TableColumn.getLocale() {
-        return this.locale;
-    }
-    
-    public void TableColumn.setLocale(String locale) {
-        this.locale = locale;
-    }
     
     public Boolean TableColumn.getKeyColumn() {
         return this.keyColumn;

@@ -27,7 +27,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     Converter<Exercise, String> ApplicationConversionServiceFactoryBean.getExerciseConverter() {
         return new Converter<Exercise, String>() {
             public String convert(Exercise source) {
-                return new StringBuilder().append(source.getTitle()).append(" ").append(source.getDescription()).toString();
+                return new StringBuilder().append(source.toString()).toString();
             }
         };
     }
@@ -59,7 +59,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     Converter<TaskTable, String> ApplicationConversionServiceFactoryBean.getTaskTableConverter() {
         return new Converter<TaskTable, String>() {
             public String convert(TaskTable source) {
-                return new StringBuilder().append(source.getOrdering()).append(" ").append(source.getNormalform()).append(" ").append(source.getDescription()).toString();
+                return new StringBuilder().append(source.getOrdering()).append(" ").append(source.getNormalform()).toString();
             }
         };
     }

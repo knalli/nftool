@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import fhkoeln.edb.nftool.ExerciseEntity;
+import fhkoeln.edb.nftool.helper.StaticHelpers;
 
 @SuppressWarnings("serial")
 @Service("internationalizationService")
@@ -83,8 +84,7 @@ public class InternationalizationService implements Serializable {
 			return LOCALE_ERROR;
 		}
 
-		Assert.isInstanceOf(Locale.class, localeObj, "That was not a locale object!!");
-		Locale locale = (Locale) localeObj;
+		Locale locale = StaticHelpers.getLocaleObject(localeObj);
 
 		String result = null, fallback_result = LOCALE_ERROR;
 
@@ -116,8 +116,7 @@ public class InternationalizationService implements Serializable {
 	 * @param localeObj Locale Object
 	 */
 	public Map<String, String> getAllTexts(String entityName, Object localeObj) {
-		Assert.isInstanceOf(Locale.class, localeObj, "That was not a locale object!!");
-		return getAllTexts(entityName, (Locale) localeObj);
+		return getAllTexts(entityName, StaticHelpers.getLocaleObject(localeObj));
 	}
 
 	/**
@@ -139,12 +138,25 @@ public class InternationalizationService implements Serializable {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param entityObj Used with createUri.
+	 * @param attributeName
+	 * @param localeObj
+	 * @return Single string of translation.
+	 */
 	public String getText(Object entityObj, String attributeName, Object localeObj) {
 		Assert.isInstanceOf(ExerciseEntity.class, entityObj,
 				"You did not gave me an ExerciseEntity to resolve!");
 		return getText(createUri((ExerciseEntity) entityObj), attributeName, localeObj);
 	}
 
+	/**
+	 * Creates an URI of an entity of this project. Example: Task:1 = Exercise:1/Task:1
+	 * 
+	 * @param entities
+	 * @return
+	 */
 	public static String createUri(ExerciseEntity... entities) {
 		StringBuilder sb = new StringBuilder();
 		Assert.notNull(entities);

@@ -4,7 +4,7 @@
     <form:update id="fu_fhkoeln_edb_nftool_TaskTable" modelAttribute="taskTable" path="/tasktables" z="2364l9VSpXwMxqgiRxSKa85rSx4=">
         <field:input field="ordering" id="c_fhkoeln_edb_nftool_TaskTable_ordering" z="lANqKkwrJl2W6b6W/63/S5rZMPw="/>
         <field:input field="normalform" id="c_fhkoeln_edb_nftool_TaskTable_normalform" z="YeR9XE0msB3ASh0o8lgl7wsCKa0="/>
-        <field:textarea field="description" id="c_fhkoeln_edb_nftool_TaskTable_description" required="true" z="DWPTia2FS1YcOja5jf1dZp0hhs4="/>
+        
         <field:simple field="tableColumns" id="c_fhkoeln_edb_nftool_TaskTable_tableColumns" messageCode="entity_reference_not_managed" messageCodeAttribute="Table Column" z="Kd4M+rooV+ESk047HjBZ7Q32fNE="/>
         <field:simple field="tableRows" id="c_fhkoeln_edb_nftool_TaskTable_tableRows" messageCode="entity_reference_not_managed" messageCodeAttribute="Table Row" z="rR2/fMxLyPp4blPnjvh+ZqrN1n8="/>
         

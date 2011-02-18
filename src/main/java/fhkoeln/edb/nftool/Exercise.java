@@ -28,12 +28,12 @@ public class Exercise implements Serializable, ExerciseEntity {
 	private transient static final Logger logger = Logger.getLogger(Exercise.class);
 
 	// @Type(type = "fhkoeln.edb.nftool.i18n.LocalizedLabelUserType")
-	@NotNull
-	private String title;
+	// @NotNull
+	// private String title;
 
 	// @Type(type = "fhkoeln.edb.nftool.i18n.LocalizedLabelUserType")
-	@NotNull
-	private String description;
+	// @NotNull
+	// private String description;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "exercise")
 	private Set<Task> tasks = new HashSet<Task>();
@@ -92,8 +92,8 @@ public class Exercise implements Serializable, ExerciseEntity {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Id: ").append(getId()).append(", ");
-		sb.append("Title: ").append(getTitle()).append(", ");
-		sb.append("Description: ").append(getDescription()).append(", ");
+		// sb.append("Title: ").append(getTitle()).append(", ");
+		// sb.append("Description: ").append(getDescription()).append(", ");
 		sb.append("Tasks: ").append(getTasks() == null ? "null" : getTasks().size());
 		return sb.toString();
 	}

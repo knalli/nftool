@@ -7,7 +7,6 @@ import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.persistence.ManyToOne;
 import fhkoeln.edb.nftool.TableColumn;
 

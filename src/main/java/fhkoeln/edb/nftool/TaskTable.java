@@ -1,21 +1,17 @@
 package fhkoeln.edb.nftool;
 
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.roo.addon.entity.RooEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import java.io.Serializable;
-import java.util.Set;
-import fhkoeln.edb.nftool.TableColumn;
 import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
-import fhkoeln.edb.nftool.TableRow;
+
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.serializable.RooSerializable;
+import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
@@ -28,9 +24,9 @@ public class TaskTable implements Serializable, ExerciseEntity {
 
 	private short normalform;
 
-	@NotNull
-	@Size(max = 150)
-	private String description;
+	// @NotNull
+	// @Size(max = 150)
+	// private String description;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "tableColumn")

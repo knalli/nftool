@@ -4,26 +4,9 @@
 package fhkoeln.edb.nftool;
 
 import fhkoeln.edb.nftool.Task;
-import java.lang.String;
 import java.util.Set;
 
 privileged aspect Exercise_Roo_JavaBean {
-    
-    public String Exercise.getTitle() {
-        return this.title;
-    }
-    
-    public void Exercise.setTitle(String title) {
-        this.title = title;
-    }
-    
-    public String Exercise.getDescription() {
-        return this.description;
-    }
-    
-    public void Exercise.setDescription(String description) {
-        this.description = description;
-    }
     
     public Set<Task> Exercise.getTasks() {
         return this.tasks;
