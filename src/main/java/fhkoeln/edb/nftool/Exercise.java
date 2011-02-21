@@ -1,23 +1,19 @@
 package fhkoeln.edb.nftool;
 
-import org.apache.log4j.Logger;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.entity.RooEntity;
-import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.io.Serializable;
-import java.util.Set;
-import fhkoeln.edb.nftool.Task;
-
 import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
-import javax.validation.constraints.NotNull;
+
+import org.apache.log4j.Logger;
+import org.springframework.roo.addon.entity.RooEntity;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.serializable.RooSerializable;
+import org.springframework.transaction.annotation.Transactional;
 
 @SuppressWarnings("serial")
 @RooJavaBean

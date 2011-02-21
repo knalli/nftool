@@ -50,7 +50,7 @@
 							${rowSeperator}
 						</c:if>
 						<td>
-							<c:set var="rowContent" value="${i18nService.getText(row, 'content', locale)"/>
+							<c:set var="rowContent" value="${i18nService.getText(row, 'content', locale)}" />
 							<c:if test="${rowContent eq ''}">
 								&#160;
 							</c:if>

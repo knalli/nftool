@@ -75,9 +75,9 @@ public class InternationalizationService implements Serializable {
 			return LOCALE_ERROR;
 		}
 		if (logger.isDebugEnabled()) {
-			logger.debug(String.format(
-					"The Service was asked about an i18n for %s and id %s. Target locale: %s",
-					entityUri, attributeName, localeObj));
+			logger.debug(String
+					.format("The Service was asked about an i18n for %s and attribute %s. Target locale: %s",
+							entityUri, attributeName, localeObj));
 		}
 		if (labels == null || labels.isEmpty()) {
 			logger.error("No locales available in i18nService!");
@@ -98,6 +98,13 @@ public class InternationalizationService implements Serializable {
 					} else if (localizedLabel.getLocale().equals(FALLBACK_LOCALE)) {
 						fallback_result = localizedLabel.getContent();
 					}
+				}
+			}
+			if (logger.isDebugEnabled()) {
+				if (result == null) {
+					logger.debug("Returning fallback result: " + fallback_result);
+				} else {
+					logger.debug("Returnning result: " + result);
 				}
 			}
 			return result == null ? fallback_result : result;
@@ -161,7 +168,7 @@ public class InternationalizationService implements Serializable {
 		StringBuilder sb = new StringBuilder();
 		Assert.notNull(entities);
 		for (ExerciseEntity e : entities) {
-			if (sb.capacity() > 0) {
+			if (sb.length() > 0) {
 				sb.append('/');
 			}
 			sb.append(e.getClass().getSimpleName()).append(':').append(e.getId());

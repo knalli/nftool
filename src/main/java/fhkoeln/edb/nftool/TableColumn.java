@@ -35,7 +35,7 @@ public class TableColumn implements Serializable, ExerciseEntity {
 	private Boolean keyColumn;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "taskColumn")
+	@JoinColumn(name = "task_column_fk")
 	private Set<TableRow> tableRows = new HashSet<TableRow>();
 
 }

@@ -5,7 +5,7 @@
 	<div id="_title">
 		<h1><c:out value="${i18nService.getText(Exercise, 'title', locale) }"/></h1>
 		<p class="description yellow-gradient">
-			<c:out value="${i18nService.getText(Exercise, 'description', locale) }"/>
+			<c:out value="${i18nService.getText(task, 'description', locale) }"/>
 		</p>
 		
 		

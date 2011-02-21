@@ -34,7 +34,7 @@ public class LocalizedLabel implements Serializable {
 	 */
 	@NotNull
 	@Size(min = 1)
-	@Index(name = "index-entityuri")
+	@Index(name = "indexEntityUri")
 	private String entityUri;
 
 	/**

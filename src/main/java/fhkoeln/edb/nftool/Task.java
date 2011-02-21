@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -39,10 +40,11 @@ public class Task implements Serializable, ExerciseEntity {
 	@Transient
 	private boolean solved;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "task")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "task_fk")
 	private Set<TaskTable> taskTables = new HashSet<TaskTable>();
 
 	@ManyToOne
+	@JoinColumn(name = "exercise_fk")
 	private Exercise exercise;
 }

@@ -29,11 +29,11 @@ public class TaskTable implements Serializable, ExerciseEntity {
 	// private String description;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "tableColumn")
+	@JoinColumn(name = "table_fk")
 	private Set<TableColumn> tableColumns = new HashSet<TableColumn>();
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "taskTable")
+	@JoinColumn(name = "task_table_fk")
 	private Set<TableRow> tableRows = new HashSet<TableRow>();
 
 }
