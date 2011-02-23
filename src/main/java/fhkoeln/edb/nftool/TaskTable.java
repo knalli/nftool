@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
@@ -28,11 +29,11 @@ public class TaskTable implements Serializable, ExerciseEntity {
 	// @Size(max = 150)
 	// private String description;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "table_fk")
 	private Set<TableColumn> tableColumns = new HashSet<TableColumn>();
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "task_table_fk")
 	private Set<TableRow> tableRows = new HashSet<TableRow>();
 

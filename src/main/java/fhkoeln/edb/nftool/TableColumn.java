@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -23,18 +24,10 @@ import org.springframework.roo.addon.tostring.RooToString;
 // "findTableColumnsByKeyColumn" })
 public class TableColumn implements Serializable, ExerciseEntity {
 
-	// @NotNull
-	// @Size(min = 1, max = 60)
-	// private String name;
-
-	// @NotNull
-	// @Size(min = 2, max = 2)
-	// private String locale;
-
 	@NotNull
 	private Boolean keyColumn;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "task_column_fk")
 	private Set<TableRow> tableRows = new HashSet<TableRow>();
 

@@ -92,7 +92,7 @@ public class InternationalizationService implements Serializable {
 			List<LocalizedLabel> entityLabels = labels.get(entityUri);
 			for (LocalizedLabel localizedLabel : entityLabels) {
 				if (localizedLabel.getAttributeName().equals(attributeName)) {
-					if (localizedLabel.getLocale().equals(locale)) {
+					if (localizedLabel.getLocale().equals(locale.getLanguage())) {
 						result = localizedLabel.getContent();
 						break;
 					} else if (localizedLabel.getLocale().equals(FALLBACK_LOCALE)) {
@@ -152,6 +152,7 @@ public class InternationalizationService implements Serializable {
 	 * @param localeObj
 	 * @return Single string of translation.
 	 */
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public String getText(Object entityObj, String attributeName, Object localeObj) {
 		Assert.isInstanceOf(ExerciseEntity.class, entityObj,
 				"You did not gave me an ExerciseEntity to resolve!");
@@ -164,7 +165,7 @@ public class InternationalizationService implements Serializable {
 	 * @param entities
 	 * @return
 	 */
-	public static String createUri(ExerciseEntity... entities) {
+	protected static String createUri(ExerciseEntity... entities) {
 		StringBuilder sb = new StringBuilder();
 		Assert.notNull(entities);
 		for (ExerciseEntity e : entities) {
