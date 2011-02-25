@@ -3,7 +3,7 @@ xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:roo="urn:jsptagdir:/WEB-INF/tags"
 xmlns:form="http://www.springframework.org/tags/form" version="2.0">
 	<jsp:output omit-xml-declaration="yes"/>
 	<div>
-		<h1><c:out value="${i18nService.getText(task, 'title', locale) }"/></h1>
+		<h1><c:out value="${i18nService.getText(Exercise, 'title', locale) }"/></h1>
 		<p class="points"><spring:message code="webflow.results.points.intermediate" arguments="${Points.points}" /></p>
 		<p class="description yellow-gradient"><c:out value="${i18nService.getText(task, 'description', locale)}"/></p>
 		

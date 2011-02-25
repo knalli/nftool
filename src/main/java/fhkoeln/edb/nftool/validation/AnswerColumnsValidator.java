@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -85,10 +84,11 @@ public class AnswerColumnsValidator {
 				ExerciseState.previous(ExerciseState.valueOf(answer.getState())));
 
 		if (containing) {
-			result = checkTablesContainsColumnsAll(columns, tables, answer.getLocale(), true);
+			result = checkTablesContainsColumnsAll(columns, tables, answer.getLocale()
+					.getLanguage(), true);
 		} else {
-			result = checkTablesContainsColumnsNone(columns, tables, tablesPrevious,
-					answer.getLocale(), false);
+			result = checkTablesContainsColumnsNone(columns, tables, tablesPrevious, answer
+					.getLocale().getLanguage(), false);
 		}
 
 		if (!result || messages.hasErrorMessages()) {
@@ -121,8 +121,7 @@ public class AnswerColumnsValidator {
 			Set<TableColumn> solutionColumns = table.getTableColumns();
 			for (TableColumn solutionColumn : solutionColumns) {
 				if (!mustBeKey || solutionColumn.getKeyColumn()) {
-					String solutionColumnName = i18nService.getText(solutionColumn, "name",
-							Locale.GERMAN);// solutionColumn.getTexts().get(locale).getName();
+					String solutionColumnName = i18nService.getText(solutionColumn, "name", locale);
 					if (answerColumns.contains(solutionColumnName)) {
 						columnsUnchecked.remove(columnsUnchecked.indexOf(solutionColumnName));
 						if (columnsUnchecked.size() == 0) {
@@ -160,10 +159,9 @@ public class AnswerColumnsValidator {
 				for (TableColumn tableColumnPrev : tcsPrev) {
 					boolean found = false;
 					String tableColumnPrevName = i18nService.getText(tableColumnPrev, "name",
-							Locale.GERMAN);// tableColumnPrev.getTexts().get(locale).getName();
+							locale);
 					for (TableColumn tableColumn : tcs) {
-						String tableColumnName = i18nService.getText(tableColumn, "name",
-								Locale.GERMAN);// tableColumn.getTexts().get(locale).getName();
+						String tableColumnName = i18nService.getText(tableColumn, "name", locale);
 						if (tableColumnName.equals(tableColumnPrevName)) {
 							found = true;
 						}

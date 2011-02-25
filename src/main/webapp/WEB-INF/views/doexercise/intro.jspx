@@ -1,13 +1,13 @@
-<div xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:form="http://www.springframework.org/tags/form" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
 	<jsp:output omit-xml-declaration="yes"/>
-	
 	
 	<div id="_title">
 		<h1><c:out value="${i18nService.getText(Exercise, 'title', locale) }"/></h1>
 		<p class="description yellow-gradient">
 			<c:out value="${i18nService.getText(task, 'description', locale) }"/>
 		</p>
-		
 		
 		<form method="POST" >
 			<form:errors cssClass="errors" delimiter="&lt;p/&gt;" path="*"/>
@@ -21,6 +21,6 @@
 			</div>
 		</form> 
 
-<!--		<util:i18n content="${Exercise.title}" entity="Exercise" field="title"/>-->
+<!--		<util:i18n entity="Exercise" field="title"/>-->
 	</div>
 </div>

@@ -36,6 +36,7 @@
 		<on-entry>
 			<evaluate expression="Exercise.getTaskByState('KEYS')" result="viewScope.task" />
 			<set name="answerColumnsPK.exercise" value="Exercise" />
+			<set name="answerColumnsPK.locale" value="externalContext.locale" />
 			<set name="answerColumnsPK.state" value="'KEYS'" />
 			<set name="viewScope.attemps" value="0"/>
 		</on-entry>
@@ -54,6 +55,7 @@
 		<on-entry>
 			<evaluate expression="Exercise.getTaskByState('NORMALFORM1')" result="viewScope.task" />
 			<set name="answerColumnsNF1.exercise" value="Exercise" />
+			<set name="answerColumnsNF1.locale" value="externalContext.locale" />
 			<set name="answerColumnsNF1.state" value="'NORMALFORM1'" />
 		</on-entry>
 		<on-render>
@@ -72,6 +74,7 @@
 			<evaluate expression="Exercise.getTaskByState('NORMALFORM2')" result="viewScope.task" />
 			<set name="answerTablesNF2.exercise" value="Exercise" />
 			<set name="answerTablesNF2.state" value="'NORMALFORM2'" />
+			<set name="answerTablesNF2.locale" value="externalContext.locale" />
 <!--			<evaluate expression="answerTablesNF2.buildPossibleColumns()" />-->
 		</on-entry>
 		<on-render>
@@ -89,6 +92,7 @@
 		<on-entry>
 			<evaluate expression="Exercise.getTaskByState('NORMALFORM3')" result="viewScope.task" />
 			<set name="answerTablesNF3.exercise" value="Exercise" />
+			<set name="answerTablesNF3.locale" value="externalContext.locale" />
 			<set name="answerTablesNF3.state" value="'NORMALFORM3'" />
 			<evaluate expression="externalContext.locale" result="viewScope.locale" />
 			<evaluate expression="answerTablesNF3.buildPossibleColumns(externalContext.locale)" />

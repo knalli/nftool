@@ -2,6 +2,7 @@ package fhkoeln.edb.nftool;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -25,7 +26,7 @@ public class AnswerColumns implements Serializable {
 
 	Boolean solved = false;
 
-	String locale;
+	Locale locale;
 
 	@Override
 	public String toString() {

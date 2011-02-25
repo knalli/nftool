@@ -2,8 +2,9 @@
 	<jsp:output omit-xml-declaration="yes"/>
 	<spring:message var="title" code="webflow.endstate.title" />
 	<div id="_title">
-		<h1>${Exercise.texts['en'].title}</h1>		
-		<p><spring:message code="webflow.endstate.message" /></p>
-		<spring:message code="webflow.results.points" arguments="${Points.points}" />
+		<h1><c:out value="${i18nService.getText(Exercise, 'title', locale) }"/></h1>
+	
+		<p><spring:message code="webflow_endstate_message" /></p>
+		<spring:message code="webflow_results_points" arguments="${Points.points}" />
 	</div>
 </div>

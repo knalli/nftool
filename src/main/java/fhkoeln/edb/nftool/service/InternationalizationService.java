@@ -37,6 +37,9 @@ public class InternationalizationService implements Serializable {
 	 */
 	private static Map<String, List<LocalizedLabel>> labels;
 
+	/**
+	 * Build up labels from db on construction a singleton upon starting spring.
+	 */
 	@PostConstruct
 	public void initialize() {
 		if (labels == null || labels.isEmpty()) {
@@ -64,31 +67,47 @@ public class InternationalizationService implements Serializable {
 	}
 
 	/**
+	 * Wrapper to handle Objects, e.g. from webflow.
+	 * 
+	 * @param entityUri
+	 * @param attributeName
+	 * @param localeObj
+	 * @return
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public String getText(String entityUri, String attributeName, Object localeObj) {
+		String locale;
+		if (!(localeObj instanceof String)) {
+			locale = StaticHelpers.getLocaleObject(localeObj).getLanguage();
+		} else {
+			locale = (String) localeObj;
+		}
+		return getText(entityUri, attributeName, locale);
+	}
+
+	/**
 	 * Based on a Table with unique key of "entityName" and "id"
 	 * 
 	 * @param entityUri Name of the Entity to look translation for, e.g. "Exercise"
 	 * @param attributeName The Field-ID, unique for this entity.
-	 * @param obj An locale
+	 * @param String An locale string like 'en'
 	 * @return The translation or it's fallback.
 	 */
-	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public String getText(String entityUri, String attributeName, Object localeObj) {
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public String getText(String entityUri, String attributeName, String locale) {
 		if (entityUri == null) {
 			logger.warn("You queried for Translation with no Entity Identifier");
 			return LOCALE_ERROR;
 		}
 		if (logger.isDebugEnabled()) {
 			logger.debug(String
-					.format("The Service was asked about an i18n for %s and attribute %s. Target locale: %s, using %s",
-							entityUri, attributeName, localeObj,
-							StaticHelpers.getLocaleObject(localeObj).getLanguage()));
+					.format("The Service was asked about an i18n for %s and attribute %s. Target locale: %s",
+							entityUri, attributeName, locale));
 		}
 		if (labels == null || labels.isEmpty()) {
 			logger.error("No locales available in i18nService!");
 			return LOCALE_ERROR;
 		}
-
-		Locale locale = StaticHelpers.getLocaleObject(localeObj);
 
 		String result = null, fallback_result = LOCALE_ERROR;
 
@@ -96,7 +115,7 @@ public class InternationalizationService implements Serializable {
 			List<LocalizedLabel> entityLabels = labels.get(entityUri);
 			for (LocalizedLabel localizedLabel : entityLabels) {
 				if (localizedLabel.getAttributeName().equals(attributeName)) {
-					if (localizedLabel.getLocale().getLanguage().equals(locale.getLanguage())) {
+					if (localizedLabel.getLocale().getLanguage().equals(locale)) {
 						result = localizedLabel.getContent();
 						break;
 					} else if (localizedLabel.getLocale().getLanguage().equals(FALLBACK_LOCALE)) {
@@ -144,6 +163,7 @@ public class InternationalizationService implements Serializable {
 	 * @return All translations for this Entity and the specified locale as Map<Attribute Name,
 	 *         Content>.
 	 */
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public Map<String, String> getAllTexts(String entityName, Locale locale) {
 		Map<String, String> result = new HashMap<String, String>();
 		Assert.notNull(locale, "No locale defined!");

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class AnswerTables implements Serializable {
 	Set<String> possibleColumns;
 	Integer points;
 	Boolean solved = false;
-	String locale;
+	Locale locale;
 
 	@Override
 	public String toString() {

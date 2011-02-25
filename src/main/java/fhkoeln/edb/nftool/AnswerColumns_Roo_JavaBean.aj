@@ -8,6 +8,7 @@ import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.List;
+import java.util.Locale;
 
 privileged aspect AnswerColumns_Roo_JavaBean {
     
@@ -51,11 +52,11 @@ privileged aspect AnswerColumns_Roo_JavaBean {
         this.solved = solved;
     }
     
-    public String AnswerColumns.getLocale() {
+    public Locale AnswerColumns.getLocale() {
         return this.locale;
     }
     
-    public void AnswerColumns.setLocale(String locale) {
+    public void AnswerColumns.setLocale(Locale locale) {
         this.locale = locale;
     }
     

@@ -10,6 +10,7 @@ import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -79,11 +80,11 @@ privileged aspect AnswerTables_Roo_JavaBean {
         this.solved = solved;
     }
     
-    public String AnswerTables.getLocale() {
+    public Locale AnswerTables.getLocale() {
         return this.locale;
     }
     
-    public void AnswerTables.setLocale(String locale) {
+    public void AnswerTables.setLocale(Locale locale) {
         this.locale = locale;
     }
     

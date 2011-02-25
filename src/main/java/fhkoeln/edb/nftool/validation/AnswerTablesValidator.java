@@ -3,7 +3,6 @@ package fhkoeln.edb.nftool.validation;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -45,7 +44,7 @@ public class AnswerTablesValidator {
 		final Map<Long, List<String>> solutionKeyColumns = new HashMap<Long, List<String>>();
 		final Map<Long, List<String>> solutionColumns = new HashMap<Long, List<String>>();
 
-		getSolution(tables, solutionKeyColumns, solutionColumns, answer.getLocale());
+		getSolution(tables, solutionKeyColumns, solutionColumns, answer.getLocale().getLanguage());
 
 		Map<Long, List<String>> answerKeyColumns = answer.getKeys();
 		Map<Long, List<String>> answerColumns = answer.getColumns();
@@ -76,7 +75,7 @@ public class AnswerTablesValidator {
 			columnKeyStrings = new ArrayList<String>();
 			columnStrings = new ArrayList<String>();
 			for (TableColumn column : table.getTableColumns()) {
-				String columnName = i18nService.getText(column, "name", Locale.GERMAN);// column.getTexts().get(locale).getName();
+				String columnName = i18nService.getText(column, "name", locale);// column.getTexts().get(locale).getName();
 				if (column.getKeyColumn()) {
 					columnKeyStrings.add(columnName);
 				} else {
@@ -187,7 +186,7 @@ public class AnswerTablesValidator {
 		final Map<Long, List<String>> solutionKeyColumns = new HashMap<Long, List<String>>();
 		final Map<Long, List<String>> solutionColumns = new HashMap<Long, List<String>>();
 
-		getSolution(tables, solutionKeyColumns, solutionColumns, answer.getLocale());
+		getSolution(tables, solutionKeyColumns, solutionColumns, answer.getLocale().getLanguage());
 
 		Map<Long, List<String>> answerKeyColumns = answer.getKeys();
 		Map<Long, List<String>> answerColumns = answer.getColumns();

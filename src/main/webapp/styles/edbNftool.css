@@ -280,7 +280,7 @@ table.exercise th {
 }
 
 .exercise thead .ui-draggable {
-	cursor:move;
+	cursor:hand;
 }
 
 .exercise .headerControl .ui-icon{
