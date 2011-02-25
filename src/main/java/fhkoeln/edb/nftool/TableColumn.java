@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -26,6 +27,8 @@ public class TableColumn implements Serializable, ExerciseEntity {
 
 	@NotNull
 	private Boolean keyColumn;
+
+	private int ordering = 0;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "task_column_fk")

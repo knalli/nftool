@@ -9,8 +9,7 @@ privileged aspect TableRow_Roo_ToString {
     
     public String TableRow.toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("RowNumber: ").append(getRowNumber()).append(", ");
-        sb.append("TableColumn: ").append(getTableColumn());
+        sb.append("RowNumber: ").append(getRowNumber());
         return sb.toString();
     }
     

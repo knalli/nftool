@@ -3,18 +3,15 @@
 
 package fhkoeln.edb.nftool.web;
 
-import fhkoeln.edb.nftool.TableColumn;
 import fhkoeln.edb.nftool.TableRow;
 import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
-import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -82,11 +79,6 @@ privileged aspect TableRowController_Roo_Controller {
         model.addAttribute("page", (page == null) ? "1" : page.toString());
         model.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/tablerows?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());
-    }
-    
-    @ModelAttribute("tablecolumns")
-    public Collection<TableColumn> TableRowController.populateTableColumns() {
-        return TableColumn.findAllTableColumns();
     }
     
     String TableRowController.encodeUrlPathSegment(String pathSegment, HttpServletRequest request) {

@@ -7,5 +7,7 @@
         <field:display field="keyColumn" id="s_fhkoeln_edb_nftool_TableColumn_keyColumn" object="${tablecolumn}" z="rvMvucp3aL58z5JCpWwaYifA0tM="/>
         <field:display field="tableRows" id="s_fhkoeln_edb_nftool_TableColumn_tableRows" object="${tablecolumn}" z="NT8fNaIFrqdQG60jLqRxzfyeAXU="/>
         
+    
+    <field:display field="ordering" id="s_fhkoeln_edb_nftool_TableColumn_ordering" object="${tablecolumn}" z="wuG65ofahJHqvGoC8SO2vdEGLak="/>
     </page:show>
 </div>

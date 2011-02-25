@@ -43,7 +43,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     Converter<TableColumn, String> ApplicationConversionServiceFactoryBean.getTableColumnConverter() {
         return new Converter<TableColumn, String>() {
             public String convert(TableColumn source) {
-                return new StringBuilder().append(source.toString()).toString();
+                return new StringBuilder().append(source.getOrdering()).toString();
             }
         };
     }

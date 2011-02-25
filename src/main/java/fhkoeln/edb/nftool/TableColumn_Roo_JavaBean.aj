@@ -17,6 +17,14 @@ privileged aspect TableColumn_Roo_JavaBean {
         this.keyColumn = keyColumn;
     }
     
+    public int TableColumn.getOrdering() {
+        return this.ordering;
+    }
+    
+    public void TableColumn.setOrdering(int ordering) {
+        this.ordering = ordering;
+    }
+    
     public Set<TableRow> TableColumn.getTableRows() {
         return this.tableRows;
     }

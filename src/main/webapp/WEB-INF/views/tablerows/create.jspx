@@ -7,7 +7,7 @@
         
         
         
-    <field:select field="tableColumn" id="c_fhkoeln_edb_nftool_TableRow_tableColumn" itemValue="id" items="${tablecolumns}" path="/tablecolumns" z="2opb1Sl7U36coKeR7Xp4ZmVHql4="/>
+    
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_fhkoeln_edb_nftool_TableRow" render="${not empty dependencies}" z="U6HI6kkLYp7YbJIwfVmkJcFWtCg="/>
 </div>

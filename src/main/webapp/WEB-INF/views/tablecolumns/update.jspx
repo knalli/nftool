@@ -7,5 +7,7 @@
         <field:checkbox field="keyColumn" id="c_fhkoeln_edb_nftool_TableColumn_keyColumn" z="VLEUpyK+PaIGxx8oLT4XRH60Atk="/>
         <field:simple field="tableRows" id="c_fhkoeln_edb_nftool_TableColumn_tableRows" messageCode="entity_reference_not_managed" messageCodeAttribute="Table Row" z="Mv84ozId6wpEntL3+dCoY5BoTpM="/>
         
+    
+    <field:input field="ordering" id="c_fhkoeln_edb_nftool_TableColumn_ordering" z="LM4YlyJN0ydabHubgV4oCosRrMA="/>
     </form:update>
 </div>

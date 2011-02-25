@@ -27,7 +27,7 @@ import fhkoeln.edb.nftool.helper.StaticHelpers;
 public class InternationalizationService implements Serializable {
 	private static final Logger logger = Logger.getLogger(InternationalizationService.class);
 
-	private static final Locale FALLBACK_LOCALE = Locale.ENGLISH;
+	private static final String FALLBACK_LOCALE = Locale.ENGLISH.getLanguage();
 	private static final String LOCALE_ERROR = "TRANSLATION NOT FOUND";
 
 	/**
@@ -53,6 +53,9 @@ public class InternationalizationService implements Serializable {
 					labels.put(uri, entityLabels);
 				}
 				entityLabels.add(label);
+				if (logger.isTraceEnabled()) {
+					logger.trace("Added label " + label);
+				}
 			}
 		}
 		if (logger.isDebugEnabled()) {
@@ -76,8 +79,9 @@ public class InternationalizationService implements Serializable {
 		}
 		if (logger.isDebugEnabled()) {
 			logger.debug(String
-					.format("The Service was asked about an i18n for %s and attribute %s. Target locale: %s",
-							entityUri, attributeName, localeObj));
+					.format("The Service was asked about an i18n for %s and attribute %s. Target locale: %s, using %s",
+							entityUri, attributeName, localeObj,
+							StaticHelpers.getLocaleObject(localeObj).getLanguage()));
 		}
 		if (labels == null || labels.isEmpty()) {
 			logger.error("No locales available in i18nService!");
@@ -92,13 +96,19 @@ public class InternationalizationService implements Serializable {
 			List<LocalizedLabel> entityLabels = labels.get(entityUri);
 			for (LocalizedLabel localizedLabel : entityLabels) {
 				if (localizedLabel.getAttributeName().equals(attributeName)) {
-					if (localizedLabel.getLocale().equals(locale.getLanguage())) {
+					if (localizedLabel.getLocale().getLanguage().equals(locale.getLanguage())) {
 						result = localizedLabel.getContent();
 						break;
-					} else if (localizedLabel.getLocale().equals(FALLBACK_LOCALE)) {
+					} else if (localizedLabel.getLocale().getLanguage().equals(FALLBACK_LOCALE)) {
 						fallback_result = localizedLabel.getContent();
 					}
 				}
+			}
+			if (result == null && entityLabels.size() == 1) {
+				if (logger.isDebugEnabled()) {
+					logger.debug("Detected just one translation for this entity, using it as fallback.");
+				}
+				result = entityLabels.get(0).getContent();
 			}
 			if (logger.isDebugEnabled()) {
 				if (result == null) {

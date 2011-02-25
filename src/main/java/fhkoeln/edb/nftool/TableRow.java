@@ -20,6 +20,6 @@ public class TableRow implements Serializable, ExerciseEntity {
 	@NotNull
 	private Integer rowNumber;
 
-	@ManyToOne(optional = false)
-	private TableColumn tableColumn;
+	// @ManyToOne(optional = false)
+	// private TableColumn tableColumn;
 }

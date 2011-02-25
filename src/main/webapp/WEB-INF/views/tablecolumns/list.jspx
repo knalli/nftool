@@ -8,6 +8,8 @@
             <table:column id="c_fhkoeln_edb_nftool_TableColumn_keyColumn" property="keyColumn" z="K94OK/GnK9UCFt9pf9QaPnyP/MU="/>
             <table:column id="c_fhkoeln_edb_nftool_TableColumn_tableRows" property="tableRows" z="VJ7SLp4hmFoLgqq/ezcmhmf6W7k="/>
             
+        
+        <table:column id="c_fhkoeln_edb_nftool_TableColumn_ordering" property="ordering" z="tOgu0WErHw3DOG2Tet/PSKn2PbU="/>
         </table:table>
     </page:list>
 </div>

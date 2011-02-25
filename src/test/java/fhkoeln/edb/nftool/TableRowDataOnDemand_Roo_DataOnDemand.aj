@@ -3,11 +3,9 @@
 
 package fhkoeln.edb.nftool;
 
-import fhkoeln.edb.nftool.TableColumnDataOnDemand;
 import fhkoeln.edb.nftool.TableRow;
 import java.util.List;
 import java.util.Random;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect TableRowDataOnDemand_Roo_DataOnDemand {
@@ -18,13 +16,9 @@ privileged aspect TableRowDataOnDemand_Roo_DataOnDemand {
     
     private List<TableRow> TableRowDataOnDemand.data;
     
-    @Autowired
-    private TableColumnDataOnDemand TableRowDataOnDemand.tableColumnDataOnDemand;
-    
     public TableRow TableRowDataOnDemand.getNewTransientTableRow(int index) {
         fhkoeln.edb.nftool.TableRow obj = new fhkoeln.edb.nftool.TableRow();
         obj.setRowNumber(new Integer(index));
-        obj.setTableColumn(tableColumnDataOnDemand.getRandomTableColumn());
         return obj;
     }
     

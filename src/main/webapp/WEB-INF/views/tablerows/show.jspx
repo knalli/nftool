@@ -7,6 +7,6 @@
         
         
         
-    <field:display field="tableColumn" id="s_fhkoeln_edb_nftool_TableRow_tableColumn" object="${tablerow}" z="Rlitr148Z0X83/o9JlDHTRKP0oM="/>
+    
     </page:show>
 </div>

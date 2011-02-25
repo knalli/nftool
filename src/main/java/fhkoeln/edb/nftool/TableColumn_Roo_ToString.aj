@@ -10,6 +10,7 @@ privileged aspect TableColumn_Roo_ToString {
     public String TableColumn.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("KeyColumn: ").append(getKeyColumn()).append(", ");
+        sb.append("Ordering: ").append(getOrdering()).append(", ");
         sb.append("TableRows: ").append(getTableRows() == null ? "null" : getTableRows().size());
         return sb.toString();
     }

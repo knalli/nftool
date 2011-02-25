@@ -3,7 +3,6 @@
 
 package fhkoeln.edb.nftool;
 
-import fhkoeln.edb.nftool.TableColumn;
 import java.lang.Integer;
 
 privileged aspect TableRow_Roo_JavaBean {
@@ -14,14 +13,6 @@ privileged aspect TableRow_Roo_JavaBean {
     
     public void TableRow.setRowNumber(Integer rowNumber) {
         this.rowNumber = rowNumber;
-    }
-    
-    public TableColumn TableRow.getTableColumn() {
-        return this.tableColumn;
-    }
-    
-    public void TableRow.setTableColumn(TableColumn tableColumn) {
-        this.tableColumn = tableColumn;
     }
     
 }
