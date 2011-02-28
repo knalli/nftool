@@ -14,9 +14,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import fhkoeln.edb.nftool.helper.StaticHelpers;
 import fhkoeln.edb.nftool.service.InternationalizationService;
 
 @Component
@@ -45,7 +46,8 @@ public class AnswerTables implements Serializable {
 		return sb.toString();
 	}
 
-	public void buildPossibleColumns(Object localeObj) {
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public void buildPossibleColumns() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Generating possible list of cases ...");
 		}
@@ -61,8 +63,7 @@ public class AnswerTables implements Serializable {
 		for (TaskTable table : tables) {
 			String columnName;
 			for (TableColumn column : table.getTableColumns()) {
-				columnName = i18nService.getText(column, "name",
-						StaticHelpers.getLocaleObject(localeObj));
+				columnName = i18nService.getText(column, "name", locale);
 				possibleColumns.add(columnName);
 				if (logger.isDebugEnabled()) {
 					logger.debug("Added " + columnName);

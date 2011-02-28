@@ -5,7 +5,6 @@
 
 	<!-- Maximum no. of relations is when every column has its own relation. -->
 	<!-- Build all radio boxes for this case, checked means 'this column is in this relation'. -->
-<!--	<c:forEach items="${Task.findTasksByExerciseAndType(Exercise, ExerciseState.valueOf(state)).getSingleResult()}" var="t" varStatus="loop">-->
 	 <c:forEach items="${tables.possibleColumns}" varStatus="loop"> 
 		<div class="keys">
 			Keys:

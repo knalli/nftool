@@ -204,8 +204,8 @@ public class InternationalizationService implements Serializable {
 			}
 			sb.append(e.getClass().getSimpleName()).append(':').append(e.getId());
 		}
-		if (logger.isDebugEnabled()) {
-			logger.debug("Created i18n-URI " + sb.toString());
+		if (logger.isTraceEnabled()) {
+			logger.trace("Created i18n-URI " + sb.toString());
 		}
 		return sb.toString();
 	}

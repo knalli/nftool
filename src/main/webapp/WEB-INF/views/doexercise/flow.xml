@@ -75,7 +75,7 @@
 			<set name="answerTablesNF2.exercise" value="Exercise" />
 			<set name="answerTablesNF2.state" value="'NORMALFORM2'" />
 			<set name="answerTablesNF2.locale" value="externalContext.locale" />
-<!--			<evaluate expression="answerTablesNF2.buildPossibleColumns()" />-->
+			<evaluate expression="answerTablesNF2.buildPossibleColumns()" />
 		</on-entry>
 		<on-render>
 			<evaluate expression="externalContext.locale" result="viewScope.locale" />

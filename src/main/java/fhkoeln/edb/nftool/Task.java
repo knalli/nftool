@@ -29,10 +29,6 @@ public class Task implements Serializable, ExerciseEntity {
 	@NotNull
 	private short ordering;
 
-	// @NotNull
-	// @Size(max = 200)
-	// private String description;
-
 	@Enumerated
 	private ExerciseState state;
 
