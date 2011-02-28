@@ -33,11 +33,11 @@ privileged aspect TaskTable_Roo_JavaBean {
         this.tableColumns = tableColumns;
     }
     
-    public Set<TableRow> TaskTable.getTableRows() {
+    public java.util.Set<TableRow> TaskTable.getTableRows() {
         return this.tableRows;
     }
     
-    public void TaskTable.setTableRows(Set<TableRow> tableRows) {
+    public void TaskTable.setTableRows(java.util.Set<TableRow> tableRows) {
         this.tableRows = tableRows;
     }
     

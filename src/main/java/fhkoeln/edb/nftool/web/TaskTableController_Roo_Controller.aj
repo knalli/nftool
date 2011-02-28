@@ -26,63 +26,66 @@ import org.springframework.web.util.WebUtils;
 privileged aspect TaskTableController_Roo_Controller {
     
     @RequestMapping(method = RequestMethod.POST)
-    public String TaskTableController.create(@Valid TaskTable taskTable, BindingResult result, Model model, HttpServletRequest request) {
-        if (result.hasErrors()) {
-            model.addAttribute("taskTable", taskTable);
+    public String TaskTableController.create(@Valid TaskTable taskTable, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("taskTable", taskTable);
             return "tasktables/create";
         }
+        uiModel.asMap().clear();
         taskTable.persist();
-        return "redirect:/tasktables/" + encodeUrlPathSegment(taskTable.getId().toString(), request);
+        return "redirect:/tasktables/" + encodeUrlPathSegment(taskTable.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", method = RequestMethod.GET)
-    public String TaskTableController.createForm(Model model) {
-        model.addAttribute("taskTable", new TaskTable());
+    public String TaskTableController.createForm(Model uiModel) {
+        uiModel.addAttribute("taskTable", new TaskTable());
         return "tasktables/create";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String TaskTableController.show(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("tasktable", TaskTable.findTaskTable(id));
-        model.addAttribute("itemId", id);
+    public String TaskTableController.show(@PathVariable("id") Long id, Model uiModel) {
+        uiModel.addAttribute("tasktable", TaskTable.findTaskTable(id));
+        uiModel.addAttribute("itemId", id);
         return "tasktables/show";
     }
     
     @RequestMapping(method = RequestMethod.GET)
-    public String TaskTableController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model model) {
+    public String TaskTableController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
-            model.addAttribute("tasktables", TaskTable.findTaskTableEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
+            uiModel.addAttribute("tasktables", TaskTable.findTaskTableEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
             float nrOfPages = (float) TaskTable.countTaskTables() / sizeNo;
-            model.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            model.addAttribute("tasktables", TaskTable.findAllTaskTables());
+            uiModel.addAttribute("tasktables", TaskTable.findAllTaskTables());
         }
         return "tasktables/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT)
-    public String TaskTableController.update(@Valid TaskTable taskTable, BindingResult result, Model model, HttpServletRequest request) {
-        if (result.hasErrors()) {
-            model.addAttribute("taskTable", taskTable);
+    public String TaskTableController.update(@Valid TaskTable taskTable, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("taskTable", taskTable);
             return "tasktables/update";
         }
+        uiModel.asMap().clear();
         taskTable.merge();
-        return "redirect:/tasktables/" + encodeUrlPathSegment(taskTable.getId().toString(), request);
+        return "redirect:/tasktables/" + encodeUrlPathSegment(taskTable.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String TaskTableController.updateForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("taskTable", TaskTable.findTaskTable(id));
+    public String TaskTableController.updateForm(@PathVariable("id") Long id, Model uiModel) {
+        uiModel.addAttribute("taskTable", TaskTable.findTaskTable(id));
         return "tasktables/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String TaskTableController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model model) {
+    public String TaskTableController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         TaskTable.findTaskTable(id).remove();
-        model.addAttribute("page", (page == null) ? "1" : page.toString());
-        model.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/tasktables?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/tasktables";
     }
     
     @ModelAttribute("tablecolumns")
@@ -91,12 +94,17 @@ privileged aspect TaskTableController_Roo_Controller {
     }
     
     @ModelAttribute("tablerows")
-    public Collection<TableRow> TaskTableController.populateTableRows() {
+    public java.util.Collection<TableRow> TaskTableController.populateTableRows() {
         return TableRow.findAllTableRows();
     }
     
-    String TaskTableController.encodeUrlPathSegment(String pathSegment, HttpServletRequest request) {
-        String enc = request.getCharacterEncoding();
+    @ModelAttribute("tasktables")
+    public java.util.Collection<TaskTable> TaskTableController.populateTaskTables() {
+        return TaskTable.findAllTaskTables();
+    }
+    
+    String TaskTableController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
+        String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {
             enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
         }

@@ -3,7 +3,6 @@
 
 package fhkoeln.edb.nftool.web;
 
-import fhkoeln.edb.nftool.Exercise;
 import fhkoeln.edb.nftool.Points;
 import fhkoeln.edb.nftool.TableColumn;
 import fhkoeln.edb.nftool.TableRow;
@@ -16,67 +15,58 @@ import org.springframework.format.FormatterRegistry;
 
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
-    Converter<TableRow, String> ApplicationConversionServiceFactoryBean.getTableRowConverter() {
-        return new Converter<TableRow, String>() {
-            public String convert(TableRow source) {
-                return new StringBuilder().append(source.getRowNumber()).toString();
-            }
-        };
-    }
-    
-    Converter<Exercise, String> ApplicationConversionServiceFactoryBean.getExerciseConverter() {
-        return new Converter<Exercise, String>() {
-            public String convert(Exercise source) {
-                return new StringBuilder().append(source.toString()).toString();
-            }
-        };
-    }
-    
     Converter<Points, String> ApplicationConversionServiceFactoryBean.getPointsConverter() {
         return new Converter<Points, String>() {
-            public String convert(Points source) {
-                return new StringBuilder().append(source.getUsername()).append(" ").append(source.getGameDate()).append(" ").append(source.getPoints()).toString();
+            public String convert(Points points) {
+                return new StringBuilder().append(points.getUsername()).append(" ").append(points.getGameDate()).append(" ").append(points.getPoints()).append(" ").append(points.getAppKey()).toString();
             }
         };
     }
     
-    Converter<TableColumn, String> ApplicationConversionServiceFactoryBean.getTableColumnConverter() {
-        return new Converter<TableColumn, String>() {
-            public String convert(TableColumn source) {
-                return new StringBuilder().append(source.getOrdering()).toString();
+    org.springframework.core.convert.converter.Converter<TableColumn, String> ApplicationConversionServiceFactoryBean.getTableColumnConverter() {
+        return new org.springframework.core.convert.converter.Converter<TableColumn, String>() {
+            public String convert(TableColumn tablecolumn) {
+                return new StringBuilder().append(tablecolumn.getOrdering()).toString();
             }
         };
     }
     
-    Converter<Task, String> ApplicationConversionServiceFactoryBean.getTaskConverter() {
-        return new Converter<Task, String>() {
-            public String convert(Task source) {
-                return new StringBuilder().append(source.getOrdering()).toString();
+    org.springframework.core.convert.converter.Converter<TableRow, String> ApplicationConversionServiceFactoryBean.getTableRowConverter() {
+        return new org.springframework.core.convert.converter.Converter<TableRow, String>() {
+            public String convert(TableRow tablerow) {
+                return new StringBuilder().append(tablerow.getRowNumber()).toString();
             }
         };
     }
     
-    Converter<TaskTable, String> ApplicationConversionServiceFactoryBean.getTaskTableConverter() {
-        return new Converter<TaskTable, String>() {
-            public String convert(TaskTable source) {
-                return new StringBuilder().append(source.getOrdering()).append(" ").append(source.getNormalform()).toString();
+    org.springframework.core.convert.converter.Converter<Task, String> ApplicationConversionServiceFactoryBean.getTaskConverter() {
+        return new org.springframework.core.convert.converter.Converter<Task, String>() {
+            public String convert(Task task) {
+                return new StringBuilder().append(task.getOrdering()).toString();
             }
         };
     }
     
-    Converter<LocalizedLabel, String> ApplicationConversionServiceFactoryBean.getLocalizedLabelConverter() {
-        return new Converter<LocalizedLabel, String>() {
-            public String convert(LocalizedLabel source) {
-                return new StringBuilder().append(source.getEntityUri()).append(" ").append(source.getAttributeName()).append(" ").append(source.getLocale()).toString();
+    org.springframework.core.convert.converter.Converter<TaskTable, String> ApplicationConversionServiceFactoryBean.getTaskTableConverter() {
+        return new org.springframework.core.convert.converter.Converter<TaskTable, String>() {
+            public String convert(TaskTable tasktable) {
+                return new StringBuilder().append(tasktable.getOrdering()).append(" ").append(tasktable.getNormalform()).toString();
+            }
+        };
+    }
+    
+    org.springframework.core.convert.converter.Converter<LocalizedLabel, String> ApplicationConversionServiceFactoryBean.getLocalizedLabelConverter() {
+        return new org.springframework.core.convert.converter.Converter<LocalizedLabel, String>() {
+            public String convert(LocalizedLabel localizedlabel) {
+                return new StringBuilder().append(localizedlabel.getEntityUri()).append(" ").append(localizedlabel.getAttributeName()).append(" ").append(localizedlabel.getLocale()).append(" ").append(localizedlabel.getContent()).toString();
             }
         };
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
-        registry.addConverter(getTableRowConverter());
-        registry.addConverter(getExerciseConverter());
         registry.addConverter(getPointsConverter());
         registry.addConverter(getTableColumnConverter());
+        registry.addConverter(getTableRowConverter());
         registry.addConverter(getTaskConverter());
         registry.addConverter(getTaskTableConverter());
         registry.addConverter(getLocalizedLabelConverter());

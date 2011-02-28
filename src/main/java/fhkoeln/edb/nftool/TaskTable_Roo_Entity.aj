@@ -76,6 +76,12 @@ privileged aspect TaskTable_Roo_Entity {
     }
     
     @Transactional
+    public void TaskTable.clear() {
+        if (this.entityManager == null) this.entityManager = entityManager();
+        this.entityManager.clear();
+    }
+    
+    @Transactional
     public TaskTable TaskTable.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
         TaskTable merged = this.entityManager.merge(this);

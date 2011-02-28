@@ -3,9 +3,11 @@
 
 package fhkoeln.edb.nftool;
 
+import fhkoeln.edb.nftool.ExerciseDataOnDemand;
 import fhkoeln.edb.nftool.Task;
 import java.util.List;
 import java.util.Random;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect TaskDataOnDemand_Roo_DataOnDemand {
@@ -16,11 +18,14 @@ privileged aspect TaskDataOnDemand_Roo_DataOnDemand {
     
     private List<Task> TaskDataOnDemand.data;
     
+    @Autowired
+    private ExerciseDataOnDemand TaskDataOnDemand.exerciseDataOnDemand;
+    
     public Task TaskDataOnDemand.getNewTransientTask(int index) {
         fhkoeln.edb.nftool.Task obj = new fhkoeln.edb.nftool.Task();
         obj.setOrdering(new Integer(index).shortValue());
-        obj.setState(null);
-        obj.setExercise(null);
+        obj.setState(fhkoeln.edb.nftool.ExerciseState.class.getEnumConstants()[0]);
+        obj.setExercise(exerciseDataOnDemand.getRandomExercise());
         return obj;
     }
     
