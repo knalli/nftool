@@ -33,7 +33,8 @@ public class AnswerTables implements Serializable {
 	Map<Long, List<String>> keys = new HashMap<Long, List<String>>();
 	Exercise exercise;
 	String state;
-	Set<String> possibleColumns;
+	Set<String> possibleColumnNames;
+	Set<TableColumn> possibleColumns;
 	Integer points;
 	Boolean solved = false;
 	Locale locale;
@@ -49,26 +50,26 @@ public class AnswerTables implements Serializable {
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public void buildPossibleColumns() {
-		if (logger.isDebugEnabled()) {
-			logger.debug("Generating possible list of cases ...");
-		}
+		logger.debug("Generating possible list of cases ...");
 		Assert.notNull(exercise, "Exercise has to be set before generating possible columns.");
 		Assert.notNull(state, "State has to be set before generating possible columns.");
 		Assert.notNull(locale,
 				"The locale was null. Have to know which locale I should build a Column list for.");
-		possibleColumns = new HashSet<String>();
+		possibleColumnNames = new HashSet<String>();
+		possibleColumns = new HashSet<TableColumn>();
 
 		Task t = Task.findTasksByExerciseAndState(exercise, ExerciseState.valueOf(state))
 				.getSingleResult();
 		Set<TaskTable> tables = t.getTaskTables();
 		for (TaskTable table : tables) {
-			String columnName;
 			for (TableColumn column : table.getTableColumns()) {
-				columnName = i18nService.getText(column, "name", locale);
-				possibleColumns.add(columnName);
-				if (logger.isDebugEnabled()) {
-					logger.debug("Added " + columnName);
-				}
+				possibleColumns.add(column);
+				final String columnName = i18nService.getText(column, "name", locale);
+				possibleColumnNames.add(columnName);
+			}
+			if (logger.isDebugEnabled()) {
+				logger.debug("Possible Columns: " + possibleColumns);
+				logger.debug("Possible Column Names: " + possibleColumnNames);
 			}
 		}
 	}

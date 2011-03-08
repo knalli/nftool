@@ -4,6 +4,7 @@
 package fhkoeln.edb.nftool;
 
 import fhkoeln.edb.nftool.Exercise;
+import fhkoeln.edb.nftool.TableColumn;
 import fhkoeln.edb.nftool.service.InternationalizationService;
 import java.lang.Boolean;
 import java.lang.Integer;
@@ -56,11 +57,19 @@ privileged aspect AnswerTables_Roo_JavaBean {
         this.state = state;
     }
     
-    public Set<String> AnswerTables.getPossibleColumns() {
+    public Set<String> AnswerTables.getPossibleColumnNames() {
+        return this.possibleColumnNames;
+    }
+    
+    public void AnswerTables.setPossibleColumnNames(Set<String> possibleColumnNames) {
+        this.possibleColumnNames = possibleColumnNames;
+    }
+    
+    public java.util.Set<TableColumn> AnswerTables.getPossibleColumns() {
         return this.possibleColumns;
     }
     
-    public void AnswerTables.setPossibleColumns(Set<String> possibleColumns) {
+    public void AnswerTables.setPossibleColumns(java.util.Set<TableColumn> possibleColumns) {
         this.possibleColumns = possibleColumns;
     }
     

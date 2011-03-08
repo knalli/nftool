@@ -6,18 +6,19 @@ package fhkoeln.edb.nftool;
 import fhkoeln.edb.nftool.Exercise;
 import java.lang.Boolean;
 import java.lang.Integer;
+import java.lang.Long;
 import java.lang.String;
 import java.util.List;
 import java.util.Locale;
 
 privileged aspect AnswerColumns_Roo_JavaBean {
     
-    public List<String> AnswerColumns.getColumns() {
-        return this.columns;
+    public List<Long> AnswerColumns.getColumnIds() {
+        return this.columnIds;
     }
     
-    public void AnswerColumns.setColumns(List<String> columns) {
-        this.columns = columns;
+    public void AnswerColumns.setColumnIds(List<Long> columnIds) {
+        this.columnIds = columnIds;
     }
     
     public Exercise AnswerColumns.getExercise() {

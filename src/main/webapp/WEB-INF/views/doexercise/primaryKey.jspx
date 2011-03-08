@@ -7,7 +7,7 @@ xmlns:form="http://www.springframework.org/tags/form" version="2.0">
 		<p class="points"><spring:message code="webflow.results.points.intermediate" arguments="${Points.points}" /></p>
 		<p class="description yellow-gradient"><c:out value="${i18nService.getText(task, 'description', locale)}"/></p>
 		
-		<form:form method="POST" commandName="answerColumnsPK">
+		<form:form method="POST" commandName="answerColumnsPK" htmlEscape="false">
 			<form:errors cssClass="errors red-gradient" path="*" />
 			<div class="tables">
 				<roo:tasktable tables="${task.taskTables}" controls="true" locked="${task.solved}"/>

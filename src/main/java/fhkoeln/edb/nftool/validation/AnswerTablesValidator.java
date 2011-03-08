@@ -115,7 +115,7 @@ public class AnswerTablesValidator {
 			columnStrings = new ArrayList<String>();
 			for (TableColumn column : table.getTableColumns()) {
 				String columnName = i18nService.getText(column, "name", locale);
-				column.getTexts().get(locale).getName();
+				// column.getTexts().get(locale).getName();
 				if (column.getKeyColumn()) {
 					columnKeyStrings.add(columnName);
 				} else {

@@ -113,8 +113,11 @@ $(function(){
 					containerPrefix = 'div:not(.keys)';
 					idPrefix = 'columns' + relationNr;
 				}
-				var checkbox = $(containerPrefix + ' input[value="' + id + '"][id^="' + idPrefix + '"]');
-				checkbox.attr('checked',true);
+//				var checkbox = $(containerPrefix + ' input[value="' + id + '"][id^="' + idPrefix + '"]');
+				debugger;
+				var map = $.data(document.body, 'edbTableMapping');
+				var checkbox = $(containerPrefix + ' input[value="' + map[id] + '"]');
+				checkbox.attr('checked', true);
 				item.data({checkboxId : checkbox.attr('id')});
 			};
 			
