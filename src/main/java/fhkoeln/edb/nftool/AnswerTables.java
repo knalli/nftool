@@ -41,8 +41,9 @@ public class AnswerTables implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("AnswerTables:");
-		sb.append(columns);
+		sb.append("AnswerTables: Keys=").append(keys);
+		sb.append(" Columns=").append(columns);
+		sb.append(" Locale=").append(locale);
 		return sb.toString();
 	}
 

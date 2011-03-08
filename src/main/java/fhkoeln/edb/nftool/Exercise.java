@@ -58,7 +58,9 @@ public class Exercise implements Serializable, ExerciseEntity {
 			logger.warn("There are no Tasks defined for this Exercise! " + tasks);
 			return null;
 		}
-		logger.warn("Searching Task for state " + es.name());
+		if (logger.isDebugEnabled()) {
+			logger.debug("Searching Task for state " + es.name());
+		}
 
 		for (Task t : tasks) {
 			if (logger.isTraceEnabled()) {
