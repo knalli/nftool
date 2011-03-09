@@ -12,8 +12,8 @@
 				<roo:tasktable tables="${task.taskTables}" controls="false"/>
 			</div>
 			<div class="submit">
-				<spring:message var="finish" code="button.finish" />
-				<spring:message var="back" code="button.back" />
+				<spring:message var="finish" code="button_finish" />
+				<spring:message var="back" code="button_back" />
 				<input type="submit" id="back" name="_eventId_back" value="${back}"/>
 				<input type="submit" id="success" name="_eventId_success" value="${finish}" />
 			</div>		
