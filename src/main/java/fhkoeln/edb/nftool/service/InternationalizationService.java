@@ -66,23 +66,61 @@ public class InternationalizationService implements Serializable {
 		}
 	}
 
+	public String getText(Object entityObj, String attributeName, Object localeObj) {
+		String entityUri = extractExerciseEntityName(entityObj);
+		String locale = extractLocaleString(localeObj);
+
+		return getText(entityUri, attributeName, locale);
+	}
+
 	/**
-	 * Wrapper to handle Objects, e.g. from webflow.
+	 * Wrapper to handle Objects from webflow.
 	 * 
 	 * @param entityUri
-	 * @param attributeName
+	 * @param attributeNameObj
 	 * @param localeObj
 	 * @return
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public String getText(String entityUri, String attributeName, Object localeObj) {
-		String locale;
-		if (!(localeObj instanceof String)) {
-			locale = StaticHelpers.getLocaleObject(localeObj).getLanguage();
-		} else {
-			locale = (String) localeObj;
+	public String getText(Object entityObj, Object attributeNameObj, Object localeObj) {
+
+		Assert.isInstanceOf(String.class, attributeNameObj,
+				"The attribute name has to be a string!");
+
+		String entityUri = extractExerciseEntityName(entityObj);
+		String locale = extractLocaleString(localeObj);
+
+		return getText(entityUri, (String) attributeNameObj, locale);
+	}
+
+	/**
+	 * @param localeObj
+	 * @return
+	 */
+	private String extractLocaleString(Object localeObj) {
+		if (localeObj instanceof String)
+			return (String) localeObj;
+		else if (localeObj instanceof Locale)
+			return StaticHelpers.getLocaleObject(localeObj).getLanguage();
+		else {
+			logger.error("The localeObj was neither a String like 'de', nor a Locale.");
+			return null;
 		}
-		return getText(entityUri, attributeName, locale);
+	}
+
+	/**
+	 * @param entityObj
+	 * @return
+	 */
+	private String extractExerciseEntityName(Object entityObj) {
+		if (entityObj instanceof String)
+			return (String) entityObj;
+		else if (ExerciseEntity.class.isAssignableFrom(entityObj.getClass()))
+			return createUri((ExerciseEntity) entityObj);
+		else {
+			logger.error("The entityObj is not a string, nor an ExerciseEntity.");
+			return null;
+		}
 	}
 
 	/**
@@ -151,9 +189,9 @@ public class InternationalizationService implements Serializable {
 	 * @param entityName Name of the Entity, e.g.
 	 * @param localeObj Locale Object
 	 */
-	public Map<String, String> getAllTexts(String entityName, Object localeObj) {
-		return getAllTexts(entityName, StaticHelpers.getLocaleObject(localeObj));
-	}
+	// public Map<String, String> getAllTexts(String entityName, Object localeObj) {
+	// return getAllTexts(entityName, StaticHelpers.getLocaleObject(localeObj));
+	// }
 
 	/**
 	 * Special here: Check Language instead of Locale equality.
@@ -163,17 +201,17 @@ public class InternationalizationService implements Serializable {
 	 * @return All translations for this Entity and the specified locale as Map<Attribute Name,
 	 *         Content>.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public Map<String, String> getAllTexts(String entityName, Locale locale) {
-		Map<String, String> result = new HashMap<String, String>();
-		Assert.notNull(locale, "No locale defined!");
-		for (LocalizedLabel label : labels.get(entityName)) {
-			if (locale.getLanguage().equals(label.getLocale().getLanguage())) {
-				result.put(label.getAttributeName(), label.getContent());
-			}
-		}
-		return result;
-	}
+	// @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	// public Map<String, String> getAllTexts(String entityName, Locale locale) {
+	// Map<String, String> result = new HashMap<String, String>();
+	// Assert.notNull(locale, "No locale defined!");
+	// for (LocalizedLabel label : labels.get(entityName)) {
+	// if (locale.getLanguage().equals(label.getLocale().getLanguage())) {
+	// result.put(label.getAttributeName(), label.getContent());
+	// }
+	// }
+	// return result;
+	// }
 
 	/**
 	 * 
@@ -182,12 +220,14 @@ public class InternationalizationService implements Serializable {
 	 * @param localeObj
 	 * @return Single string of translation.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public String getText(Object entityObj, String attributeName, Object localeObj) {
-		Assert.isInstanceOf(ExerciseEntity.class, entityObj,
-				"You did not gave me an ExerciseEntity to resolve!");
-		return getText(createUri((ExerciseEntity) entityObj), attributeName, localeObj);
-	}
+	// @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	// public String getText(Object entityObj, String attributeNameObj, Object localeObj) {
+	// Assert.isInstanceOf(ExerciseEntity.class, entityObj,
+	// "You did not gave me an ExerciseEntity to resolve!");
+	// Assert.isInstanceOf(String.class, attributeNameObj,
+	// "The attribute name has to be a string!");
+	// return getText(createUri((ExerciseEntity) entityObj), attributeNameObj, localeObj);
+	// }
 
 	/**
 	 * Creates an URI of an entity of this project. Example: Task:1 = Exercise:1/Task:1

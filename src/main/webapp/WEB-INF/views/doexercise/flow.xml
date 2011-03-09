@@ -93,11 +93,13 @@ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.spr
 		<on-entry>
 			<evaluate expression="Exercise.getTaskByState('NORMALFORM3')" result="viewScope.task" />
 			<set name="answerTablesNF3.exercise" value="Exercise" />
-			<set name="answerTablesNF3.locale" value="externalContext.locale" />
 			<set name="answerTablesNF3.state" value="'NORMALFORM3'" />
-			<evaluate expression="externalContext.locale" result="viewScope.locale" />
-			<evaluate expression="answerTablesNF3.buildPossibleColumns(externalContext.locale)" />
+			<set name="answerTablesNF3.locale" value="externalContext.locale" />
+			<evaluate expression="answerTablesNF3.buildPossibleColumns()" />
 		</on-entry>
+		<on-render>
+			<evaluate expression="externalContext.locale" result="viewScope.locale" />
+		</on-render>
 		<transition on="success" to="solved">
 			<set name="viewScope.task.solved" value="true"/>
 			<evaluate expression="Points.points = Points.points + answerTablesNF3.points" />

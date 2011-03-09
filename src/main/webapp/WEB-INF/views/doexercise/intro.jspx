@@ -4,9 +4,9 @@
 	<jsp:output omit-xml-declaration="yes"/>
 	
 	<div id="_title">
-		<h1><c:out value="${i18nService.getText(Exercise, 'title', locale) }"/></h1>
+		<h1><util:i18n entity="${Exercise}" field="title"/></h1>
 		<p class="description yellow-gradient">
-			<c:out value="${i18nService.getText(task, 'description', locale) }"/>
+			<util:i18n entity="${task}" field="description"/>
 		</p>
 		
 		<form method="POST" >
@@ -21,6 +21,6 @@
 			</div>
 		</form> 
 
-<!--		<util:i18n entity="Exercise" field="title"/>-->
+<!--		-->
 	</div>
 </div>

@@ -21,15 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class AnswerColumns implements Serializable {
 
 	List<Long> columnIds;
-
 	Exercise exercise;
-
 	String state;
-
 	Integer points;
-
 	Boolean solved = false;
-
 	Locale locale;
 
 	@Override

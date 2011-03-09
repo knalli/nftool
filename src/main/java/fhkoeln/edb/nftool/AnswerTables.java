@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.serializable.RooSerializable;
@@ -18,8 +17,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import fhkoeln.edb.nftool.service.InternationalizationService;
-
 @Component
 @RooJavaBean
 @RooSerializable
@@ -27,13 +24,11 @@ import fhkoeln.edb.nftool.service.InternationalizationService;
 @SuppressWarnings("serial")
 public class AnswerTables implements Serializable {
 	private static final Logger logger = Logger.getLogger(AnswerTables.class);
-	@Autowired
-	private InternationalizationService i18nService;
-	Map<Long, List<String>> columns = new HashMap<Long, List<String>>();
-	Map<Long, List<String>> keys = new HashMap<Long, List<String>>();
+
+	Map<Long, List<Long>> columns = new HashMap<Long, List<Long>>();
+	Map<Long, List<Long>> keys = new HashMap<Long, List<Long>>();
 	Exercise exercise;
 	String state;
-	Set<String> possibleColumnNames;
 	Set<TableColumn> possibleColumns;
 	Integer points;
 	Boolean solved = false;
@@ -55,7 +50,6 @@ public class AnswerTables implements Serializable {
 		Assert.notNull(state, "State has to be set before generating possible columns.");
 		Assert.notNull(locale,
 				"The locale was null. Have to know which locale I should build a Column list for.");
-		possibleColumnNames = new HashSet<String>();
 		possibleColumns = new HashSet<TableColumn>();
 
 		Task t = Task.findTasksByExerciseAndState(exercise, ExerciseState.valueOf(state))
@@ -64,12 +58,9 @@ public class AnswerTables implements Serializable {
 		for (TaskTable table : tables) {
 			for (TableColumn column : table.getTableColumns()) {
 				possibleColumns.add(column);
-				final String columnName = i18nService.getText(column, "name", locale);
-				possibleColumnNames.add(columnName);
 			}
 			if (logger.isDebugEnabled()) {
 				logger.debug("Possible Columns: " + possibleColumns);
-				logger.debug("Possible Column Names: " + possibleColumnNames);
 			}
 		}
 	}

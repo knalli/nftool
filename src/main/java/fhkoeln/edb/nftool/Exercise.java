@@ -43,7 +43,6 @@ public class Exercise implements Serializable, ExerciseEntity {
 	 */
 	@Transactional(readOnly = true)
 	public Task getTaskByState(String str) {
-		System.out.println("lala3");
 		return getTaskByState(ExerciseState.valueOf(str));
 	}
 

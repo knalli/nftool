@@ -3,6 +3,7 @@ package fhkoeln.edb.nftool.validation;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -13,6 +14,8 @@ import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.binding.validation.ValidationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import fhkoeln.edb.nftool.AnswerTables;
@@ -31,6 +34,7 @@ public class AnswerTablesValidator {
 	 * @param answer
 	 * @param context
 	 */
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public void validateNormalForm2(AnswerTables answer, ValidationContext context) {
 		MessageContext messages = context.getMessageContext();
 		if (logger.isInfoEnabled()) {
@@ -46,8 +50,10 @@ public class AnswerTablesValidator {
 
 		getSolution(tables, solutionKeyColumns, solutionColumns, answer.getLocale().getLanguage());
 
-		Map<Long, List<String>> answerKeyColumns = answer.getKeys();
-		Map<Long, List<String>> answerColumns = answer.getColumns();
+		Map<Long, List<String>> answerKeyColumns = getAnswerColumnNames(answer.getKeys(),
+				answer.getLocale());
+		Map<Long, List<String>> answerColumns = getAnswerColumnNames(answer.getColumns(),
+				answer.getLocale());
 
 		final boolean matched = matchTables(messages, solutionKeyColumns, solutionColumns,
 				answerKeyColumns, answerColumns);
@@ -59,10 +65,43 @@ public class AnswerTablesValidator {
 		}
 	}
 
+	private Map<Long, List<String>> getAnswerColumnNames(Map<Long, List<Long>> answer, Locale locale) {
+		Map<Long, List<String>> result = new HashMap<Long, List<String>>();
+		for (Entry<Long, List<Long>> answerPart : answer.entrySet()) {
+			List<Long> colIds = answerPart.getValue();
+			if (colIds == null) {
+				continue;
+			}
+			List<String> names = new ArrayList<String>(answerPart.getValue().size());
+			List<Long> colIdsConverted = null;
+			// Workaround for Spring bug: Long is in real a String
+			try {
+				final Long x = colIds.get(0);
+			} catch (ClassCastException e) {
+				colIdsConverted = new ArrayList<Long>(colIds.size());
+				for (Object idObj : colIds) {
+					Long id = Long.parseLong((String) idObj);
+					colIdsConverted.add(id);
+				}
+			}
+			if (colIdsConverted != null) {
+				colIds = colIdsConverted;
+			}
+
+			for (Long id : colIds) {
+				TableColumn tc = TableColumn.findTableColumn(id);
+				names.add(i18nService.getText(tc, "name", locale));
+			}
+			result.put(answerPart.getKey(), names);
+		}
+		return result;
+	}
+
 	/**
 	 * @param answer
 	 * @param context
 	 */
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public void validateNormalForm3(AnswerTables answer, ValidationContext context) {
 		MessageContext messages = context.getMessageContext();
 		if (logger.isInfoEnabled()) {
@@ -78,8 +117,10 @@ public class AnswerTablesValidator {
 
 		getSolution(tables, solutionKeyColumns, solutionColumns, answer.getLocale().getLanguage());
 
-		Map<Long, List<String>> answerKeyColumns = answer.getKeys();
-		Map<Long, List<String>> answerColumns = answer.getColumns();
+		Map<Long, List<String>> answerKeyColumns = getAnswerColumnNames(answer.getKeys(),
+				answer.getLocale());
+		Map<Long, List<String>> answerColumns = getAnswerColumnNames(answer.getColumns(),
+				answer.getLocale());
 
 		final boolean matched = matchTables(messages, solutionKeyColumns, solutionColumns,
 				answerKeyColumns, answerColumns);
@@ -89,12 +130,6 @@ public class AnswerTablesValidator {
 		} else {
 			logger.info("The Answer was correct.");
 		}
-	}
-
-	private class SolutionColumn {
-		String columnName;
-		long id;
-		boolean keyColumn;
 	}
 
 	/**
@@ -152,7 +187,7 @@ public class AnswerTablesValidator {
 			return false;
 		}
 
-		logger.info("Build mapping answered relation-ids to solution relation-ids");
+		logger.info("Build mapping 'answered relation-ids' to 'solution relation-ids'");
 		final Map<Long, Long> solutionToAnswerRelationMapping = new HashMap<Long, Long>();
 		try {
 			for (Entry<Long, List<String>> answerKeys : answerKeyColumns.entrySet()) {
@@ -192,7 +227,8 @@ public class AnswerTablesValidator {
 			for (Entry<Long, Long> mapping : solutionToAnswerRelationMapping.entrySet()) {
 				List<String> solutionRel = solutionColumns.get(mapping.getKey());
 				List<String> answerRel = answerColumns.get(mapping.getValue());
-				if (!solutionRel.equals(answerRel)) {
+				if (!(solutionRel.containsAll(answerRel) && answerRel.containsAll(solutionRel) && solutionRel
+						.size() == answerRel.size())) {
 					final String err = "Answer was not correct. The columns differ to the solution columns.";
 					logger.info(err);
 					if (logger.isDebugEnabled()) {
@@ -202,6 +238,7 @@ public class AnswerTablesValidator {
 					messages.addMessage(new MessageBuilder().error()
 							.source("" + mapping.getValue()).code("edb.exercise.tables.error")
 							.defaultText(err).build());
+
 				}
 			}
 		} catch (ClassCastException e) {
