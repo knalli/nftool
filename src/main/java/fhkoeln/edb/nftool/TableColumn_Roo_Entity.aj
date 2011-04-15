@@ -76,6 +76,12 @@ privileged aspect TableColumn_Roo_Entity {
     }
     
     @Transactional
+    public void TableColumn.clear() {
+        if (this.entityManager == null) this.entityManager = entityManager();
+        this.entityManager.clear();
+    }
+    
+    @Transactional
     public TableColumn TableColumn.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
         TableColumn merged = this.entityManager.merge(this);

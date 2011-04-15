@@ -73,6 +73,12 @@ privileged aspect LocalizedLabel_Roo_Entity {
     }
     
     @Transactional
+    public void LocalizedLabel.clear() {
+        if (this.entityManager == null) this.entityManager = entityManager();
+        this.entityManager.clear();
+    }
+    
+    @Transactional
     public LocalizedLabel LocalizedLabel.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
         LocalizedLabel merged = this.entityManager.merge(this);

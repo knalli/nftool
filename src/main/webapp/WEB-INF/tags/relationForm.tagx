@@ -5,16 +5,30 @@
 
 	<!-- Maximum no. of relations is when every column has its own relation. -->
 	<!-- Build all radio boxes for this case, checked means 'this column is in this relation'. -->
-<!--	<c:forEach items="${Task.findTasksByExerciseAndType(Exercise, ExerciseState.valueOf(state)).getSingleResult()}" var="t" varStatus="loop">-->
-	 <c:forEach items="${tables.possibleColumns}" varStatus="loop"> 
+	 <c:forEach items="${tables.possibleColumns}" varStatus="loop" > 
 		<div class="keys">
-			Keys:
-			<form:checkboxes items="${tables.possibleColumns}" path="keys[${loop.index}]" cssClass="relKeys rel${loop.index}" />
+			<c:forEach items="${tables.possibleColumns}" var="col">
+				<form:checkbox path="keys[${loop.index}]" value="${col.id}" cssClass="relKeys rel${loop.index}" label="${i18nService.getText(col, 'name', locale)}"/> 
+			</c:forEach>
 		</div>
 		<div class="cols">
-			Cols:
-			<form:checkboxes items="${tables.possibleColumns}" path="columns[${loop.index}]" cssClass="relCols rel${loop.index}" />
+			<c:forEach items="${tables.possibleColumns}" var="col">
+				<form:checkbox path="columns[${loop.index}]" value="${col.id}" cssClass="relCols rel${loop.index}" label="${i18nService.getText(col, 'name', locale)}" />
+			</c:forEach>
 		</div>
 		<br class="clear" />
 	</c:forEach>
+	
+	<script type="text/javascript">
+	// ColumnName -> Id
+	jQuery(document).ready(function(){
+		jQuery.data(document.body, 'edbTableMapping', {
+			<c:forEach items="${tables.possibleColumns}" varStatus="loop" var="column">
+			<c:set var="colName" value="${i18nService.getText(column, 'name', locale)}" />
+	 		'<c:out value="${colName}"/>' : <c:out value="${column.id}"/> <c:if test="${!(loop.last)}">,</c:if>
+	</c:forEach>
+	});
+
+});
+	</script>
  </jsp:root>

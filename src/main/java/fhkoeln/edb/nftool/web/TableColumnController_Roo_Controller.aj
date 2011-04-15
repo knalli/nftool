@@ -25,72 +25,80 @@ import org.springframework.web.util.WebUtils;
 privileged aspect TableColumnController_Roo_Controller {
     
     @RequestMapping(method = RequestMethod.POST)
-    public String TableColumnController.create(@Valid TableColumn tableColumn, BindingResult result, Model model, HttpServletRequest request) {
-        if (result.hasErrors()) {
-            model.addAttribute("tableColumn", tableColumn);
+    public String TableColumnController.create(@Valid TableColumn tableColumn, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("tableColumn", tableColumn);
             return "tablecolumns/create";
         }
+        uiModel.asMap().clear();
         tableColumn.persist();
-        return "redirect:/tablecolumns/" + encodeUrlPathSegment(tableColumn.getId().toString(), request);
+        return "redirect:/tablecolumns/" + encodeUrlPathSegment(tableColumn.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", method = RequestMethod.GET)
-    public String TableColumnController.createForm(Model model) {
-        model.addAttribute("tableColumn", new TableColumn());
+    public String TableColumnController.createForm(Model uiModel) {
+        uiModel.addAttribute("tableColumn", new TableColumn());
         return "tablecolumns/create";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String TableColumnController.show(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("tablecolumn", TableColumn.findTableColumn(id));
-        model.addAttribute("itemId", id);
+    public String TableColumnController.show(@PathVariable("id") Long id, Model uiModel) {
+        uiModel.addAttribute("tablecolumn", TableColumn.findTableColumn(id));
+        uiModel.addAttribute("itemId", id);
         return "tablecolumns/show";
     }
     
     @RequestMapping(method = RequestMethod.GET)
-    public String TableColumnController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model model) {
+    public String TableColumnController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
-            model.addAttribute("tablecolumns", TableColumn.findTableColumnEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
+            uiModel.addAttribute("tablecolumns", TableColumn.findTableColumnEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
             float nrOfPages = (float) TableColumn.countTableColumns() / sizeNo;
-            model.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            model.addAttribute("tablecolumns", TableColumn.findAllTableColumns());
+            uiModel.addAttribute("tablecolumns", TableColumn.findAllTableColumns());
         }
         return "tablecolumns/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT)
-    public String TableColumnController.update(@Valid TableColumn tableColumn, BindingResult result, Model model, HttpServletRequest request) {
-        if (result.hasErrors()) {
-            model.addAttribute("tableColumn", tableColumn);
+    public String TableColumnController.update(@Valid TableColumn tableColumn, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("tableColumn", tableColumn);
             return "tablecolumns/update";
         }
+        uiModel.asMap().clear();
         tableColumn.merge();
-        return "redirect:/tablecolumns/" + encodeUrlPathSegment(tableColumn.getId().toString(), request);
+        return "redirect:/tablecolumns/" + encodeUrlPathSegment(tableColumn.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String TableColumnController.updateForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("tableColumn", TableColumn.findTableColumn(id));
+    public String TableColumnController.updateForm(@PathVariable("id") Long id, Model uiModel) {
+        uiModel.addAttribute("tableColumn", TableColumn.findTableColumn(id));
         return "tablecolumns/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String TableColumnController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model model) {
+    public String TableColumnController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         TableColumn.findTableColumn(id).remove();
-        model.addAttribute("page", (page == null) ? "1" : page.toString());
-        model.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/tablecolumns?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/tablecolumns";
+    }
+    
+    @ModelAttribute("tablecolumns")
+    public Collection<TableColumn> TableColumnController.populateTableColumns() {
+        return TableColumn.findAllTableColumns();
     }
     
     @ModelAttribute("tablerows")
-    public Collection<TableRow> TableColumnController.populateTableRows() {
+    public java.util.Collection<TableRow> TableColumnController.populateTableRows() {
         return TableRow.findAllTableRows();
     }
     
-    String TableColumnController.encodeUrlPathSegment(String pathSegment, HttpServletRequest request) {
-        String enc = request.getCharacterEncoding();
+    String TableColumnController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
+        String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {
             enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
         }

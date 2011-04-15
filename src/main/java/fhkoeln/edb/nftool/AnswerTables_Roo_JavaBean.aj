@@ -4,7 +4,7 @@
 package fhkoeln.edb.nftool;
 
 import fhkoeln.edb.nftool.Exercise;
-import fhkoeln.edb.nftool.service.InternationalizationService;
+import fhkoeln.edb.nftool.TableColumn;
 import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.Long;
@@ -16,27 +16,19 @@ import java.util.Set;
 
 privileged aspect AnswerTables_Roo_JavaBean {
     
-    public InternationalizationService AnswerTables.getI18nService() {
-        return this.i18nService;
-    }
-    
-    public void AnswerTables.setI18nService(InternationalizationService i18nService) {
-        this.i18nService = i18nService;
-    }
-    
-    public Map<Long, List<String>> AnswerTables.getColumns() {
+    public Map<Long, List<Long>> AnswerTables.getColumns() {
         return this.columns;
     }
     
-    public void AnswerTables.setColumns(Map<Long, List<String>> columns) {
+    public void AnswerTables.setColumns(Map<Long, List<Long>> columns) {
         this.columns = columns;
     }
     
-    public Map<Long, List<String>> AnswerTables.getKeys() {
+    public Map<Long, List<Long>> AnswerTables.getKeys() {
         return this.keys;
     }
     
-    public void AnswerTables.setKeys(Map<Long, List<String>> keys) {
+    public void AnswerTables.setKeys(Map<Long, List<Long>> keys) {
         this.keys = keys;
     }
     
@@ -56,11 +48,11 @@ privileged aspect AnswerTables_Roo_JavaBean {
         this.state = state;
     }
     
-    public Set<String> AnswerTables.getPossibleColumns() {
+    public Set<TableColumn> AnswerTables.getPossibleColumns() {
         return this.possibleColumns;
     }
     
-    public void AnswerTables.setPossibleColumns(Set<String> possibleColumns) {
+    public void AnswerTables.setPossibleColumns(Set<TableColumn> possibleColumns) {
         this.possibleColumns = possibleColumns;
     }
     

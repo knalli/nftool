@@ -8,12 +8,14 @@ import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
 import java.lang.Long;
 import java.lang.String;
+import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,77 +26,85 @@ import org.springframework.web.util.WebUtils;
 privileged aspect PointsController_Roo_Controller {
     
     @RequestMapping(method = RequestMethod.POST)
-    public String PointsController.create(@Valid Points points, BindingResult result, Model model, HttpServletRequest request) {
-        if (result.hasErrors()) {
-            model.addAttribute("points", points);
-            addDateTimeFormatPatterns(model);
+    public String PointsController.create(@Valid Points points, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("points", points);
+            addDateTimeFormatPatterns(uiModel);
             return "pointses/create";
         }
+        uiModel.asMap().clear();
         points.persist();
-        return "redirect:/pointses/" + encodeUrlPathSegment(points.getId().toString(), request);
+        return "redirect:/pointses/" + encodeUrlPathSegment(points.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", method = RequestMethod.GET)
-    public String PointsController.createForm(Model model) {
-        model.addAttribute("points", new Points());
-        addDateTimeFormatPatterns(model);
+    public String PointsController.createForm(Model uiModel) {
+        uiModel.addAttribute("points", new Points());
+        addDateTimeFormatPatterns(uiModel);
         return "pointses/create";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String PointsController.show(@PathVariable("id") Long id, Model model) {
-        addDateTimeFormatPatterns(model);
-        model.addAttribute("points", Points.findPoints(id));
-        model.addAttribute("itemId", id);
+    public String PointsController.show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("points", Points.findPoints(id));
+        uiModel.addAttribute("itemId", id);
         return "pointses/show";
     }
     
     @RequestMapping(method = RequestMethod.GET)
-    public String PointsController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model model) {
+    public String PointsController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
-            model.addAttribute("pointses", Points.findPointsEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
+            uiModel.addAttribute("pointses", Points.findPointsEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
             float nrOfPages = (float) Points.countPointses() / sizeNo;
-            model.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            model.addAttribute("pointses", Points.findAllPointses());
+            uiModel.addAttribute("pointses", Points.findAllPointses());
         }
-        addDateTimeFormatPatterns(model);
+        addDateTimeFormatPatterns(uiModel);
         return "pointses/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT)
-    public String PointsController.update(@Valid Points points, BindingResult result, Model model, HttpServletRequest request) {
-        if (result.hasErrors()) {
-            model.addAttribute("points", points);
-            addDateTimeFormatPatterns(model);
+    public String PointsController.update(@Valid Points points, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            uiModel.addAttribute("points", points);
+            addDateTimeFormatPatterns(uiModel);
             return "pointses/update";
         }
+        uiModel.asMap().clear();
         points.merge();
-        return "redirect:/pointses/" + encodeUrlPathSegment(points.getId().toString(), request);
+        return "redirect:/pointses/" + encodeUrlPathSegment(points.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String PointsController.updateForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("points", Points.findPoints(id));
-        addDateTimeFormatPatterns(model);
+    public String PointsController.updateForm(@PathVariable("id") Long id, Model uiModel) {
+        uiModel.addAttribute("points", Points.findPoints(id));
+        addDateTimeFormatPatterns(uiModel);
         return "pointses/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String PointsController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model model) {
+    public String PointsController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Points.findPoints(id).remove();
-        model.addAttribute("page", (page == null) ? "1" : page.toString());
-        model.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/pointses?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/pointses";
     }
     
-    void PointsController.addDateTimeFormatPatterns(Model model) {
-        model.addAttribute("points_gamedate_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+    @ModelAttribute("pointses")
+    public Collection<Points> PointsController.populatePointses() {
+        return Points.findAllPointses();
     }
     
-    String PointsController.encodeUrlPathSegment(String pathSegment, HttpServletRequest request) {
-        String enc = request.getCharacterEncoding();
+    void PointsController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("points_gamedate_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
+    }
+    
+    String PointsController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
+        String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {
             enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
         }

@@ -11,20 +11,20 @@ import javax.persistence.TypedQuery;
 
 privileged aspect Task_Roo_Finder {
     
-    public static TypedQuery<Task> Task.findTasksByState(ExerciseState state) {
-        if (state == null) throw new IllegalArgumentException("The state argument is required");
-        EntityManager em = Task.entityManager();
-        TypedQuery<Task> q = em.createQuery("SELECT Task FROM Task AS task WHERE task.state = :state", Task.class);
-        q.setParameter("state", state);
-        return q;
-    }
-    
     public static TypedQuery<Task> Task.findTasksByExerciseAndState(Exercise exercise, ExerciseState state) {
         if (exercise == null) throw new IllegalArgumentException("The exercise argument is required");
         if (state == null) throw new IllegalArgumentException("The state argument is required");
         EntityManager em = Task.entityManager();
         TypedQuery<Task> q = em.createQuery("SELECT Task FROM Task AS task WHERE task.exercise = :exercise AND task.state = :state", Task.class);
         q.setParameter("exercise", exercise);
+        q.setParameter("state", state);
+        return q;
+    }
+    
+    public static TypedQuery<Task> Task.findTasksByState(ExerciseState state) {
+        if (state == null) throw new IllegalArgumentException("The state argument is required");
+        EntityManager em = Task.entityManager();
+        TypedQuery<Task> q = em.createQuery("SELECT Task FROM Task AS task WHERE task.state = :state", Task.class);
         q.setParameter("state", state);
         return q;
     }

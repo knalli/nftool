@@ -4,6 +4,6 @@
 	<div id="_title">
 		<h1>${Exercise.texts['en'].title}</h1>		
 		<p><spring:message code="webflow.endstate.message" /></p>
-		<spring:message code="webflow.results.points" arguments="${Points.points}" />
+		<spring:message code="webflow_results_points" arguments="${Points.points}" />
 	</div>
 </div>

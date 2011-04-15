@@ -73,6 +73,12 @@ privileged aspect Points_Roo_Entity {
     }
     
     @Transactional
+    public void Points.clear() {
+        if (this.entityManager == null) this.entityManager = entityManager();
+        this.entityManager.clear();
+    }
+    
+    @Transactional
     public Points Points.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
         Points merged = this.entityManager.merge(this);

@@ -22,13 +22,13 @@
 							<c:choose>
 								<c:when test="${controls}">
 									<c:set var="colName" value="${i18nService.getText(column, 'name', locale)}" />
-									<label for="lbl${colName}"><c:out value="${colName}" /></label>
+									<label for="lblColumn${column.id}"><c:out value="${colName}" /></label>
 									<c:choose>
 										<c:when test="${locked}">
-											<form:checkbox path="columns" id="lbl${colName}" value="${colName}" disabled="true" />						
+											<form:checkbox path="columnIds" id="lblColumn${column.id}" value="${column.id}" disabled="true" />						
 										</c:when>
 										<c:otherwise>
-											<form:checkbox path="columns" id="lbl${colName}" value="${colName}" />
+											<form:checkbox path="columnIds" id="lblColumn${column.id}" value="${column.id}" />
 										</c:otherwise>
 									</c:choose>
 								</c:when>

@@ -1,7 +1,6 @@
 package fhkoeln.edb.nftool.validation;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,16 +58,13 @@ public class AnswerColumnsValidator {
 			ValidationContext context) {
 		logger.trace("Entering checkViewStateByColumnComparison");
 		logger.info("Validating answer: " + answer);
-		List<String> columns = answer.getColumns();
+		List<TableColumn> columns = answer.getColumns();
 		MessageContext messages = context.getMessageContext();
 		boolean result;
 
 		if (answer.getExercise() == null) {
 			logger.error("The current exercise been has not been set. Are we in a Flow?");
 			return;
-		}
-		if (columns == null) {
-			columns = Collections.emptyList();
 		}
 		if (columns.size() < 1) {
 			logger.debug("No column was checked.");
@@ -108,23 +104,26 @@ public class AnswerColumnsValidator {
 	 * @param mustBeKey
 	 * @return
 	 */
-	protected boolean checkTablesContainsColumnsAll(List<String> answerColumns,
+	protected boolean checkTablesContainsColumnsAll(List<TableColumn> answerColumns,
 			Set<TaskTable> taskTables, String locale, boolean mustBeKey) {
 		logger.trace("Entering checkTablesContainsColumnsAll");
 		if (logger.isDebugEnabled()) {
 			logger.debug("Checking for Locale " + locale);
 		}
-		List<String> columnsUnchecked = new ArrayList<String>(answerColumns.size());
-		columnsUnchecked.addAll(answerColumns);
+		// List<TableColumn> columnsUnchecked = new ArrayList<TableColumn>(answerColumns.size());
+		// Collections.copy(columnsUnchecked, answerColumns);
+
+		List<String> answerColumnNames = getLocalizedColumnNames(answerColumns, locale);
 
 		for (TaskTable table : taskTables) {
 			Set<TableColumn> solutionColumns = table.getTableColumns();
 			for (TableColumn solutionColumn : solutionColumns) {
 				if (!mustBeKey || solutionColumn.getKeyColumn()) {
 					String solutionColumnName = i18nService.getText(solutionColumn, "name", locale);
-					if (answerColumns.contains(solutionColumnName)) {
-						columnsUnchecked.remove(columnsUnchecked.indexOf(solutionColumnName));
-						if (columnsUnchecked.size() == 0) {
+
+					if (answerColumnNames.contains(solutionColumnName)) {
+						answerColumnNames.remove(answerColumnNames.indexOf(solutionColumnName));
+						if (answerColumnNames.size() == 0) {
 							continue;
 						}
 					} else
@@ -134,10 +133,23 @@ public class AnswerColumnsValidator {
 				}
 			}
 		}
-		return columnsUnchecked.size() == 0;
+		return answerColumnNames.size() == 0;
 	}
 
-	protected boolean checkTablesContainsColumnsNone(List<String> answerColumns,
+	/**
+	 * @param columns
+	 * @param locale
+	 * @return
+	 */
+	private List<String> getLocalizedColumnNames(List<TableColumn> columns, String locale) {
+		List<String> answerColumnNames = new ArrayList<String>();
+		for (TableColumn c : columns) {
+			answerColumnNames.add(i18nService.getText(c, "name", locale));
+		}
+		return answerColumnNames;
+	}
+
+	protected boolean checkTablesContainsColumnsNone(List<TableColumn> answerColumns,
 			Set<TaskTable> taskTables, Set<TaskTable> tablesPrevious, String locale,
 			boolean mustBeKey) {
 		logger.trace("Entering checkTablesContainsColumnsNone");
@@ -172,7 +184,7 @@ public class AnswerColumnsValidator {
 				}
 			}
 		}
-		return answerColumns.containsAll(columnsIntersection);
+		return getLocalizedColumnNames(answerColumns, locale).containsAll(columnsIntersection);
 	}
 
 	/**

@@ -21,7 +21,7 @@ privileged aspect PointsDataOnDemand_Roo_DataOnDemand {
         obj.setUsername("username_" + index);
         obj.setGameDate(new java.util.GregorianCalendar(java.util.Calendar.getInstance().get(java.util.Calendar.YEAR), java.util.Calendar.getInstance().get(java.util.Calendar.MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_MONTH), java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY), java.util.Calendar.getInstance().get(java.util.Calendar.MINUTE), java.util.Calendar.getInstance().get(java.util.Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime());
         java.lang.Long points = new Integer(index).longValue();
-        if (points < 0) {
+        if (points < 0L) {
             points = 0L;
         }
         obj.setPoints(points);

@@ -2,7 +2,7 @@
 	<jsp:output omit-xml-declaration="yes"/>
 	<div id="_title">
 		<h1>${Exercise.texts['en'].title}</h1>
-		<p class="points"><spring:message code="webflow.results.points.intermediate" arguments="${Points.points}" /></p>
+		<p class="points"><spring:message code="webflow_results_points_intermediate" arguments="${Points.points}" /></p>
 		<p class="description yellow-gradient">${task.texts['en'].description}</p>
 		
 		<form:form method="POST" commandName="answerTablesNF2" cssClass="keysAttributes">

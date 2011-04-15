@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<flow xmlns="http://www.springframework.org/schema/webflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+<flow xmlns="http://www.springframework.org/schema/webflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
     	<persistence-context />
 
@@ -75,7 +76,7 @@
 			<set name="answerTablesNF2.exercise" value="Exercise" />
 			<set name="answerTablesNF2.state" value="'NORMALFORM2'" />
 			<set name="answerTablesNF2.locale" value="externalContext.locale" />
-<!--			<evaluate expression="answerTablesNF2.buildPossibleColumns()" />-->
+			<evaluate expression="answerTablesNF2.buildPossibleColumns()" />
 		</on-entry>
 		<on-render>
 			<evaluate expression="externalContext.locale" result="viewScope.locale" />
@@ -92,11 +93,13 @@
 		<on-entry>
 			<evaluate expression="Exercise.getTaskByState('NORMALFORM3')" result="viewScope.task" />
 			<set name="answerTablesNF3.exercise" value="Exercise" />
-			<set name="answerTablesNF3.locale" value="externalContext.locale" />
 			<set name="answerTablesNF3.state" value="'NORMALFORM3'" />
-			<evaluate expression="externalContext.locale" result="viewScope.locale" />
-			<evaluate expression="answerTablesNF3.buildPossibleColumns(externalContext.locale)" />
+			<set name="answerTablesNF3.locale" value="externalContext.locale" />
+			<evaluate expression="answerTablesNF3.buildPossibleColumns()" />
 		</on-entry>
+		<on-render>
+			<evaluate expression="externalContext.locale" result="viewScope.locale" />
+		</on-render>
 		<transition on="success" to="solved">
 			<set name="viewScope.task.solved" value="true"/>
 			<evaluate expression="Points.points = Points.points + answerTablesNF3.points" />

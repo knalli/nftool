@@ -76,6 +76,12 @@ privileged aspect Exercise_Roo_Entity {
     }
     
     @Transactional
+    public void Exercise.clear() {
+        if (this.entityManager == null) this.entityManager = entityManager();
+        this.entityManager.clear();
+    }
+    
+    @Transactional
     public Exercise Exercise.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
         Exercise merged = this.entityManager.merge(this);

@@ -124,7 +124,7 @@ table.exercise {
 
 table.exercise th {
 	border-right: 1px solid #999;
-	cursor:hand;
+	cursor:cursor;
 }
 
 .exercise.modify td,.exercise.modify th {
@@ -280,7 +280,7 @@ table.exercise th {
 }
 
 .exercise thead .ui-draggable {
-	cursor:hand;
+	cursor:pointer;
 }
 
 .exercise .headerControl .ui-icon{
@@ -319,4 +319,9 @@ table.exercise th {
 	float:right;
 	padding:7px;
 	margin:0;
+}
+
+.resultPoints {
+	font-size: 1.5em;
+	display:block;
 }

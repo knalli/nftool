@@ -2,7 +2,7 @@
 	<jsp:output omit-xml-declaration="yes"/>
 	<div>
 		<h1><c:out value="${i18nService.getText(task, 'title', locale) }"/></h1>
-		<p class="points"><spring:message code="webflow.results.points.intermediate" arguments="${Points.points}" /></p>
+		<p class="points"><spring:message code="webflow_results_points_intermediate" arguments="${Points.points}" /></p>
 		<p class="description yellow-gradient">${i18nService(task, 'description', locale)}</p>
 		
 		<form:form method="POST" commandName="answerColumnsPK">
