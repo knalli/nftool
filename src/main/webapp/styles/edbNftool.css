@@ -320,3 +320,8 @@ table.exercise th {
 	padding:7px;
 	margin:0;
 }
+
+.resultPoints {
+	font-size: 1.5em;
+	display:block;
+}
