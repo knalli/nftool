@@ -179,3 +179,39 @@ backup
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-03-08 22:36:36
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-03-08 23:19:52
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-03-09 09:52:18
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-03-09 16:48:27
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-13 14:30:20
+quit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-13 14:40:28
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-13 14:43:02
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.url.stream
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.propfiles
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.dbre
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.tostring
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.javabean
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.web.selenium
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.roobot.client
+// [failed] addon upgrade all 
+pgp trust --keyId 0x587B796C
+help
+quit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-13 14:56:55
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-13 14:57:02
+persistence setup --database HYPERSONIC_PERSISTENT --provider HIBERNATE
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-13 16:08:44
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-13 16:14:14
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-13 17:50:27
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-15 14:04:34
