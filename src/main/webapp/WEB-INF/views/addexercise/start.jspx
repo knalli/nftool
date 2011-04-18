@@ -1,0 +1,41 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:form="http://www.springframework.org/tags/form" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+	version="2.0">
+	<jsp:output omit-xml-declaration="yes"/>
+	
+	
+	<div id="_title">
+		<h1>Neue Aufgabe erstellen</h1>
+<!--		<util:i18n content="${Exercise.title}" entity="Exercise" field="title"/>-->
+	</div>
+	<form:form modelAttribute="newExercise">
+	
+	
+<!--	<form method="POST" action="${nextStep}">-->
+		<p>
+			Bitte wählen Sie die Sprache, in der die neue Aufgabe erfasst werden soll:<br />
+			<!-- <select name="language">
+				<option value="de">Deutsch</option>
+				<option value="en">Englisch</option>
+			</select> -->
+			<form:select path="language">
+			
+				<form:options items="languages" />
+			</form:select>
+		</p>
+		<p>
+			Bitte geben Sie den Titel der neuen Aufgabe ein:<br />
+			<input type="text" name="title" />
+		</p>
+		<p>
+			Bitte geben Sie eine einleitende Beschreibung der Aufgabe ein:<br />
+			<textarea rows="4" cols="40" name="introText" >Intro text</textarea>
+
+		</p>
+		
+		<input type="submit" value="Submit" />
+		
+<!--	</form>-->
+	</form:form>
+</div>

@@ -21,7 +21,7 @@
 		<spring:theme code="styleSheetIE" var="styleSheetIE"/>	
 		<spring:url value="/${styleSheetIE}" var="ie_css_url"/>
 		
-		<spring:theme code="jsJQuery" var="jquery"/>	
+		<spring:theme code="jsJQuery" var="jquery"/>
 		<spring:theme code="jsJQueryUI" var="jquery_ui"/>	
 		<spring:theme code="jsEdb" var="js_edb"/>	
 		<spring:theme code="jsNftool" var="js_nftool"/>	

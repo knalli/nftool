@@ -12,7 +12,6 @@ import org.hibernate.annotations.Index;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.serializable.RooSerializable;
-import org.springframework.roo.addon.tostring.RooToString;
 
 /**
  * Bean to store an translation of an entity field.
@@ -21,12 +20,29 @@ import org.springframework.roo.addon.tostring.RooToString;
  * 
  */
 @RooJavaBean
-@RooToString
 @SuppressWarnings("serial")
 @RooSerializable
 @RooEntity(finders = { "findLocalizedLabelsByEntityUriAndAttributeNameAndLocale" })
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "entityUri", "attributeName", "locale" }))
 public class LocalizedLabel implements Serializable {
+
+	/**
+	 * Pre-Set content text and locale.
+	 * 
+	 * @param content
+	 */
+	public LocalizedLabel(String content, Locale locale) {
+		this.content = content;
+		this.locale = locale;
+	}
+
+	public LocalizedLabel() {
+	}
+
+	@Override
+	public String toString() {
+		return this.content;
+	}
 
 	/**
 	 * URI to a specific entity: 'Exercise:1/Table:42'

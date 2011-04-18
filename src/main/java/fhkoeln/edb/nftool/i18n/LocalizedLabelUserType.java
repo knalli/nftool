@@ -14,6 +14,12 @@ import org.hibernate.usertype.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import fhkoeln.edb.nftool.service.InternationalizationService;
 
+/**
+ * @deprecated
+ * @author sja
+ * 
+ */
+@Deprecated
 public class LocalizedLabelUserType implements UserType, Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(LocalizedLabelUserType.class);

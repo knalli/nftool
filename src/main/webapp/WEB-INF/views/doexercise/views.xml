@@ -7,25 +7,25 @@
 <!--</tiles-definitions>-->
 
 <tiles-definitions>
-    <definition extends="default" name="intro">
+    <definition extends="edb" name="intro">
         <put-attribute name="body" value="/WEB-INF/views/doexercise/intro.jspx"/>
     </definition>
-    <definition extends="default" name="primaryKey">
+    <definition extends="edb" name="primaryKey">
         <put-attribute name="body" value="/WEB-INF/views/doexercise/primaryKey.jspx"/>
     </definition>
-    <definition extends="default" name="normalForm1">
+    <definition extends="edb" name="normalForm1">
         <put-attribute name="body" value="/WEB-INF/views/doexercise/normalform1.jspx"/>
     </definition>
-    <definition extends="default" name="normalForm2">
+    <definition extends="edb" name="normalForm2">
         <put-attribute name="body" value="/WEB-INF/views/doexercise/normalform2.jspx"/>
     </definition>
-    <definition extends="default" name="normalForm3">
+    <definition extends="edb" name="normalForm3">
         <put-attribute name="body" value="/WEB-INF/views/doexercise/normalform3.jspx"/>
     </definition>
-    <definition extends="default" name="solved">
+    <definition extends="edb" name="solved">
         <put-attribute name="body" value="/WEB-INF/views/doexercise/solved.jspx"/>
     </definition>
-    <definition extends="default" name="results">
+    <definition extends="edb" name="results">
         <put-attribute name="body" value="/WEB-INF/views/doexercise/results.jspx"/>
     </definition>
 </tiles-definitions>

@@ -14,7 +14,7 @@
 	<var name="i18nService" class="fhkoeln.edb.nftool.service.InternationalizationService"/>
 
 	<on-start>
-		<evaluate expression="new Exercise. findExercise(1.0)" result="Exercise" />
+		<evaluate expression="new Exercise()" result="Exercise" />
 		<set name="Points.points" value="0" />
 		<set name="answerColumnsPK.points" value="2" />
 		<set name="answerColumnsNF1.points" value="2" />
@@ -24,7 +24,7 @@
 
 	<view-state id="intro">
 		<on-entry>
-			<evaluate expression="Exercise.getTaskByState('INTRO')" result="viewScope.task" />
+			<evaluate expression="new Task()" result="viewScope.task" />
 		</on-entry>
 		<on-render>
 			<evaluate expression="externalContext.locale" result="viewScope.locale" />

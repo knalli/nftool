@@ -44,6 +44,7 @@
 	
 	<!-- store preferred theme configuration in a cookie -->
 <!--	<bean class="org.springframework.web.servlet.theme.CookieThemeResolver" id="themeResolver" p:cookieName="theme" p:defaultThemeName="standard"/>-->
+<!--	<bean class="org.springframework.web.servlet.theme.SessionThemeResolver" id="themeResolver" p:defaultThemeName="standard"/>-->
 	<bean class="org.springframework.web.servlet.theme.FixedThemeResolver" id="themeResolver" p:defaultThemeName="edb"/>
 	
 	<!-- This bean resolves specific types of exceptions to corresponding logical - view names for error views. 
