@@ -7,6 +7,8 @@
             
             <table:column id="c_fhkoeln_edb_nftool_Exercise_tasks" property="tasks" z="uk9Uw7PlxpXddSUGpIC2t+Ks71Y="/>
         
+        <table:column id="c_fhkoeln_edb_nftool_Exercise_description" property="description" z="Tb726DK2vlq2ZB2jVOhwm/D8eK4="/>
+            <table:column id="c_fhkoeln_edb_nftool_Exercise_title" property="title" z="oiMnJifiS/umeTAmGoSroaQdV+Q="/>
         </table:table>
     </page:list>
 </div>

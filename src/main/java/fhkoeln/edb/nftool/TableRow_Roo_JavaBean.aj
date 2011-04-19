@@ -4,8 +4,17 @@
 package fhkoeln.edb.nftool;
 
 import java.lang.Integer;
+import java.lang.String;
 
 privileged aspect TableRow_Roo_JavaBean {
+    
+    public String TableRow.getContent() {
+        return this.content;
+    }
+    
+    public void TableRow.setContent(String content) {
+        this.content = content;
+    }
     
     public Integer TableRow.getRowNumber() {
         return this.rowNumber;

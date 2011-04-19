@@ -1,6 +1,7 @@
 package fhkoeln.edb.nftool.service;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Locale;
 
 import javax.persistence.Table;
@@ -86,4 +87,9 @@ public class LocalizedLabel implements Serializable {
 	 * };
 	 * }
 	 */
+
+	public static List<Locale> getLocales() {
+		return entityManager().createQuery("select distinct o.locale from LocalizedLabel o",
+				Locale.class).getResultList();
+	}
 }

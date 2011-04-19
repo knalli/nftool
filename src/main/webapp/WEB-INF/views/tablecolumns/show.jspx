@@ -9,5 +9,6 @@
         
     
     <field:display field="ordering" id="s_fhkoeln_edb_nftool_TableColumn_ordering" object="${tablecolumn}" z="wuG65ofahJHqvGoC8SO2vdEGLak="/>
+    <field:display field="name" id="s_fhkoeln_edb_nftool_TableColumn_name" object="${tablecolumn}" z="h0ZwnVHNVUhCuk4i1OttsfwXRms="/>
     </page:show>
 </div>

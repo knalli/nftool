@@ -25,6 +25,7 @@ privileged aspect TaskDataOnDemand_Roo_DataOnDemand {
         fhkoeln.edb.nftool.Task obj = new fhkoeln.edb.nftool.Task();
         obj.setOrdering(new Integer(index).shortValue());
         obj.setState(fhkoeln.edb.nftool.ExerciseState.class.getEnumConstants()[0]);
+        obj.setPoints(1);
         obj.setExercise(exerciseDataOnDemand.getRandomExercise());
         return obj;
     }

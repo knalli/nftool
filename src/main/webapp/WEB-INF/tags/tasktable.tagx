@@ -4,13 +4,26 @@
 	<jsp:directive.attribute name="tables" type="java.util.Set" required="true" description="The table(s) to be printed."/>
 	<jsp:directive.attribute name="controls" type="java.lang.Boolean" required="true" description="Add header controls?"/>
 	<jsp:directive.attribute name="locked" type="java.lang.Boolean" description="Allow control modification?"/>
+	<jsp:directive.attribute name="editable" type="java.lang.Boolean" required="false" description="Should the table be a Dojo DataGrid"/>
 	
 	<spring:theme code="keyColumnClass" var="keyClass"/>
 	<spring:theme code="keyHeaderClass" var="keyHeadClass"/>
 	<spring:theme code="headerControlClass" var="headerControlClass"/>
 	
+	<c:if test="${editable}">
+		<!-- Dojo styles for editable grid -->
+		<link rel="stylesheet" type="text/css" href="script/dojox/grid/resources/Grid.css" />
+		<link rel="stylesheet" type="text/css" href="script/dojox/grid/resources/tundraGrid.css" />
+		<style type="text/css">
+		    .dojoxGrid table { margin: 0; } 
+		    html, body { width: 100%; height: 100%; margin: 0; }
+		</style>
+		<!-- Dojo libs for editable grid -->
+		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js" type="text/javascript"></script>
+	</c:if>
+	
 	<c:forEach var="table" items="${tables}">
-		<table class="exercise" width="100%">
+		<table class="exercise" width="100%"  dojoType="dojox.grid.DataGrid">
 			<caption><c:out value="${i18nService.getText(table, 'description', locale)}" /></caption>
 			<thead>
 				<tr>

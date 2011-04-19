@@ -9,6 +9,7 @@ privileged aspect TaskTable_Roo_ToString {
     
     public String TaskTable.toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("Description: ").append(getDescription()).append(", ");
         sb.append("Ordering: ").append(getOrdering()).append(", ");
         sb.append("Normalform: ").append(getNormalform()).append(", ");
         sb.append("TableColumns: ").append(getTableColumns() == null ? "null" : getTableColumns().size()).append(", ");

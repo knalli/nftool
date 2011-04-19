@@ -10,6 +10,7 @@
             
         
         <table:column id="c_fhkoeln_edb_nftool_TableColumn_ordering" property="ordering" z="tOgu0WErHw3DOG2Tet/PSKn2PbU="/>
+        <table:column id="c_fhkoeln_edb_nftool_TableColumn_name" property="name" z="7JCDfuNACvnzzlfEiqreBZH1jYc="/>
         </table:table>
     </page:list>
 </div>

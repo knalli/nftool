@@ -8,5 +8,6 @@
         
         
     
+    <field:display field="content" id="s_fhkoeln_edb_nftool_TableRow_content" object="${tablerow}" z="6+DAdKQVpI3O6YRj+mewftYla/s="/>
     </page:show>
 </div>

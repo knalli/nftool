@@ -9,6 +9,7 @@
             <table:column id="c_fhkoeln_edb_nftool_TaskTable_tableColumns" property="tableColumns" z="5YZC9cZWx6zT/H6Gl5P+fMy0qyk="/>
             <table:column id="c_fhkoeln_edb_nftool_TaskTable_tableRows" property="tableRows" z="zdTD18J39jQryEnIfwYAA6lew98="/>
             
+        <table:column id="c_fhkoeln_edb_nftool_TaskTable_description" property="description" z="i5e+83D4F85SFr/CL2OYsH8lz5Y="/>
         </table:table>
     </page:list>
 </div>

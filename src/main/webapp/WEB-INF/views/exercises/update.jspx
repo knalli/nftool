@@ -3,5 +3,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_fhkoeln_edb_nftool_Exercise" modelAttribute="exercise" path="/exercises" versionField="Version" z="OYtleyTlzc9ne7iF2B1DyaCRSrc=">
         <field:simple field="tasks" id="c_fhkoeln_edb_nftool_Exercise_tasks" messageCode="entity_reference_not_managed" messageCodeAttribute="Task" z="cKmjM5B0DW9T2XV9EU0q4SihfE8="/>
+    <field:input field="description" id="c_fhkoeln_edb_nftool_Exercise_description" z="T/CGaz8FgyWnMaA97E+1azCCGhA="/>
+        <field:input field="title" id="c_fhkoeln_edb_nftool_Exercise_title" z="uCce38o1Fd4gGr9ar4/M4UmI+xU="/>
     </form:update>
 </div>

@@ -5,9 +5,18 @@ package fhkoeln.edb.nftool;
 
 import fhkoeln.edb.nftool.TableColumn;
 import fhkoeln.edb.nftool.TableRow;
+import java.lang.String;
 import java.util.Set;
 
 privileged aspect TaskTable_Roo_JavaBean {
+    
+    public String TaskTable.getDescription() {
+        return this.description;
+    }
+    
+    public void TaskTable.setDescription(String description) {
+        this.description = description;
+    }
     
     public short TaskTable.getOrdering() {
         return this.ordering;

@@ -9,33 +9,24 @@
 		<h1>Neue Aufgabe erstellen</h1>
 <!--		<util:i18n content="${Exercise.title}" entity="Exercise" field="title"/>-->
 	</div>
-	<form:form modelAttribute="newExercise">
-	
-	
-<!--	<form method="POST" action="${nextStep}">-->
+	<form:form modelAttribute="newExercise" action="exercise">
 		<p>
 			Bitte wählen Sie die Sprache, in der die neue Aufgabe erfasst werden soll:<br />
-			<!-- <select name="language">
-				<option value="de">Deutsch</option>
-				<option value="en">Englisch</option>
-			</select> -->
-			<form:select path="language">
-			
-				<form:options items="languages" />
-			</form:select>
+			<form:select items="${locales}" path="locale" />
 		</p>
+		<spring:hasBindErrors name="NewExercise">
+			<p>Ungültige Eingabe!</p>
+		</spring:hasBindErrors>
 		<p>
 			Bitte geben Sie den Titel der neuen Aufgabe ein:<br />
-			<input type="text" name="title" />
+			<form:input path="exercise.title"/>
 		</p>
 		<p>
 			Bitte geben Sie eine einleitende Beschreibung der Aufgabe ein:<br />
-			<textarea rows="4" cols="40" name="introText" >Intro text</textarea>
-
+			<form:textarea path="introTask.description" rows="4" cols="50" />
 		</p>
 		
 		<input type="submit" value="Submit" />
 		
-<!--	</form>-->
 	</form:form>
 </div>

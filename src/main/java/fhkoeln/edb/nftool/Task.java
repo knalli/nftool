@@ -26,11 +26,16 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooEntity(table = "TASKS", finders = { "findTasksByState", "findTasksByExerciseAndState" })
 public class Task implements Serializable, ExerciseEntity {
 
+	@Transient
+	private String description;
+
 	@NotNull
 	private short ordering;
 
 	@Enumerated
 	private ExerciseState state;
+
+	private int points = 1;
 
 	@Value("false")
 	@Transient

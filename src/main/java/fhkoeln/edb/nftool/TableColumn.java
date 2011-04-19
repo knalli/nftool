@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.roo.addon.entity.RooEntity;
@@ -24,6 +25,9 @@ import org.springframework.roo.addon.tostring.RooToString;
 // , finders = { "findTableColumnsByTaskTableAndKeyColumn",
 // "findTableColumnsByKeyColumn" })
 public class TableColumn implements Serializable, ExerciseEntity {
+
+	@Transient
+	private String name;
 
 	@NotNull
 	private Boolean keyColumn;

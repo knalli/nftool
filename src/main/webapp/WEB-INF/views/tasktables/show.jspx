@@ -8,5 +8,6 @@
         <field:display field="tableColumns" id="s_fhkoeln_edb_nftool_TaskTable_tableColumns" object="${tasktable}" z="TNCKwsdIR0ExiSt6kVpVZrlmREc="/>
         <field:display field="tableRows" id="s_fhkoeln_edb_nftool_TaskTable_tableRows" object="${tasktable}" z="0IBkQvt8PSTNS92EwSteUyhCJXA="/>
         
+    <field:display field="description" id="s_fhkoeln_edb_nftool_TaskTable_description" object="${tasktable}" z="w6gPPNBsaXTFNeV+xgssg/UFkiM="/>
     </page:show>
 </div>

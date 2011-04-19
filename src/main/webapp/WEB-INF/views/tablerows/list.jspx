@@ -9,6 +9,7 @@
             
             
         
+        <table:column id="c_fhkoeln_edb_nftool_TableRow_content" property="content" z="kxw3ReAigIznOmh/e4BckdhQ6xo="/>
         </table:table>
     </page:list>
 </div>

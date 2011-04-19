@@ -235,7 +235,7 @@ public class InternationalizationService implements Serializable {
 	 * @param entities
 	 * @return
 	 */
-	protected static String createUri(ExerciseEntity... entities) {
+	public static String createUri(ExerciseEntity... entities) {
 		StringBuilder sb = new StringBuilder();
 		Assert.notNull(entities);
 		for (ExerciseEntity e : entities) {

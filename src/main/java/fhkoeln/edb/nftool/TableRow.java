@@ -8,6 +8,8 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import javax.validation.constraints.NotNull;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
 import fhkoeln.edb.nftool.TableColumn;
 
 @RooJavaBean
@@ -17,9 +19,10 @@ import fhkoeln.edb.nftool.TableColumn;
 @SuppressWarnings("serial")
 public class TableRow implements Serializable, ExerciseEntity {
 
+	@Transient
+	private String content;
+
 	@NotNull
 	private Integer rowNumber;
 
-	// @ManyToOne(optional = false)
-	// private TableColumn tableColumn;
 }

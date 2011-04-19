@@ -12,5 +12,7 @@
     <field:display field="solved" id="s_fhkoeln_edb_nftool_Task_solved" object="${task}" z="rhNkuWhdg+OJ4DK4AvXKJPEOySw="/>
     <field:display field="state" id="s_fhkoeln_edb_nftool_Task_state" object="${task}" z="08pWWa1qLj2+OqRFLT0Oij05yrE="/>
     <field:display field="exercise" id="s_fhkoeln_edb_nftool_Task_exercise" object="${task}" z="U7i516QoPaF+TSbTQHBGRJrh6E8="/>
+    <field:display field="description" id="s_fhkoeln_edb_nftool_Task_description" object="${task}" z="mfRbHiPiBd2V3nEJ14dthieY4HA="/>
+    <field:display field="points" id="s_fhkoeln_edb_nftool_Task_points" object="${task}" z="VbCBx0ZEr7KhpdO00rZaB2pLHfM="/>
     </page:show>
 </div>

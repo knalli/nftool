@@ -8,31 +8,16 @@ import fhkoeln.edb.nftool.AnswerTables;
 import fhkoeln.edb.nftool.Exercise;
 import fhkoeln.edb.nftool.Task;
 import java.lang.String;
+import java.util.Locale;
 
 privileged aspect NewExercise_Roo_JavaBean {
     
-    public String NewExercise.getLanguage() {
-        return this.language;
+    public Locale NewExercise.getLocale() {
+        return this.locale;
     }
     
-    public void NewExercise.setLanguage(String language) {
-        this.language = language;
-    }
-    
-    public String NewExercise.getTitle() {
-        return this.title;
-    }
-    
-    public void NewExercise.setTitle(String title) {
-        this.title = title;
-    }
-    
-    public String NewExercise.getIntro() {
-        return this.intro;
-    }
-    
-    public void NewExercise.setIntro(String intro) {
-        this.intro = intro;
+    public void NewExercise.setLocale(Locale locale) {
+        this.locale = locale;
     }
     
     public Exercise NewExercise.getExercise() {
@@ -41,6 +26,14 @@ privileged aspect NewExercise_Roo_JavaBean {
     
     public void NewExercise.setExercise(Exercise exercise) {
         this.exercise = exercise;
+    }
+    
+    public Task NewExercise.getIntroTask() {
+        return this.introTask;
+    }
+    
+    public void NewExercise.setIntroTask(Task introTask) {
+        this.introTask = introTask;
     }
     
     public String NewExercise.getPrimaryKeyText() {
@@ -137,6 +130,30 @@ privileged aspect NewExercise_Roo_JavaBean {
     
     public void NewExercise.setNormalForm3Tables(AnswerTables normalForm3Tables) {
         this.normalForm3Tables = normalForm3Tables;
+    }
+    
+    public String NewExercise.getSolvedText() {
+        return this.solvedText;
+    }
+    
+    public void NewExercise.setSolvedText(String solvedText) {
+        this.solvedText = solvedText;
+    }
+    
+    public Task NewExercise.getSolved() {
+        return this.solved;
+    }
+    
+    public void NewExercise.setSolved(Task solved) {
+        this.solved = solved;
+    }
+    
+    public AnswerTables NewExercise.getSolvedTables() {
+        return this.solvedTables;
+    }
+    
+    public void NewExercise.setSolvedTables(AnswerTables solvedTables) {
+        this.solvedTables = solvedTables;
     }
     
 }

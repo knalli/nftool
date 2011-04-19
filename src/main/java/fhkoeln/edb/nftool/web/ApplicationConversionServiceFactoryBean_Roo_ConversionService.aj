@@ -3,11 +3,11 @@
 
 package fhkoeln.edb.nftool.web;
 
+import fhkoeln.edb.nftool.Exercise;
 import fhkoeln.edb.nftool.Points;
 import fhkoeln.edb.nftool.TableColumn;
 import fhkoeln.edb.nftool.TableRow;
 import fhkoeln.edb.nftool.Task;
-import fhkoeln.edb.nftool.TaskTable;
 import fhkoeln.edb.nftool.service.LocalizedLabel;
 import java.lang.String;
 import org.springframework.core.convert.converter.Converter;
@@ -15,8 +15,16 @@ import org.springframework.format.FormatterRegistry;
 
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
-    Converter<Points, String> ApplicationConversionServiceFactoryBean.getPointsConverter() {
-        return new Converter<Points, String>() {
+    Converter<Exercise, String> ApplicationConversionServiceFactoryBean.getExerciseConverter() {
+        return new Converter<Exercise, String>() {
+            public String convert(Exercise exercise) {
+                return new StringBuilder().append(exercise.getTitle()).append(" ").append(exercise.getDescription()).toString();
+            }
+        };
+    }
+    
+    org.springframework.core.convert.converter.Converter<Points, String> ApplicationConversionServiceFactoryBean.getPointsConverter() {
+        return new org.springframework.core.convert.converter.Converter<Points, String>() {
             public String convert(Points points) {
                 return new StringBuilder().append(points.getUsername()).append(" ").append(points.getGameDate()).append(" ").append(points.getPoints()).append(" ").append(points.getAppKey()).toString();
             }
@@ -26,7 +34,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     org.springframework.core.convert.converter.Converter<TableColumn, String> ApplicationConversionServiceFactoryBean.getTableColumnConverter() {
         return new org.springframework.core.convert.converter.Converter<TableColumn, String>() {
             public String convert(TableColumn tablecolumn) {
-                return new StringBuilder().append(tablecolumn.getOrdering()).toString();
+                return new StringBuilder().append(tablecolumn.getName()).append(" ").append(tablecolumn.getOrdering()).toString();
             }
         };
     }
@@ -34,7 +42,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     org.springframework.core.convert.converter.Converter<TableRow, String> ApplicationConversionServiceFactoryBean.getTableRowConverter() {
         return new org.springframework.core.convert.converter.Converter<TableRow, String>() {
             public String convert(TableRow tablerow) {
-                return new StringBuilder().append(tablerow.getRowNumber()).toString();
+                return new StringBuilder().append(tablerow.getContent()).append(" ").append(tablerow.getRowNumber()).toString();
             }
         };
     }
@@ -42,15 +50,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     org.springframework.core.convert.converter.Converter<Task, String> ApplicationConversionServiceFactoryBean.getTaskConverter() {
         return new org.springframework.core.convert.converter.Converter<Task, String>() {
             public String convert(Task task) {
-                return new StringBuilder().append(task.getOrdering()).toString();
-            }
-        };
-    }
-    
-    org.springframework.core.convert.converter.Converter<TaskTable, String> ApplicationConversionServiceFactoryBean.getTaskTableConverter() {
-        return new org.springframework.core.convert.converter.Converter<TaskTable, String>() {
-            public String convert(TaskTable tasktable) {
-                return new StringBuilder().append(tasktable.getOrdering()).append(" ").append(tasktable.getNormalform()).toString();
+                return new StringBuilder().append(task.getDescription()).append(" ").append(task.getOrdering()).append(" ").append(task.getPoints()).toString();
             }
         };
     }
@@ -64,6 +64,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
+        registry.addConverter(getExerciseConverter());
         registry.addConverter(getPointsConverter());
         registry.addConverter(getTableColumnConverter());
         registry.addConverter(getTableRowConverter());

@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.apache.log4j.Logger;
 import org.springframework.roo.addon.entity.RooEntity;
@@ -23,13 +24,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class Exercise implements Serializable, ExerciseEntity {
 	private transient static final Logger logger = Logger.getLogger(Exercise.class);
 
-	// @Type(type = "fhkoeln.edb.nftool.i18n.LocalizedLabelUserType")
-	// @NotNull
-	// private String title;
+	@Transient
+	private String title;
 
-	// @Type(type = "fhkoeln.edb.nftool.i18n.LocalizedLabelUserType")
-	// @NotNull
-	// private String description;
+	@Transient
+	private String description;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "exercise")
 	private Set<Task> tasks = new HashSet<Task>();

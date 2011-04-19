@@ -2,17 +2,21 @@ package fhkoeln.edb.nftool.web;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,22 +28,25 @@ import fhkoeln.edb.nftool.Exercise;
 import fhkoeln.edb.nftool.ExerciseEntity;
 import fhkoeln.edb.nftool.NewExercise;
 import fhkoeln.edb.nftool.Task;
+import fhkoeln.edb.nftool.TaskTable;
+import fhkoeln.edb.nftool.TaskTableDataOnDemand;
+import fhkoeln.edb.nftool.service.InternationalizationService;
 import fhkoeln.edb.nftool.service.LocalizedLabel;
 
-//@RooWebScaffold(path = "exercises", formBackingObject = Exercise.class)
 @RequestMapping("/addexercise")
 @Controller
 @SessionAttributes("newExercise")
 public class AddExerciseController {
 
-	private static Logger logger = Logger.getLogger(AddExerciseController.class);
+	private static final String appname = "addexercise/";
 
-	private final static Map<String, String> languages = new HashMap<String, String>(2);
+	@Autowired
+	private InternationalizationService i18nService;
+
+	private static Logger logger = Logger.getLogger(AddExerciseController.class);
 
 	public AddExerciseController() {
 		logger.trace("New AddExerciseController instantiated.");
-		languages.put("de", "Deutsch");
-		languages.put("en", "Englisch");
 	}
 
 	@ModelAttribute("exercises")
@@ -47,9 +54,9 @@ public class AddExerciseController {
 		return Exercise.findAllExercises();
 	}
 
-	@ModelAttribute("languages")
-	public Map<String, String> populateLanguages() {
-		return languages;
+	@ModelAttribute("locales")
+	public Collection<Locale> populateLocales() {
+		return LocalizedLabel.getLocales();
 	}
 
 	@RequestMapping(value = "add", method = RequestMethod.GET)
@@ -57,68 +64,79 @@ public class AddExerciseController {
 		logger.trace("Initializing " + this.toString());
 
 		NewExercise ex = new NewExercise();
-		ex.setExercise(new Exercise());
-		ex.setLanguage("de");
+		Exercise e = new Exercise();
+		Set<Task> tasks = NewExercise.inititSampleData();
+		e.setTitle("Neue Aufgabe");
+		e.setTasks(tasks);
+		ex.setExercise(e);
+		ex.setLocale(new Locale("de"));
+
 		model.addAttribute(ex);
 
-		return new ModelAndView("addexercise/start", model);
+		return new ModelAndView(appname + "start", model);
 	}
 
 	@RequestMapping(value = "exercise", method = RequestMethod.POST)
-	public ModelAndView exercise(@RequestParam String title,
-			@ModelAttribute("languages") String language, @RequestParam String introText,
-			ModelMap modelMap, BindingResult result, SessionStatus status) {
-
-		LocalizedLabel exerciseTitle = createLocalizedLabelFromRequest(title, modelMap);
-		modelMap.addAttribute("exerciseTitle", exerciseTitle);
-
-		LocalizedLabel intro = createLocalizedLabelFromRequest(introText, modelMap);
-		modelMap.addAttribute("introText", intro);
-
-		modelMap.addAttribute("nextStep", "persist");
-
-		return persist(modelMap);
-		// return "addexercise/tasks";
+	public String exercise(@ModelAttribute NewExercise ex, BindingResult result,
+			SessionStatus status) {
+		logger.trace("Handling exercise.");
+		return appname + ((result.hasErrors()) ? "exercise" : "taskTable");
+		/*
+		 * if (result.hasErrors())
+		 * return "addexercise/add";
+		 * return "addexercise/start";
+		 */
 	}
 
-	@RequestMapping(value = "taskPk", method = RequestMethod.POST)
+	@RequestMapping(value = "taskTable", method = RequestMethod.POST)
+	public String taskTable(@ModelAttribute NewExercise ex) {
+		TaskTable table = new TaskTable();
+
+		return "";
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
 	public String taskPk(@RequestParam String name, ModelMap modelMap) {
 		createTask("taskPk", name);
 		return "";
 	}
 
-	@RequestMapping(value = "taskNf1", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public String taskNf1(ModelMap modelMap) {
 		return "";
 	}
 
-	@RequestMapping(value = "taskNf2", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public String taskNf2(ModelMap modelMap) {
 		return "";
 	}
 
-	@RequestMapping(value = "taskNf3", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public String taskNf3(ModelMap modelMap) {
 		return "";
 	}
 
 	/**
+	 * @param status
+	 * @param result
 	 * @todo Handle Entity-Already-Persisted-Exception!
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "persist", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	@Transactional
-	public ModelAndView persist(ModelMap modelMap) {
+	public String persist(NewExercise ex, BindingResult result, SessionStatus status) {
 		logger.trace("Entering persisting state.");
 
-		Exercise exercise = (Exercise) modelMap.get("exercise");
-		exercise.persist();
+		ex.getExercise().persist();
+		/*
+		 * persistLabelForExerciseEntity(ex.getExercise(),
+		 * new LocalizedLabel(ex.getTitle(), ex.getLocale()));
+		 */
 
-		LocalizedLabel exTitle = (LocalizedLabel) modelMap.get("exerciseTitle");
-		persistLabelForEntity(exercise, exTitle);
+		status.isComplete();
 
-		return new ModelAndView("persisted", modelMap);
+		return "persisted";
 	}
 
 	private Map<String, Object> createTask(String name, String text) {
@@ -132,17 +150,10 @@ public class AddExerciseController {
 		return result;
 	}
 
-	private void persistLabelForEntity(ExerciseEntity entity, LocalizedLabel label) {
+	private void persistLabelForExerciseEntity(ExerciseEntity entity, LocalizedLabel label) {
 		Assert.notNull(entity.getId(), "Entity has to be persisted before!");
-		String name = entity.getClass().getSimpleName();
-		label.setEntityUri(name + ":" + entity.getId());
+		label.setEntityUri(InternationalizationService.createUri(entity));
 		label.persist();
 	}
 
-	private LocalizedLabel createLocalizedLabelFromRequest(String text, ModelMap modelMap) {
-		LocalizedLabel label = new LocalizedLabel();
-		label.setLocale(new Locale((String) modelMap.get("language")));
-		label.setContent(text);
-		return label;
-	}
 }

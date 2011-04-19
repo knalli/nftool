@@ -6,5 +6,6 @@
         <field:simple field="tableRows" id="c_fhkoeln_edb_nftool_TaskTable_tableRows" messageCode="entity_reference_not_managed" messageCodeAttribute="Table Row" z="rR2/fMxLyPp4blPnjvh+ZqrN1n8="/>
         <field:simple field="tableColumns" id="c_fhkoeln_edb_nftool_TaskTable_tableColumns" messageCode="entity_reference_not_managed" messageCodeAttribute="Table Column" z="Kd4M+rooV+ESk047HjBZ7Q32fNE="/>
         <field:input field="normalform" id="c_fhkoeln_edb_nftool_TaskTable_normalform" z="YeR9XE0msB3ASh0o8lgl7wsCKa0="/>
+    <field:input field="description" id="c_fhkoeln_edb_nftool_TaskTable_description" z="pUThHikYdbgMJTjNLuMjF8KEjd0="/>
     </form:update>
 </div>

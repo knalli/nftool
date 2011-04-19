@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.Transient;
 
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -22,14 +23,13 @@ import org.springframework.roo.addon.tostring.RooToString;
 @SuppressWarnings("serial")
 public class TaskTable implements Serializable, ExerciseEntity {
 
+	@Transient
+	private String description;
+
 	@OrderBy
 	private short ordering;
 
 	private short normalform;
-
-	// @NotNull
-	// @Size(max = 150)
-	// private String description;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "table_fk")

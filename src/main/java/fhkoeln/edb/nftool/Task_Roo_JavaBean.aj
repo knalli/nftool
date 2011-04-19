@@ -6,9 +6,18 @@ package fhkoeln.edb.nftool;
 import fhkoeln.edb.nftool.Exercise;
 import fhkoeln.edb.nftool.ExerciseState;
 import fhkoeln.edb.nftool.TaskTable;
+import java.lang.String;
 import java.util.Set;
 
 privileged aspect Task_Roo_JavaBean {
+    
+    public String Task.getDescription() {
+        return this.description;
+    }
+    
+    public void Task.setDescription(String description) {
+        this.description = description;
+    }
     
     public short Task.getOrdering() {
         return this.ordering;
@@ -24,6 +33,14 @@ privileged aspect Task_Roo_JavaBean {
     
     public void Task.setState(ExerciseState state) {
         this.state = state;
+    }
+    
+    public int Task.getPoints() {
+        return this.points;
+    }
+    
+    public void Task.setPoints(int points) {
+        this.points = points;
     }
     
     public boolean Task.isSolved() {

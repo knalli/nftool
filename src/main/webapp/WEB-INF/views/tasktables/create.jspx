@@ -8,6 +8,7 @@
         <field:simple field="tableColumns" id="c_fhkoeln_edb_nftool_TaskTable_tableColumns" messageCode="entity_reference_not_managed" messageCodeAttribute="Table Column" z="Kd4M+rooV+ESk047HjBZ7Q32fNE="/>
         <field:simple field="tableRows" id="c_fhkoeln_edb_nftool_TaskTable_tableRows" messageCode="entity_reference_not_managed" messageCodeAttribute="Table Row" z="rR2/fMxLyPp4blPnjvh+ZqrN1n8="/>
         
+    <field:input field="description" id="c_fhkoeln_edb_nftool_TaskTable_description" z="pUThHikYdbgMJTjNLuMjF8KEjd0="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_fhkoeln_edb_nftool_TaskTable" render="${not empty dependencies}" z="m034i5hs3SW/bSupWGM6hv6Hv88="/>
 </div>
