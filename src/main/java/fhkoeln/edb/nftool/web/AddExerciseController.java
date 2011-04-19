@@ -69,6 +69,7 @@ public class AddExerciseController {
 		e.setTitle("Neue Aufgabe");
 		e.setTasks(tasks);
 		ex.setExercise(e);
+		ex.setIntroTask(tasks.iterator().next());
 		ex.setLocale(new Locale("de"));
 
 		model.addAttribute(ex);
@@ -80,6 +81,7 @@ public class AddExerciseController {
 	public String exercise(@ModelAttribute NewExercise ex, BindingResult result,
 			SessionStatus status) {
 		logger.trace("Handling exercise.");
+		logger.debug(appname + ((result.hasErrors()) ? "exercise" : "taskTable"));
 		return appname + ((result.hasErrors()) ? "exercise" : "taskTable");
 		/*
 		 * if (result.hasErrors())

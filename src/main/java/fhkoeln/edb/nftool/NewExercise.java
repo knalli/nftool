@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.serializable.RooSerializable;
@@ -71,6 +69,7 @@ public class NewExercise {
 		tt.setTableColumns(tcs);
 
 		Set<TaskTable> tts = new HashSet<TaskTable>(1);
+		tts.add(tt);
 		introTask.setTaskTables(tts);
 
 		Set<Task> ts = new HashSet<Task>(1);

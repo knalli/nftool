@@ -1,19 +1,19 @@
 <div xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" 
 	xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" 
-	xmlns:form="http://www.springframework.org/tags/form" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
-	version="2.0">
+	xmlns:form="http://www.springframework.org/tags/form" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" >
 	<jsp:output omit-xml-declaration="yes"/>
 	
+	<div id="_title">
+		<h1>Tabelle zu Aufgabe <c:out value="${newExercise.exercise.title}" default=" kein titel "/></h1>
+	</div>
 	<form:form modelAttribute="newExercise" action="exercise">
 	
-		<div id="_title">
-			<h1>Tabelle zu Aufgabe <c:out value="${title}" default="kein titel"/></h1>
-		</div>
 		<spring:hasBindErrors name="NewExercise">
-			<p>Ungültige Eingabe!</p>
+			<p class="error">Ungueltige Eingabe!</p>
 		</spring:hasBindErrors>
 		<p>
-			TableCreator
+			<h2>TableCreator</h2>
+			<roo:tasktable tables="${newExercise.introTask.taskTables}" controls="true" locked="false" editable="false"/>
 		</p>
 
 		<input type="submit" value="Submit" />

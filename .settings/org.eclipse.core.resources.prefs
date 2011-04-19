@@ -1,4 +1,11 @@
-#Tue Apr 19 14:28:17 CEST 2011
+#Tue Apr 19 16:27:17 CEST 2011
 eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/addexercise/end-state.jspx=UTF-8
+encoding//src/main/webapp/WEB-INF/views/addexercise/normalform1.jspx=UTF-8
+encoding//src/main/webapp/WEB-INF/views/addexercise/normalform2.jspx=UTF-8
+encoding//src/main/webapp/WEB-INF/views/addexercise/normalform3.jspx=UTF-8
+encoding//src/main/webapp/WEB-INF/views/addexercise/persisted.jspx=UTF-8
+encoding//src/main/webapp/WEB-INF/views/addexercise/primaryKey.jspx=UTF-8
+encoding//src/main/webapp/WEB-INF/views/addexercise/results.jspx=UTF-8
 encoding//src/main/webapp/WEB-INF/views/addexercise/start.jspx=UTF-8
 encoding//src/main/webapp/WEB-INF/views/addexercise/taskTable.jspx=UTF-8
