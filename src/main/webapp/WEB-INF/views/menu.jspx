@@ -32,8 +32,10 @@
         <menu:item id="fi_localizedlabel_entityuriandattributenameandlocale" messageCode="global_menu_find" url="/localizedlabels?find=ByEntityUriAndAttributeNameAndLocale&amp;form" z="riF4mDxYoz7RJbbn7s0AGQcO2Hg="/>
         </menu:category>
     <menu:category id="c_exercise" z="jmRqJenbh5VLkH+bwtkuITAti7w=">
-            <menu:item id="i_exercise_new" messageCode="global_menu_new" url="/exercises?form" z="EQjQ7NFz2FdX+yL922dJHnOE/H8="/>
+            
         <menu:item id="i_exercise_list" messageCode="global_menu_list" url="/exercises?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="kV4/kOJVBqzme7yxoQezRLZ77TY="/>
+        
+        <menu:item id="i_exercise_new" messageCode="global_menu_new" url="/exercises?form" z="EQjQ7NFz2FdX+yL922dJHnOE/H8="/>
         </menu:category>
     <menu:category id="c_task" z="5/YEXemVsbl4iFvHS/UosIk5vGA=">
             <menu:item id="i_task_new" messageCode="global_menu_new" url="/tasks?form" z="YotbILlsjTB2PtR5PNSnTnvYdJ4="/>

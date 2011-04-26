@@ -10,21 +10,28 @@
 <!--		<util:i18n content="${Exercise.title}" entity="Exercise" field="title"/>-->
 	</div>
 	<form:form modelAttribute="newExercise" action="exercise">
+		
+		<spring:hasBindErrors name="newExercise">
+			<p>Ungültige Eingabe!</p>
+		</spring:hasBindErrors>
 		<p>
 			Bitte wählen Sie die Sprache, in der die neue Aufgabe erfasst werden soll:<br />
 			<form:select items="${locales}" path="locale" />
 		</p>
-		<spring:hasBindErrors name="NewExercise">
-			<p>Ungültige Eingabe!</p>
-		</spring:hasBindErrors>
 		<p>
 			Bitte geben Sie den Titel der neuen Aufgabe ein:<br />
 			<form:input path="exercise.title"/>
 		</p>
+		
 		<p>
-			Bitte geben Sie eine einleitende Beschreibung der Aufgabe ein:<br />
-			<form:textarea path="introTask.description" rows="4" cols="50" />
+			Bite geben Sie, kommasepariert, die Spalten der einleitenden Tabelle ein:<br />
+<!--			<textarea rows="4" cols="50" name="columnNames">Spalte 1</textarea>-->
+			<form:textarea path="columnNames" />
 		</p>
+<!--		<p>-->
+<!--			Bitte geben Sie eine einleitende Beschreibung der Aufgabe ein:<br />-->
+<!--			<form:textarea path="currentTask.description" rows="4" cols="50" />-->
+<!--		</p>-->
 		
 		<input type="submit" value="Submit" />
 		

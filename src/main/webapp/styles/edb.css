@@ -1,3 +1,84 @@
 @import url("edbDefaults.css");
 @import url("ui-lightness/jquery-ui-1.8.1.custom.css");
 @import url("edbNftool.css");
+
+
+/* fallbacks for roo theme */
+#wrapper {
+	width:800px;
+	min-width: 800px;
+	max-width: 800px;
+	margin-right: auto;
+	margin-left: auto;
+
+	/* fix max-width incompatibility in IE6 */
+	width:expression(document.body.clientWidth > 800? "800px": "auto" );
+	
+	overflow:hidden;
+	display:block;
+}
+
+/* header and footer elements */
+
+#main {
+	overflow:hidden;
+	display:box;
+}
+
+#menu {
+    background: #eee;
+  	position:relative;
+  	float:left;  	
+  	left:0px;
+  	width:220px;
+  	margin-right:15px;
+}
+
+#menu ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#menu ul li{
+	padding: 0px;
+}
+
+
+#menu a, #menu h2 {
+	display: block;
+	margin: 0;
+	padding: 2px 6px;
+	color:#FFFFFF;
+}
+
+#menu h2 {
+	color: #fff;
+	background: #648C1D;
+	text-transform: uppercase;
+	font-weight:bold;
+	font-size: 12px;
+}
+
+#menu a {
+	color: #666666;
+	background: #efefef;
+	text-decoration: none;
+	padding: 2px 12px;
+}
+
+#menu a:hover {
+	color: #648C1D;
+	background: #fff;
+}
+
+#footer {
+	background:#fff;
+	border:none;
+	margin-top:15px;
+	border-top:1px solid #999999;
+}
+
+#footer .new {
+	float:left;
+}

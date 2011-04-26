@@ -6,17 +6,52 @@
 	<div id="_title">
 		<h1>Tabelle zu Aufgabe <c:out value="${newExercise.exercise.title}" default=" kein titel "/></h1>
 	</div>
-	<form:form modelAttribute="newExercise" action="exercise">
-	
-		<spring:hasBindErrors name="NewExercise">
+	<spring:eval expression="newExercise.exercise.tasks.?[state.equals(T(fhkoeln.edb.nftool.ExerciseState).INTRO)]" var="currentTask"/>
+	<spring:eval expression="currentTask[0].taskTables" var="tables"/>
+<!--	Tables: <c:out value="${tables}"/>-->
+	<!-- <c:forEach items="${tables}" var="t">
+		<c:forEach items="${t.tableColumns}" var="column">
+			<spring:eval var="colName" expression="column.name" />
+			Col: <c:out value="${colName}"></c:out><br />
+		</c:forEach>
+	</c:forEach>-->
+	<form:form commandName="newExercise" action="introTable">
+		<spring:hasBindErrors name="newExercise">
 			<p class="error">Ungueltige Eingabe!</p>
 		</spring:hasBindErrors>
+		
 		<p>
-			<h2>TableCreator</h2>
-			<roo:tasktable tables="${newExercise.introTask.taskTables}" controls="true" locked="false" editable="false"/>
+			Tabellenbeschreibung:<br />
+			<form:input path="title"/>
 		</p>
 
+		<roo:tasktable tables="${tables}" controls="true" locked="false" editable="true"/>
+		<input type="hidden" id="tableData" name="tableData"/>
+
+		<button type="button" id="btnAddRow">Zeile hinzufuegen</button>
 		<input type="submit" value="Submit" />
 		
 	</form:form>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#btnAddRow').click(function() {
+				$('table.exercise tr:last').clone().appendTo($('table.exercise tbody'));
+				return false;
+			});
+			
+			$('form').submit(function(){
+				var data = {};
+				$('table.exercise tbody').find('tr').each(function(rowNr){
+					var row = {};
+					$('input', this).each(function(colNr) {
+						row[colNr] = $(this).val();
+					});
+					data[rowNr] = row;
+				});
+				//console.log(data);
+				$('#tableData').val($.param(data));
+			});
+		});
+	</script>
 </div>
+

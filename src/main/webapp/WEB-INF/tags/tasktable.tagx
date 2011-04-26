@@ -1,4 +1,6 @@
-<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:form="http://www.springframework.org/tags/form" version="2.0">
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:form="http://www.springframework.org/tags/form" 
+	version="2.0">
 	<jsp:output omit-xml-declaration="yes"/>
 	
 	<jsp:directive.attribute name="tables" type="java.util.Set" required="true" description="The table(s) to be printed."/>
@@ -12,18 +14,18 @@
 	
 	<c:if test="${editable}">
 		<!-- Dojo styles for editable grid -->
-		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/grid/resources/Grid.css" />
-		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/grid/resources/tundraGrid.css" />
-		<style type="text/css">
-		    .dojoxGrid table { margin: 0; } 
-		    html, body { width: 100%; height: 100%; margin: 0; }
-		</style>
+<!--		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/grid/resources/Grid.css" />-->
+<!--		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/grid/resources/tundraGrid.css" />-->
+<!--		<style type="text/css">-->
+<!--		    table.exercise { margin: 0; } -->
+<!--		    html, body { width: 100%; height: 100%; margin: 0; }-->
+<!--		</style>-->
 		<!-- Dojo libs for editable grid -->
-		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js" type="text/javascript"><!-- x --></script>
+<!--		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js" type="text/javascript"> //required for FF3 and Opera </script>-->
 	</c:if>
 	
 	<c:forEach var="table" items="${tables}">
-		<table class="exercise" width="100%" dojoType="dojox.grid.DataGrid">
+		<table class="exercise" width="100%">
 			<caption><c:out value="${i18nService.getText(table, 'description', locale)}" /></caption>
 			<thead>
 				<tr>
@@ -34,19 +36,36 @@
 							</c:if>
 							<c:choose>
 								<c:when test="${controls}">
-									<c:set var="colName" value="${i18nService.getText(column, 'name', locale)}" />
-									<label for="lblColumn${column.id}"><c:out value="${colName}" /></label>
 									<c:choose>
-										<c:when test="${locked}">
-											<form:checkbox path="columnIds" id="lblColumn${column.id}" value="${column.id}" disabled="true" />						
+										<c:when test="i18nService">
+											<spring:eval var="colName" expression="i18nService.getText(column, 'name', locale)" />
+		<!--									<c:set var="colName" value="${i18nService.getText(column, 'name', locale)}" />-->
 										</c:when>
 										<c:otherwise>
-											<form:checkbox path="columnIds" id="lblColumn${column.id}" value="${column.id}" />
+											<c:set var="colName" value="${column.name}"/>
 										</c:otherwise>
 									</c:choose>
+									<label for="lblColumn${column.id}"><c:out value="${colName}" /></label>
+									<c:if test="${not editable}">
+										<c:choose>
+											<c:when test="${locked}">
+												<form:checkbox path="columnIds" id="lblColumn${column.id}" value="${column.id}" disabled="true" />						
+											</c:when>
+											<c:otherwise>
+												<form:checkbox path="columnIds" id="lblColumn${column.id}" value="${column.id}" />
+											</c:otherwise>
+										</c:choose>
+									</c:if>
 								</c:when>
 								<c:otherwise>
-									<c:out value="${i18nService.getText(column, 'name', locale)}" />
+									<c:choose>
+										<c:when test="i18nService">
+											<c:out value="${i18nService.getText(column, 'name', locale)}" />
+										</c:when>
+										<c:otherwise>
+											<c:out value="${column.name}"/>
+										</c:otherwise>
+									</c:choose>
 								</c:otherwise>
 							</c:choose>
 						</th>
@@ -55,22 +74,37 @@
 			</thead>
 			<tbody>
 				<c:set var="rowNumber" value="1" />
+				<c:set var="colNumber" value="1" />
 				<c:set var="rowSeperator"><![CDATA[</tr><tr>]]></c:set>
 				<tr>
 					<c:forEach var="row" items="${table.tableRows}">
 						<c:if test="${row.rowNumber gt rowNumber}">
 							<c:set var="rowNumber" value="${rowNumber + 1}"/>
-							${rowSeperator}
+							<c:out value="${rowSeperator}" escapeXml="false"/>
 						</c:if>
 						<td>
-							<c:set var="rowContent" value="${i18nService.getText(row, 'content', locale)}" />
-							<c:if test="${rowContent eq ''}">
-								&#160;
-							</c:if>
-							<c:if test="${rowContent eq null}">
-								<em>NULL</em>
-							</c:if>
-							<c:out value="${rowContent}" />
+							<c:choose>
+								<c:when test="${editable}">
+									<input type="text" name="row${rowNumber}col${colNumber}" value="${row.content}"/>
+									<c:set var="colNumber" value="${colNumber + 1}"/>
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="i18nService">
+											<c:out value="${i18nService.getText(row, 'content', locale)}" />
+										</c:when>
+										<c:when test="${rowContent eq ''}">
+											&#160;
+										</c:when>
+										<c:when test="${rowContent eq null}">
+											<em>NULL</em>
+										</c:when>
+										<c:otherwise>
+											<c:out value="${row.content}"/>
+										</c:otherwise>
+									</c:choose>	
+								</c:otherwise>
+							</c:choose>
 						</td>
 					</c:forEach>
 				</tr>

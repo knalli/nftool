@@ -6,8 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
@@ -69,6 +71,9 @@ public class InternationalizationService implements Serializable {
 	public String getText(Object entityObj, String attributeName, Object localeObj) {
 		String entityUri = extractExerciseEntityName(entityObj);
 		String locale = extractLocaleString(localeObj);
+		if (locale.length() == 4) {
+			locale = locale.substring(0, 2);
+		}
 
 		return getText(entityUri, attributeName, locale);
 	}
@@ -249,4 +254,28 @@ public class InternationalizationService implements Serializable {
 		}
 		return sb.toString();
 	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public void setText(ExerciseEntity entity, String attributeName, String text, Locale locale) {
+		LocalizedLabel label = new LocalizedLabel(text, locale);
+		label.setEntityUri(createUri(entity));
+		label.persist();
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public void updateText(ExerciseEntity entity, String attributeName, String text, Locale locale) {
+		LocalizedLabel label = LocalizedLabel
+				.findLocalizedLabelsByEntityUriAndAttributeNameAndLocale(createUri(entity),
+						attributeName, locale).getSingleResult();
+		label.merge();
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public void deleteText(ExerciseEntity entity, String attributeName, String text, Locale locale) {
+		LocalizedLabel label = LocalizedLabel
+				.findLocalizedLabelsByEntityUriAndAttributeNameAndLocale(createUri(entity),
+						attributeName, locale).getSingleResult();
+		label.remove();
+	}
+
 }

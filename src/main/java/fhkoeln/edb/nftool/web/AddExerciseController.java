@@ -3,12 +3,18 @@ package fhkoeln.edb.nftool.web;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -26,7 +32,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fhkoeln.edb.nftool.Exercise;
 import fhkoeln.edb.nftool.ExerciseEntity;
+import fhkoeln.edb.nftool.ExerciseState;
 import fhkoeln.edb.nftool.NewExercise;
+import fhkoeln.edb.nftool.TableColumn;
+import fhkoeln.edb.nftool.TableRow;
 import fhkoeln.edb.nftool.Task;
 import fhkoeln.edb.nftool.TaskTable;
 import fhkoeln.edb.nftool.TaskTableDataOnDemand;
@@ -64,30 +73,60 @@ public class AddExerciseController {
 		logger.trace("Initializing " + this.toString());
 
 		NewExercise ex = new NewExercise();
-		Exercise e = new Exercise();
-		Set<Task> tasks = NewExercise.inititSampleData();
-		e.setTitle("Neue Aufgabe");
-		e.setTasks(tasks);
-		ex.setExercise(e);
-		ex.setIntroTask(tasks.iterator().next());
 		ex.setLocale(new Locale("de"));
-
+		ex.inititSampleData();
 		model.addAttribute(ex);
+		model.addAttribute("i18nService", i18nService);
+
+		// model.addAttribute("taskTables", ex.getTaskTablesByState("INTRO"));
 
 		return new ModelAndView(appname + "start", model);
 	}
 
 	@RequestMapping(value = "exercise", method = RequestMethod.POST)
-	public String exercise(@ModelAttribute NewExercise ex, BindingResult result,
-			SessionStatus status) {
+	public String exercise(@RequestParam List<String> columnNames, @ModelAttribute NewExercise ex,
+			BindingResult result, SessionStatus status) {
 		logger.trace("Handling exercise.");
-		logger.debug(appname + ((result.hasErrors()) ? "exercise" : "taskTable"));
+
+		Set<TaskTable> taskTables = ex.getExercise().getTaskByState(ExerciseState.INTRO)
+				.getTaskTables(); // NPE!
+		Set<TableColumn> tableColumns = new HashSet<TableColumn>(columnNames.size());
+		Set<TableRow> tableRows = new HashSet<TableRow>();
+		int i = 1;
+		for (String name : columnNames) {
+			TableRow tr = new TableRow();
+			tr.setRowNumber(1);
+			tr.setContent("Content");
+
+			TableColumn tc = new TableColumn();
+			tc.setKeyColumn(false);
+			tc.setName(name);
+			tc.setOrdering(i++);
+
+			tableRows.add(tr);
+			Set<TableRow> tableRowsForColumn = new HashSet<TableRow>(1);
+			tableRowsForColumn.add(tr);
+			tc.setTableRows(tableRowsForColumn);
+
+			tableColumns.add(tc);
+		}
+		TaskTable table = taskTables.iterator().next();
+		table.setTableColumns(tableColumns);
+		table.setTableRows(tableRows);
+
 		return appname + ((result.hasErrors()) ? "exercise" : "taskTable");
 		/*
 		 * if (result.hasErrors())
 		 * return "addexercise/add";
 		 * return "addexercise/start";
 		 */
+	}
+
+	@RequestMapping(value = "introTable", method = RequestMethod.POST)
+	public String introTable(@RequestBody List<Map<Integer, String>> tableData,
+			@ModelAttribute NewExercise ex, BindingResult result, SessionStatus status) {
+
+		return appname + "taskTable";
 	}
 
 	@RequestMapping(value = "taskTable", method = RequestMethod.POST)

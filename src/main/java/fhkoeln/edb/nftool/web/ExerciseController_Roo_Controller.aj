@@ -11,9 +11,7 @@ import java.lang.Long;
 import java.lang.String;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,52 +22,10 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect ExerciseController_Roo_Controller {
     
-    @RequestMapping(method = RequestMethod.POST)
-    public String ExerciseController.create(@Valid Exercise exercise, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("exercise", exercise);
-            return "exercises/create";
-        }
-        uiModel.asMap().clear();
-        exercise.persist();
-        return "redirect:/exercises/" + encodeUrlPathSegment(exercise.getId().toString(), httpServletRequest);
-    }
-    
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String ExerciseController.createForm(Model uiModel) {
         uiModel.addAttribute("exercise", new Exercise());
         return "exercises/create";
-    }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String ExerciseController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("exercise", Exercise.findExercise(id));
-        uiModel.addAttribute("itemId", id);
-        return "exercises/show";
-    }
-    
-    @RequestMapping(method = RequestMethod.GET)
-    public String ExerciseController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("exercises", Exercise.findExerciseEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) Exercise.countExercises() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("exercises", Exercise.findAllExercises());
-        }
-        return "exercises/list";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT)
-    public String ExerciseController.update(@Valid Exercise exercise, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("exercise", exercise);
-            return "exercises/update";
-        }
-        uiModel.asMap().clear();
-        exercise.merge();
-        return "redirect:/exercises/" + encodeUrlPathSegment(exercise.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)

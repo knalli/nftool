@@ -3,11 +3,9 @@
 
 package fhkoeln.edb.nftool.web;
 
-import fhkoeln.edb.nftool.Exercise;
 import fhkoeln.edb.nftool.Points;
 import fhkoeln.edb.nftool.TableColumn;
 import fhkoeln.edb.nftool.TableRow;
-import fhkoeln.edb.nftool.Task;
 import fhkoeln.edb.nftool.service.LocalizedLabel;
 import java.lang.String;
 import org.springframework.core.convert.converter.Converter;
@@ -15,16 +13,8 @@ import org.springframework.format.FormatterRegistry;
 
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
-    Converter<Exercise, String> ApplicationConversionServiceFactoryBean.getExerciseConverter() {
-        return new Converter<Exercise, String>() {
-            public String convert(Exercise exercise) {
-                return new StringBuilder().append(exercise.getTitle()).append(" ").append(exercise.getDescription()).toString();
-            }
-        };
-    }
-    
-    org.springframework.core.convert.converter.Converter<Points, String> ApplicationConversionServiceFactoryBean.getPointsConverter() {
-        return new org.springframework.core.convert.converter.Converter<Points, String>() {
+    Converter<Points, String> ApplicationConversionServiceFactoryBean.getPointsConverter() {
+        return new Converter<Points, String>() {
             public String convert(Points points) {
                 return new StringBuilder().append(points.getUsername()).append(" ").append(points.getGameDate()).append(" ").append(points.getPoints()).append(" ").append(points.getAppKey()).toString();
             }
@@ -43,14 +33,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<TableRow, String>() {
             public String convert(TableRow tablerow) {
                 return new StringBuilder().append(tablerow.getContent()).append(" ").append(tablerow.getRowNumber()).toString();
-            }
-        };
-    }
-    
-    org.springframework.core.convert.converter.Converter<Task, String> ApplicationConversionServiceFactoryBean.getTaskConverter() {
-        return new org.springframework.core.convert.converter.Converter<Task, String>() {
-            public String convert(Task task) {
-                return new StringBuilder().append(task.getDescription()).append(" ").append(task.getOrdering()).append(" ").append(task.getPoints()).toString();
             }
         };
     }

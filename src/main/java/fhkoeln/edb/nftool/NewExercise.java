@@ -1,9 +1,12 @@
 package fhkoeln.edb.nftool;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.serializable.RooSerializable;
@@ -15,66 +18,90 @@ import org.springframework.stereotype.Component;
 @Scope(value = "session")
 @SuppressWarnings("serial")
 public class NewExercise {
+	private static final Logger logger = Logger.getLogger(NewExercise.class);
 	private Locale locale;
 
 	private Exercise exercise;
 
-	private Task introTask;
+	private List<String> columnNames;
+	private String title;
 
-	private String primaryKeyText;
-	private Task primaryKey;
-	private AnswerColumns primaryKeyColumns;
+	// private Task introTask;
 
-	private String normalForm1Text;
-	private Task normalForm1;
-	private AnswerColumns normalForm1Columns;
+	// private String primaryKeyText;
+	// private Task primaryKey;
+	private AnswerColumns tableColumnsModel;
 
-	private String normalForm2Text;
-	private Task normalForm2;
-	private AnswerTables normalForm2Tables;
+	// private String normalForm1Text;
+	// private Task normalForm1;
+	// private AnswerColumns normalForm1Columns;
 
-	private String normalForm3Text;
-	private Task normalForm3;
-	private AnswerTables normalForm3Tables;
+	// private String normalForm2Text;
+	// private Task normalForm2;
+	private AnswerTables tableModel;
 
-	private String solvedText;
-	private Task solved;
-	private AnswerTables solvedTables;
+	// private String normalForm3Text;
+	// private Task normalForm3;
+	// private AnswerTables normalForm3Tables;
 
-	public static Set<Task> inititSampleData() {
+	// private String solvedText;
+	// private Task solved;
+	// private AnswerTables solvedTables;
 
+	public void inititSampleData() {
 		Task introTask = new Task();
 		introTask.setOrdering((short) 0);
-		// introTask.setExercise(exercise);
+		introTask.setExercise(exercise);
 		introTask.setState(ExerciseState.INTRO);
 
-		TaskTable tt = new TaskTable();
-		tt.setNormalform((short) 0);
-		tt.setDescription("Aufgabentabelle");
+		TaskTable taskTable = new TaskTable();
+		taskTable.setNormalform((short) 0);
+		taskTable.setDescription("Aufgabentabelle");
 
-		TableRow tr = new TableRow();
-		tr.setContent("content");
-		tr.setRowNumber(0);
-		Set<TableRow> trs = new HashSet<TableRow>(1);
-		trs.add(tr);
+		TableRow tableRow = new TableRow();
+		tableRow.setContent("content");
+		tableRow.setRowNumber(0);
+		Set<TableRow> tableRows = new HashSet<TableRow>(1);
+		tableRows.add(tableRow);
 
-		TableColumn tc = new TableColumn();
-		tc.setName("Spalte 1");
-		tc.setKeyColumn(false);
-		tc.setOrdering(0);
-		tc.setTableRows(trs);
-		Set<TableColumn> tcs = new HashSet<TableColumn>(1);
+		TableColumn tableColumn = new TableColumn();
+		tableColumn.setName("Spalte 1");
+		tableColumn.setKeyColumn(false);
+		tableColumn.setOrdering(0);
+		tableColumn.setTableRows(tableRows);
+		Set<TableColumn> tableColumns = new HashSet<TableColumn>(1);
+		tableColumns.add(tableColumn);
 
-		tt.setTableRows(trs);
-		tt.setTableColumns(tcs);
+		taskTable.setTableRows(tableRows);
+		taskTable.setTableColumns(tableColumns);
 
-		Set<TaskTable> tts = new HashSet<TaskTable>(1);
-		tts.add(tt);
-		introTask.setTaskTables(tts);
+		Set<TaskTable> taskTables = new HashSet<TaskTable>(1);
+		taskTables.add(taskTable);
+		introTask.setTaskTables(taskTables);
 
-		Set<Task> ts = new HashSet<Task>(1);
-		ts.add(introTask);
-		return ts;
+		Set<Task> tasks = new HashSet<Task>(1);
+		tasks.add(introTask);
+		exercise = new Exercise();
+		exercise.setTasks(tasks);
 	}
 
+	/*
+	 * public Set<TaskTable> getTaskTablesByState(String stateName) {
+	 * for (Task task : exercise.getTasks()) {
+	 * if (task.getState().equals(ExerciseState.valueOf(stateName)))
+	 * return task.getTaskTables();
+	 * }
+	 * logger.error("No Such state or no such task.");
+	 * return Collections.emptySet();
+	 * }
+	 * 
+	 * public Task getTaskByState(String stateName) {
+	 * for (Task task : exercise.getTasks()) {
+	 * if (task.getState().equals(ExerciseState.valueOf(stateName)))
+	 * return task;
+	 * }
+	 * logger.error("No Such state or no such task.");
+	 * return null;
+	 * }
+	 */
 }

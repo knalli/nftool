@@ -6,8 +6,8 @@ package fhkoeln.edb.nftool;
 import fhkoeln.edb.nftool.AnswerColumns;
 import fhkoeln.edb.nftool.AnswerTables;
 import fhkoeln.edb.nftool.Exercise;
-import fhkoeln.edb.nftool.Task;
 import java.lang.String;
+import java.util.List;
 import java.util.Locale;
 
 privileged aspect NewExercise_Roo_JavaBean {
@@ -28,132 +28,36 @@ privileged aspect NewExercise_Roo_JavaBean {
         this.exercise = exercise;
     }
     
-    public Task NewExercise.getIntroTask() {
-        return this.introTask;
+    public List<String> NewExercise.getColumnNames() {
+        return this.columnNames;
     }
     
-    public void NewExercise.setIntroTask(Task introTask) {
-        this.introTask = introTask;
+    public void NewExercise.setColumnNames(List<String> columnNames) {
+        this.columnNames = columnNames;
     }
     
-    public String NewExercise.getPrimaryKeyText() {
-        return this.primaryKeyText;
+    public String NewExercise.getTitle() {
+        return this.title;
     }
     
-    public void NewExercise.setPrimaryKeyText(String primaryKeyText) {
-        this.primaryKeyText = primaryKeyText;
+    public void NewExercise.setTitle(String title) {
+        this.title = title;
     }
     
-    public Task NewExercise.getPrimaryKey() {
-        return this.primaryKey;
+    public AnswerColumns NewExercise.getTableColumnsModel() {
+        return this.tableColumnsModel;
     }
     
-    public void NewExercise.setPrimaryKey(Task primaryKey) {
-        this.primaryKey = primaryKey;
+    public void NewExercise.setTableColumnsModel(AnswerColumns tableColumnsModel) {
+        this.tableColumnsModel = tableColumnsModel;
     }
     
-    public AnswerColumns NewExercise.getPrimaryKeyColumns() {
-        return this.primaryKeyColumns;
+    public AnswerTables NewExercise.getTableModel() {
+        return this.tableModel;
     }
     
-    public void NewExercise.setPrimaryKeyColumns(AnswerColumns primaryKeyColumns) {
-        this.primaryKeyColumns = primaryKeyColumns;
-    }
-    
-    public String NewExercise.getNormalForm1Text() {
-        return this.normalForm1Text;
-    }
-    
-    public void NewExercise.setNormalForm1Text(String normalForm1Text) {
-        this.normalForm1Text = normalForm1Text;
-    }
-    
-    public Task NewExercise.getNormalForm1() {
-        return this.normalForm1;
-    }
-    
-    public void NewExercise.setNormalForm1(Task normalForm1) {
-        this.normalForm1 = normalForm1;
-    }
-    
-    public AnswerColumns NewExercise.getNormalForm1Columns() {
-        return this.normalForm1Columns;
-    }
-    
-    public void NewExercise.setNormalForm1Columns(AnswerColumns normalForm1Columns) {
-        this.normalForm1Columns = normalForm1Columns;
-    }
-    
-    public String NewExercise.getNormalForm2Text() {
-        return this.normalForm2Text;
-    }
-    
-    public void NewExercise.setNormalForm2Text(String normalForm2Text) {
-        this.normalForm2Text = normalForm2Text;
-    }
-    
-    public Task NewExercise.getNormalForm2() {
-        return this.normalForm2;
-    }
-    
-    public void NewExercise.setNormalForm2(Task normalForm2) {
-        this.normalForm2 = normalForm2;
-    }
-    
-    public AnswerTables NewExercise.getNormalForm2Tables() {
-        return this.normalForm2Tables;
-    }
-    
-    public void NewExercise.setNormalForm2Tables(AnswerTables normalForm2Tables) {
-        this.normalForm2Tables = normalForm2Tables;
-    }
-    
-    public String NewExercise.getNormalForm3Text() {
-        return this.normalForm3Text;
-    }
-    
-    public void NewExercise.setNormalForm3Text(String normalForm3Text) {
-        this.normalForm3Text = normalForm3Text;
-    }
-    
-    public Task NewExercise.getNormalForm3() {
-        return this.normalForm3;
-    }
-    
-    public void NewExercise.setNormalForm3(Task normalForm3) {
-        this.normalForm3 = normalForm3;
-    }
-    
-    public AnswerTables NewExercise.getNormalForm3Tables() {
-        return this.normalForm3Tables;
-    }
-    
-    public void NewExercise.setNormalForm3Tables(AnswerTables normalForm3Tables) {
-        this.normalForm3Tables = normalForm3Tables;
-    }
-    
-    public String NewExercise.getSolvedText() {
-        return this.solvedText;
-    }
-    
-    public void NewExercise.setSolvedText(String solvedText) {
-        this.solvedText = solvedText;
-    }
-    
-    public Task NewExercise.getSolved() {
-        return this.solved;
-    }
-    
-    public void NewExercise.setSolved(Task solved) {
-        this.solved = solved;
-    }
-    
-    public AnswerTables NewExercise.getSolvedTables() {
-        return this.solvedTables;
-    }
-    
-    public void NewExercise.setSolvedTables(AnswerTables solvedTables) {
-        this.solvedTables = solvedTables;
+    public void NewExercise.setTableModel(AnswerTables tableModel) {
+        this.tableModel = tableModel;
     }
     
 }

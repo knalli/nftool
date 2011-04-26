@@ -24,5 +24,8 @@
   <script src="${spring_url}" type="text/javascript"><!-- /required for FF3 and Opera --></script>
   <script src="${spring_dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
-
+  
+  <spring:theme code="jsJQuery" var="jquery"/>
+  <spring:url value="/${jquery}" var="jquery_url"/>
+  <script type="text/javascript" src="${jquery_url}"><!-- //required for FF3 and Opera --></script>
 </jsp:root>
