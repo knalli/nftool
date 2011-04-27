@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,15 @@ import fhkoeln.edb.nftool.service.InternationalizationService;
 @Controller
 public class ExerciseController {
 
-	InternationalizationService i18nService = new InternationalizationService();
+	@Autowired
+	InternationalizationService i18nService;
+	
+	@RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
+    public String updateForm(@PathVariable("id") Long id, Model uiModel, Locale locale) {
+		Exercise exercise = localizeExercise(Exercise.findExercise(id), locale);
+        uiModel.addAttribute("exercise", exercise);
+        return "exercises/update";
+    }
 
 	@RequestMapping(method = RequestMethod.PUT)
 	public String update(@Valid Exercise exercise, BindingResult bindingResult, Model uiModel,
@@ -31,10 +40,11 @@ public class ExerciseController {
 			uiModel.addAttribute("exercise", exercise);
 			return "exercises/update";
 		}
-		i18nService.updateText(exercise, "title", exercise.getTitle(), locale);
-		i18nService.updateText(exercise, "description", exercise.getDescription(), locale);
 		uiModel.asMap().clear();
 		exercise.merge();
+		i18nService.initialize();
+		i18nService.updateText(exercise, "title", exercise.getTitle(), locale);
+		i18nService.updateText(exercise, "description", exercise.getDescription(), locale);
 		return "redirect:/exercises/" + exercise.getId();
 	}
 
@@ -45,10 +55,10 @@ public class ExerciseController {
 			uiModel.addAttribute("exercise", exercise);
 			return "exercises/create";
 		}
-		i18nService.setText(exercise, "title", exercise.getTitle(), locale);
-		i18nService.setText(exercise, "description", exercise.getDescription(), locale);
 		uiModel.asMap().clear();
 		exercise.persist();
+		i18nService.setText(exercise, "title", exercise.getTitle(), locale);
+		i18nService.setText(exercise, "description", exercise.getDescription(), locale);
 		return "redirect:/exercises/" + exercise.getId();
 	}
 
@@ -78,10 +88,15 @@ public class ExerciseController {
 
 	private List<Exercise> localizeExercises(List<Exercise> exercises, Locale locale) {
 		for (Exercise exercise : exercises) {
-			exercise.setTitle(i18nService.getText(exercise, "title", locale));
-			exercise.setDescription(i18nService.getText(exercise, "description", locale));
+			localizeExercise(exercise, locale);
 		}
 		return exercises;
+	}
+	
+	private Exercise localizeExercise(Exercise exercise, Locale locale) {
+		exercise.setTitle(i18nService.getText(exercise, "title", locale));
+		exercise.setDescription(i18nService.getText(exercise, "description", locale));
+		return exercise;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

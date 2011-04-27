@@ -6,10 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
@@ -48,16 +46,18 @@ public class InternationalizationService implements Serializable {
 			List<LocalizedLabel> labelsList = LocalizedLabel.findAllLocalizedLabels();
 			labels = new HashMap<String, List<LocalizedLabel>>(labelsList.size() / 2);
 
-			List<LocalizedLabel> entityLabels;
+//			List<LocalizedLabel> entityLabels;
 			for (LocalizedLabel label : labelsList) {
-				String uri = label.getEntityUri();
+				
+				addLabelToList(label);
+				/*String uri = label.getEntityUri();
 				if (labels.containsKey(uri)) {
 					entityLabels = labels.get(uri);
 				} else {
 					entityLabels = new ArrayList<LocalizedLabel>();
 					labels.put(uri, entityLabels);
 				}
-				entityLabels.add(label);
+				entityLabels.add(label);*/
 				if (logger.isTraceEnabled()) {
 					logger.trace("Added label " + label);
 				}
@@ -257,17 +257,45 @@ public class InternationalizationService implements Serializable {
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void setText(ExerciseEntity entity, String attributeName, String text, Locale locale) {
-		LocalizedLabel label = new LocalizedLabel(text, locale);
+		Locale lang = new Locale(locale.getLanguage());
+		LocalizedLabel label = new LocalizedLabel(text, lang);
 		label.setEntityUri(createUri(entity));
+		label.setAttributeName(attributeName);
+		
+		addLabelToList(label);
+			
 		label.persist();
+	}
+
+	private void addLabelToList(LocalizedLabel label) {
+		List<LocalizedLabel> list;
+		String uri = label.getEntityUri();
+		if (!labels.containsKey(uri)) {
+			list = new ArrayList<LocalizedLabel>(1);
+			labels.put(uri, list);
+		} else {
+			list = labels.get(label.getEntityUri());
+		}
+		list.add(label);
+	}
+	
+	private void removeLabelFromList(LocalizedLabel label) {
+		if (labels.containsKey(label.getEntityUri())) {
+			List<LocalizedLabel> list = labels.get(label.getEntityUri());
+			list.remove(label);
+		}
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void updateText(ExerciseEntity entity, String attributeName, String text, Locale locale) {
+		Locale lang = new Locale(locale.getLanguage());
 		LocalizedLabel label = LocalizedLabel
 				.findLocalizedLabelsByEntityUriAndAttributeNameAndLocale(createUri(entity),
-						attributeName, locale).getSingleResult();
+						attributeName, lang).getSingleResult();
+		label.setContent(text);
 		label.merge();
+		removeLabelFromList(label);
+		addLabelToList(label);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
@@ -276,6 +304,7 @@ public class InternationalizationService implements Serializable {
 				.findLocalizedLabelsByEntityUriAndAttributeNameAndLocale(createUri(entity),
 						attributeName, locale).getSingleResult();
 		label.remove();
+		removeLabelFromList(label);
 	}
 
 }

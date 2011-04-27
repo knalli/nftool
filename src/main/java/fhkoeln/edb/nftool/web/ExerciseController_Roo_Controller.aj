@@ -28,12 +28,6 @@ privileged aspect ExerciseController_Roo_Controller {
         return "exercises/create";
     }
     
-    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String ExerciseController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("exercise", Exercise.findExercise(id));
-        return "exercises/update";
-    }
-    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String ExerciseController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Exercise.findExercise(id).remove();
