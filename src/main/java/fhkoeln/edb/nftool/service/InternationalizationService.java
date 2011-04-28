@@ -13,7 +13,6 @@ import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -46,18 +45,15 @@ public class InternationalizationService implements Serializable {
 			List<LocalizedLabel> labelsList = LocalizedLabel.findAllLocalizedLabels();
 			labels = new HashMap<String, List<LocalizedLabel>>(labelsList.size() / 2);
 
-//			List<LocalizedLabel> entityLabels;
+			// List<LocalizedLabel> entityLabels;
 			for (LocalizedLabel label : labelsList) {
-				
+
 				addLabelToList(label);
-				/*String uri = label.getEntityUri();
-				if (labels.containsKey(uri)) {
-					entityLabels = labels.get(uri);
-				} else {
-					entityLabels = new ArrayList<LocalizedLabel>();
-					labels.put(uri, entityLabels);
-				}
-				entityLabels.add(label);*/
+				/*
+				 * String uri = label.getEntityUri(); if (labels.containsKey(uri)) { entityLabels =
+				 * labels.get(uri); } else { entityLabels = new ArrayList<LocalizedLabel>();
+				 * labels.put(uri, entityLabels); } entityLabels.add(label);
+				 */
 				if (logger.isTraceEnabled()) {
 					logger.trace("Added label " + label);
 				}
@@ -86,7 +82,7 @@ public class InternationalizationService implements Serializable {
 	 * @param localeObj
 	 * @return
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	@Transactional(readOnly = true)
 	public String getText(Object entityObj, Object attributeNameObj, Object localeObj) {
 
 		Assert.isInstanceOf(String.class, attributeNameObj,
@@ -131,12 +127,15 @@ public class InternationalizationService implements Serializable {
 	/**
 	 * Based on a Table with unique key of "entityName" and "id"
 	 * 
-	 * @param entityUri Name of the Entity to look translation for, e.g. "Exercise"
-	 * @param attributeName The Field-ID, unique for this entity.
-	 * @param String An locale string like 'en'
+	 * @param entityUri
+	 *            Name of the Entity to look translation for, e.g. "Exercise"
+	 * @param attributeName
+	 *            The Field-ID, unique for this entity.
+	 * @param String
+	 *            An locale string like 'en'
 	 * @return The translation or it's fallback.
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	@Transactional(readOnly = true)
 	public String getText(String entityUri, String attributeName, String locale) {
 		if (entityUri == null) {
 			logger.warn("You queried for Translation with no Entity Identifier");
@@ -187,54 +186,6 @@ public class InternationalizationService implements Serializable {
 	}
 
 	/**
-	 * Helper for SpeEL-Expressions, which give us an Object instead of a Locale.
-	 * Throws IllegalArgumentException if localeObj was not a Locale.
-	 * 
-	 * @see getAllTexts()
-	 * @param entityName Name of the Entity, e.g.
-	 * @param localeObj Locale Object
-	 */
-	// public Map<String, String> getAllTexts(String entityName, Object localeObj) {
-	// return getAllTexts(entityName, StaticHelpers.getLocaleObject(localeObj));
-	// }
-
-	/**
-	 * Special here: Check Language instead of Locale equality.
-	 * 
-	 * @param entityName
-	 * @param locale
-	 * @return All translations for this Entity and the specified locale as Map<Attribute Name,
-	 *         Content>.
-	 */
-	// @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	// public Map<String, String> getAllTexts(String entityName, Locale locale) {
-	// Map<String, String> result = new HashMap<String, String>();
-	// Assert.notNull(locale, "No locale defined!");
-	// for (LocalizedLabel label : labels.get(entityName)) {
-	// if (locale.getLanguage().equals(label.getLocale().getLanguage())) {
-	// result.put(label.getAttributeName(), label.getContent());
-	// }
-	// }
-	// return result;
-	// }
-
-	/**
-	 * 
-	 * @param entityObj Used with createUri.
-	 * @param attributeName
-	 * @param localeObj
-	 * @return Single string of translation.
-	 */
-	// @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	// public String getText(Object entityObj, String attributeNameObj, Object localeObj) {
-	// Assert.isInstanceOf(ExerciseEntity.class, entityObj,
-	// "You did not gave me an ExerciseEntity to resolve!");
-	// Assert.isInstanceOf(String.class, attributeNameObj,
-	// "The attribute name has to be a string!");
-	// return getText(createUri((ExerciseEntity) entityObj), attributeNameObj, localeObj);
-	// }
-
-	/**
 	 * Creates an URI of an entity of this project. Example: Task:1 = Exercise:1/Task:1
 	 * 
 	 * @param entities
@@ -255,15 +206,15 @@ public class InternationalizationService implements Serializable {
 		return sb.toString();
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	@Transactional
 	public void setText(ExerciseEntity entity, String attributeName, String text, Locale locale) {
 		Locale lang = new Locale(locale.getLanguage());
 		LocalizedLabel label = new LocalizedLabel(text, lang);
 		label.setEntityUri(createUri(entity));
 		label.setAttributeName(attributeName);
-		
+
 		addLabelToList(label);
-			
+
 		label.persist();
 	}
 
@@ -278,7 +229,7 @@ public class InternationalizationService implements Serializable {
 		}
 		list.add(label);
 	}
-	
+
 	private void removeLabelFromList(LocalizedLabel label) {
 		if (labels.containsKey(label.getEntityUri())) {
 			List<LocalizedLabel> list = labels.get(label.getEntityUri());
@@ -286,7 +237,14 @@ public class InternationalizationService implements Serializable {
 		}
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	/**
+	 * 
+	 * @param entity
+	 * @param attributeName
+	 * @param text
+	 * @param locale
+	 */
+	@Transactional
 	public void updateText(ExerciseEntity entity, String attributeName, String text, Locale locale) {
 		Locale lang = new Locale(locale.getLanguage());
 		LocalizedLabel label = LocalizedLabel
@@ -298,7 +256,7 @@ public class InternationalizationService implements Serializable {
 		addLabelToList(label);
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	@Transactional
 	public void deleteText(ExerciseEntity entity, String attributeName, String text, Locale locale) {
 		LocalizedLabel label = LocalizedLabel
 				.findLocalizedLabelsByEntityUriAndAttributeNameAndLocale(createUri(entity),

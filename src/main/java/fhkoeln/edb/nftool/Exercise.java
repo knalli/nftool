@@ -13,21 +13,27 @@ import javax.persistence.Transient;
 import org.apache.log4j.Logger;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.transaction.annotation.Transactional;
+
+import fhkoeln.edb.nftool.i18n.I18nString;
 
 @SuppressWarnings("serial")
 @RooJavaBean
 // @RooToString
 @RooEntity(table = "EXERCISES")
 @RooSerializable
+@RooJson
 public class Exercise implements Serializable, ExerciseEntity {
 	private transient static final Logger logger = Logger.getLogger(Exercise.class);
 
 	@Transient
+	@I18nString
 	private String title;
 
 	@Transient
+	@I18nString
 	private String description;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "exercise")

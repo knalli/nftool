@@ -16,17 +16,22 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import fhkoeln.edb.nftool.i18n.I18nString;
+
 @RooJavaBean
 @RooToString
+@RooJson
 @RooSerializable
 @SuppressWarnings("serial")
 @RooEntity(table = "TASKS", finders = { "findTasksByState", "findTasksByExerciseAndState" })
 public class Task implements Serializable, ExerciseEntity {
 
 	@Transient
+	@I18nString
 	private String description;
 
 	@NotNull

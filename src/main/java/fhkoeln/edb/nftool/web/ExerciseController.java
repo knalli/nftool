@@ -25,13 +25,13 @@ public class ExerciseController {
 
 	@Autowired
 	InternationalizationService i18nService;
-	
+
 	@RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String updateForm(@PathVariable("id") Long id, Model uiModel, Locale locale) {
+	public String updateForm(@PathVariable("id") Long id, Model uiModel, Locale locale) {
 		Exercise exercise = localizeExercise(Exercise.findExercise(id), locale);
-        uiModel.addAttribute("exercise", exercise);
-        return "exercises/update";
-    }
+		uiModel.addAttribute("exercise", exercise);
+		return "exercises/update";
+	}
 
 	@RequestMapping(method = RequestMethod.PUT)
 	public String update(@Valid Exercise exercise, BindingResult bindingResult, Model uiModel,
@@ -42,7 +42,6 @@ public class ExerciseController {
 		}
 		uiModel.asMap().clear();
 		exercise.merge();
-		i18nService.initialize();
 		i18nService.updateText(exercise, "title", exercise.getTitle(), locale);
 		i18nService.updateText(exercise, "description", exercise.getDescription(), locale);
 		return "redirect:/exercises/" + exercise.getId();
@@ -92,7 +91,7 @@ public class ExerciseController {
 		}
 		return exercises;
 	}
-	
+
 	private Exercise localizeExercise(Exercise exercise, Locale locale) {
 		exercise.setTitle(i18nService.getText(exercise, "title", locale));
 		exercise.setDescription(i18nService.getText(exercise, "description", locale));

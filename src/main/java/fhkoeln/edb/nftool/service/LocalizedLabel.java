@@ -37,6 +37,45 @@ public class LocalizedLabel implements Serializable {
 		this.locale = locale;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((attributeName == null) ? 0 : attributeName.hashCode());
+		result = prime * result
+				+ ((entityUri == null) ? 0 : entityUri.hashCode());
+		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LocalizedLabel other = (LocalizedLabel) obj;
+		if (attributeName == null) {
+			if (other.attributeName != null)
+				return false;
+		} else if (!attributeName.equals(other.attributeName))
+			return false;
+		if (entityUri == null) {
+			if (other.entityUri != null)
+				return false;
+		} else if (!entityUri.equals(other.entityUri))
+			return false;
+		if (locale == null) {
+			if (other.locale != null)
+				return false;
+		} else if (!locale.equals(other.locale))
+			return false;
+		return true;
+	}
+
 	public LocalizedLabel() {
 	}
 

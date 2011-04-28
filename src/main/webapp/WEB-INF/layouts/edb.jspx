@@ -49,7 +49,7 @@
    	<body>		
    		<div id="wrapper">
 		    <tiles:insertAttribute name="menu" ignore="true" />   
-	    	<div id="main" style="">
+	    	<div id="main" style="" class="nftool">
 	    		<tiles:insertAttribute name="body" />
 	    		<div id="footer">				
 				  	<spring:url var="home" value="/" />

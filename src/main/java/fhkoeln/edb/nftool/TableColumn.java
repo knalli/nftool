@@ -14,11 +14,15 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.serializable.RooSerializable;
 import org.springframework.roo.addon.tostring.RooToString;
 
+import fhkoeln.edb.nftool.i18n.I18nString;
+
 @RooJavaBean
 @RooToString
+@RooJson
 @RooSerializable
 @SuppressWarnings("serial")
 @RooEntity(table = "TABLE_COLUMNS")
@@ -26,6 +30,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 // "findTableColumnsByKeyColumn" })
 public class TableColumn implements Serializable, ExerciseEntity {
 
+	@I18nString
 	@Transient
 	private String name;
 

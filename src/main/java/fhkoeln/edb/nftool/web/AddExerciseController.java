@@ -10,14 +10,8 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.EvaluationContext;
-import org.springframework.expression.Expression;
-import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -38,7 +32,6 @@ import fhkoeln.edb.nftool.TableColumn;
 import fhkoeln.edb.nftool.TableRow;
 import fhkoeln.edb.nftool.Task;
 import fhkoeln.edb.nftool.TaskTable;
-import fhkoeln.edb.nftool.TaskTableDataOnDemand;
 import fhkoeln.edb.nftool.service.InternationalizationService;
 import fhkoeln.edb.nftool.service.LocalizedLabel;
 

@@ -8,12 +8,14 @@
         
         
         
-    <field:simple field="taskTables" id="c_fhkoeln_edb_nftool_Task_taskTables" messageCode="entity_reference_not_managed" messageCodeAttribute="Task Table" z="+hiMQWpG3ejHMZKDhHdCOMMmVPo="/>
+    
     <field:checkbox field="solved" id="c_fhkoeln_edb_nftool_Task_solved" z="zrlSulsLMI4SqmdT4C63/cylpYo="/>
     <field:select field="state" id="c_fhkoeln_edb_nftool_Task_state" items="${exercisestates}" path="exercisestates" z="a196lskMMwofQU5uWIx4VZnV0o4="/>
     <field:select field="exercise" id="c_fhkoeln_edb_nftool_Task_exercise" itemValue="id" items="${exercises}" path="/exercises" z="MOzCOjYatGF1MjEQzcOsz81zbqY="/>
     <field:input field="description" id="c_fhkoeln_edb_nftool_Task_description" z="sZwKjMGY5tZfperiBrmyIYkPkvk="/>
+    
     <field:input field="points" id="c_fhkoeln_edb_nftool_Task_points" z="Do6cVHjkpdSKpynTrjGPYda6sI8="/>
+        <field:simple field="taskTables" id="c_fhkoeln_edb_nftool_Task_taskTables" messageCode="entity_reference_not_managed" messageCodeAttribute="Task Table" z="+hiMQWpG3ejHMZKDhHdCOMMmVPo="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_fhkoeln_edb_nftool_Task" render="${not empty dependencies}" z="OXE0lHgv472G/QtPNtUH+GwesHo="/>
 </div>

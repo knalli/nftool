@@ -2,6 +2,7 @@ package fhkoeln.edb.nftool.web;
 
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
@@ -18,6 +19,9 @@ import fhkoeln.edb.nftool.service.InternationalizationService;
 @RooConversionService
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
+	@Autowired
+	InternationalizationService i18nService;
+
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {
 		// registry.addConverter(LocalizedLabel.getLocalizedLabelConverter());
@@ -33,7 +37,8 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 		return new org.springframework.core.convert.converter.Converter<TaskTable, String>() {
 			@Override
 			public String convert(TaskTable taskTable) {
-				return new StringBuilder().append("taskTablefromConverter").toString();
+				return new StringBuilder().append(
+						i18nService.getText(taskTable, "description", new Locale("de"))).toString();
 			}
 		};
 	}
@@ -43,9 +48,8 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 			@Override
 			public String convert(Exercise exercise) {
 				InternationalizationService i18nService = new InternationalizationService();
-				return new StringBuilder().append("Aufgabe ")
-						.append(i18nService.getText(exercise, "title", new Locale("de")))
-						.toString();
+				return new StringBuilder().append(
+						i18nService.getText(exercise, "title", new Locale("de"))).toString();
 			}
 
 		};

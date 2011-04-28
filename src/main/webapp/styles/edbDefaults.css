@@ -76,7 +76,7 @@ img {
 	border-bottom: 1px dotted #B1B1B1;
 }
 
-div#main {
+div#main.nftool {
 	width: 989px;
 	margin: 0 auto;
 }

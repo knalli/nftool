@@ -15,6 +15,7 @@
             
         <table:column id="c_fhkoeln_edb_nftool_Task_exercise" property="exercise" z="tMWdUxs3cnK2A9iDpHaVOw3fhxg="/>
         <table:column id="c_fhkoeln_edb_nftool_Task_description" property="description" z="ghkwLLYlBE8PbcDbXTXALQNdeJc="/>
+        
         <table:column id="c_fhkoeln_edb_nftool_Task_points" property="points" z="jHbk2NP8YhReTQZYIxSXfu8usjY="/>
         </table:table>
     </page:list>

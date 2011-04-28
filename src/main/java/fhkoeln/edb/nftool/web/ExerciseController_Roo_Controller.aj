@@ -8,15 +8,20 @@ import fhkoeln.edb.nftool.Task;
 import java.io.UnsupportedEncodingException;
 import java.lang.Integer;
 import java.lang.Long;
+import java.lang.Object;
 import java.lang.String;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
@@ -45,6 +50,64 @@ privileged aspect ExerciseController_Roo_Controller {
     @ModelAttribute("tasks")
     public java.util.Collection<Task> ExerciseController.populateTasks() {
         return Task.findAllTasks();
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    @ResponseBody
+    public Object ExerciseController.showJson(@PathVariable("id") Long id) {
+        Exercise exercise = Exercise.findExercise(id);
+        if (exercise == null) {
+            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+        }
+        return exercise.toJson();
+    }
+    
+    @RequestMapping(headers = "Accept=application/json")
+    @ResponseBody
+    public String ExerciseController.listJson() {
+        return Exercise.toJsonArray(Exercise.findAllExercises());
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
+    public org.springframework.http.ResponseEntity<String> ExerciseController.createFromJson(@RequestBody String json) {
+        Exercise.fromJsonToExercise(json).persist();
+        return new ResponseEntity<String>(HttpStatus.CREATED);
+    }
+    
+    @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
+    public org.springframework.http.ResponseEntity<String> ExerciseController.createFromJsonArray(@RequestBody String json) {
+        for (Exercise exercise: Exercise.fromJsonArrayToExercises(json)) {
+            exercise.persist();
+        }
+        return new ResponseEntity<String>(HttpStatus.CREATED);
+    }
+    
+    @RequestMapping(method = RequestMethod.PUT, headers = "Accept=application/json")
+    public org.springframework.http.ResponseEntity<String> ExerciseController.updateFromJson(@RequestBody String json) {
+        if (Exercise.fromJsonToExercise(json).merge() == null) {
+            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/jsonArray", method = RequestMethod.PUT, headers = "Accept=application/json")
+    public org.springframework.http.ResponseEntity<String> ExerciseController.updateFromJsonArray(@RequestBody String json) {
+        for (Exercise exercise: Exercise.fromJsonArrayToExercises(json)) {
+            if (exercise.merge() == null) {
+                return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+            }
+        }
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+    public org.springframework.http.ResponseEntity<String> ExerciseController.deleteFromJson(@PathVariable("id") Long id) {
+        Exercise exercise = Exercise.findExercise(id);
+        if (exercise == null) {
+            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+        }
+        exercise.remove();
+        return new ResponseEntity<String>(HttpStatus.OK);
     }
     
     String ExerciseController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

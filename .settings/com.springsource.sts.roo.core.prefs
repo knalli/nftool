@@ -1,4 +1,4 @@
-#Mon Feb 28 10:56:16 CET 2011
-com.springsource.sts.roo.core.com.springsource.sts.roo.core.install.name=roo 1.1.2
-com.springsource.sts.roo.core.use.default.install=true
+#Tue Apr 26 17:33:25 CEST 2011
+com.springsource.sts.roo.core.com.springsource.sts.roo.core.install.name=Roo 1.1.2
+com.springsource.sts.roo.core.use.default.install=false
 eclipse.preferences.version=1

@@ -2,9 +2,11 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_fhkoeln_edb_nftool_TableColumn" modelAttribute="tableColumn" path="/tablecolumns" versionField="Version" z="Fr4RofNGhWbXZdvdByRZayt+Dds=">
-        <field:input field="ordering" id="c_fhkoeln_edb_nftool_TableColumn_ordering" z="LM4YlyJN0ydabHubgV4oCosRrMA="/>
+        
         <field:checkbox field="keyColumn" id="c_fhkoeln_edb_nftool_TableColumn_keyColumn" z="VLEUpyK+PaIGxx8oLT4XRH60Atk="/>
-        <field:simple field="tableRows" id="c_fhkoeln_edb_nftool_TableColumn_tableRows" messageCode="entity_reference_not_managed" messageCodeAttribute="Table Row" z="Mv84ozId6wpEntL3+dCoY5BoTpM="/>
+        
     <field:input field="name" id="c_fhkoeln_edb_nftool_TableColumn_name" z="yQHBd+YeVebL9ir07NCM7UQV67g="/>
+    <field:input field="ordering" id="c_fhkoeln_edb_nftool_TableColumn_ordering" z="LM4YlyJN0ydabHubgV4oCosRrMA="/>
+        <field:simple field="tableRows" id="c_fhkoeln_edb_nftool_TableColumn_tableRows" messageCode="entity_reference_not_managed" messageCodeAttribute="Table Row" z="Mv84ozId6wpEntL3+dCoY5BoTpM="/>
     </form:update>
 </div>
