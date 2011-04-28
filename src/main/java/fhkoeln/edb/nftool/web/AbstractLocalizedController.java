@@ -64,7 +64,6 @@ public abstract class AbstractLocalizedController<T extends ExerciseEntity> {
 				if (f.getAnnotation(i18nClass) != null) {
 					String txt = (String) f.get(entity);
 					i18nService.updateText(entity, f.getName(), txt, locale);
-					// f.set(entity, i18nService.getText(entity, f.getName(), locale));
 					if (logger.isDebugEnabled()) {
 						logger.debug("Updated " + f.getName() + " of Entity "
 								+ entity.getClass().getSimpleName() + " to value " + f.get(entity));

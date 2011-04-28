@@ -47,43 +47,6 @@ privileged aspect TaskTableController_Roo_Controller {
         return "tasktables/create";
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String TaskTableController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("tasktable", TaskTable.findTaskTable(id));
-        uiModel.addAttribute("itemId", id);
-        return "tasktables/show";
-    }
-    
-    @RequestMapping(method = RequestMethod.GET)
-    public String TaskTableController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("tasktables", TaskTable.findTaskTableEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) TaskTable.countTaskTables() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("tasktables", TaskTable.findAllTaskTables());
-        }
-        return "tasktables/list";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT)
-    public String TaskTableController.update(@Valid TaskTable taskTable, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("taskTable", taskTable);
-            return "tasktables/update";
-        }
-        uiModel.asMap().clear();
-        taskTable.merge();
-        return "redirect:/tasktables/" + encodeUrlPathSegment(taskTable.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String TaskTableController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("taskTable", TaskTable.findTaskTable(id));
-        return "tasktables/update";
-    }
-    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String TaskTableController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         TaskTable.findTaskTable(id).remove();

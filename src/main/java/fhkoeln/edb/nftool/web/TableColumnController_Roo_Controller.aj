@@ -46,43 +46,6 @@ privileged aspect TableColumnController_Roo_Controller {
         return "tablecolumns/create";
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String TableColumnController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("tablecolumn", TableColumn.findTableColumn(id));
-        uiModel.addAttribute("itemId", id);
-        return "tablecolumns/show";
-    }
-    
-    @RequestMapping(method = RequestMethod.GET)
-    public String TableColumnController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("tablecolumns", TableColumn.findTableColumnEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) TableColumn.countTableColumns() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("tablecolumns", TableColumn.findAllTableColumns());
-        }
-        return "tablecolumns/list";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT)
-    public String TableColumnController.update(@Valid TableColumn tableColumn, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("tableColumn", tableColumn);
-            return "tablecolumns/update";
-        }
-        uiModel.asMap().clear();
-        tableColumn.merge();
-        return "redirect:/tablecolumns/" + encodeUrlPathSegment(tableColumn.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String TableColumnController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("tableColumn", TableColumn.findTableColumn(id));
-        return "tablecolumns/update";
-    }
-    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String TableColumnController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         TableColumn.findTableColumn(id).remove();

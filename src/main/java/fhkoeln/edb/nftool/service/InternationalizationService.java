@@ -45,18 +45,8 @@ public class InternationalizationService implements Serializable {
 			List<LocalizedLabel> labelsList = LocalizedLabel.findAllLocalizedLabels();
 			labels = new HashMap<String, List<LocalizedLabel>>(labelsList.size() / 2);
 
-			// List<LocalizedLabel> entityLabels;
 			for (LocalizedLabel label : labelsList) {
-
 				addLabelToList(label);
-				/*
-				 * String uri = label.getEntityUri(); if (labels.containsKey(uri)) { entityLabels =
-				 * labels.get(uri); } else { entityLabels = new ArrayList<LocalizedLabel>();
-				 * labels.put(uri, entityLabels); } entityLabels.add(label);
-				 */
-				if (logger.isTraceEnabled()) {
-					logger.trace("Added label " + label);
-				}
 			}
 		}
 		if (logger.isDebugEnabled()) {

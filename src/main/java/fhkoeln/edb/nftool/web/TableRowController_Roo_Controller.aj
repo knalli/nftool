@@ -45,43 +45,6 @@ privileged aspect TableRowController_Roo_Controller {
         return "tablerows/create";
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String TableRowController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("tablerow", TableRow.findTableRow(id));
-        uiModel.addAttribute("itemId", id);
-        return "tablerows/show";
-    }
-    
-    @RequestMapping(method = RequestMethod.GET)
-    public String TableRowController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            uiModel.addAttribute("tablerows", TableRow.findTableRowEntries(page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo));
-            float nrOfPages = (float) TableRow.countTableRows() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("tablerows", TableRow.findAllTableRows());
-        }
-        return "tablerows/list";
-    }
-    
-    @RequestMapping(method = RequestMethod.PUT)
-    public String TableRowController.update(@Valid TableRow tableRow, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("tableRow", tableRow);
-            return "tablerows/update";
-        }
-        uiModel.asMap().clear();
-        tableRow.merge();
-        return "redirect:/tablerows/" + encodeUrlPathSegment(tableRow.getId().toString(), httpServletRequest);
-    }
-    
-    @RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
-    public String TableRowController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("tableRow", TableRow.findTableRow(id));
-        return "tablerows/update";
-    }
-    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String TableRowController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         TableRow.findTableRow(id).remove();
