@@ -1,6 +1,7 @@
 package fhkoeln.edb.nftool.web;
 
 import java.util.Locale;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
@@ -9,6 +10,7 @@ import org.springframework.format.support.FormattingConversionServiceFactoryBean
 import org.springframework.roo.addon.web.mvc.controller.RooConversionService;
 
 import fhkoeln.edb.nftool.Exercise;
+import fhkoeln.edb.nftool.TableRow;
 import fhkoeln.edb.nftool.Task;
 import fhkoeln.edb.nftool.TaskTable;
 import fhkoeln.edb.nftool.service.InternationalizationService;
@@ -28,6 +30,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 		registry.addConverter(getTaskTableConverter());
 		registry.addConverter(getExerciseConverter());
 		registry.addConverter(getTaskConverter());
+		registry.addConverter(getSetTableRowConverter());
 		super.installFormatters(registry);
 		// Register application converters and formatters
 
@@ -61,6 +64,18 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 			public String convert(Task task) {
 				// InternationalizationService i18nService = new InternationalizationService();
 				return new StringBuilder().append(task.getState().name()).toString();
+			}
+
+		};
+	}
+
+	Converter<Set<TableRow>, String> getSetTableRowConverter() {
+		return new org.springframework.core.convert.converter.Converter<Set<TableRow>, String>() {
+			@Override
+			public String convert(Set<TableRow> tableRows) {
+
+				return new StringBuilder().append(tableRows.size()).append(" Table Rows")
+						.toString();
 			}
 
 		};

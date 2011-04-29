@@ -1,6 +1,7 @@
 package fhkoeln.edb.nftool.web;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.log4j.Logger;
@@ -40,6 +41,13 @@ public abstract class AbstractLocalizedController<T extends ExerciseEntity> {
 			logger.error("Error Accessing Field via Annotation.", ex);
 		}
 		return entity;
+	}
+
+	protected List<T> localizeEntities(List<T> entities, Locale locale) {
+		for (T entity : entities) {
+			localizeEntity(entity, locale);
+		}
+		return entities;
 	}
 
 	protected T persistEntityLocalizations(T entity, Locale locale) {

@@ -1,6 +1,5 @@
 package fhkoeln.edb.nftool.web;
 
-import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
@@ -55,22 +54,18 @@ public class TaskTableController extends AbstractLocalizedController<TaskTable> 
 			Locale locale) {
 		if (page != null || size != null) {
 			int sizeNo = size == null ? 10 : size.intValue();
-			List<TaskTable> taskTables = TaskTable.findTaskTableEntries(
-					page == null ? 0 : (page.intValue() - 1) * sizeNo, sizeNo);
-			for (TaskTable taskTable : taskTables) {
-				localizeEntity(taskTable, locale);
-			}
-			uiModel.addAttribute("tasktables", taskTables);
+			uiModel.addAttribute(
+					"tasktables",
+					localizeEntities(
+							TaskTable.findTaskTableEntries(page == null ? 0 : (page.intValue() - 1)
+									* sizeNo, sizeNo), locale));
 			float nrOfPages = (float) TaskTable.countTaskTables() / sizeNo;
 			uiModel.addAttribute("maxPages",
 					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
 							: nrOfPages));
 		} else {
-			List<TaskTable> taskTables = TaskTable.findAllTaskTables();
-			for (TaskTable taskTable : taskTables) {
-				localizeEntity(taskTable, locale);
-			}
-			uiModel.addAttribute("tasktables", taskTables);
+			uiModel.addAttribute("tasktables",
+					localizeEntities(TaskTable.findAllTaskTables(), locale));
 		}
 		return "tasktables/list";
 	}

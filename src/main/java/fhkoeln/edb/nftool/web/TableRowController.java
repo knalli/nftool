@@ -1,6 +1,5 @@
 package fhkoeln.edb.nftool.web;
 
-import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
@@ -20,6 +19,19 @@ import fhkoeln.edb.nftool.TableRow;
 @RequestMapping("/tablerows")
 @Controller
 public class TableRowController extends AbstractLocalizedController<TableRow> {
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(@Valid TableRow tableRow, BindingResult bindingResult, Model uiModel,
+			Locale locale) {
+		if (bindingResult.hasErrors()) {
+			uiModel.addAttribute("tableRow", tableRow);
+			return "tablerows/create";
+		}
+		uiModel.asMap().clear();
+		tableRow.persist();
+		persistEntityLocalizations(tableRow, locale);
+		return "redirect:/tablerows/" + tableRow.getId().toString();
+	}
 
 	/**
 	 * Update a TableRow and theri corresponing LocalizedLabels.
@@ -87,25 +99,19 @@ public class TableRowController extends AbstractLocalizedController<TableRow> {
 	public String list(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size, Model uiModel,
 			Locale locale) {
-		List<TableRow> tableRows;
 		if (page != null || size != null) {
 			int sizeNo = size == null ? 10 : size.intValue();
-			tableRows = TableRow.findTableRowEntries(page == null ? 0 : (page.intValue() - 1)
-					* sizeNo, sizeNo);
-			for (TableRow tableRow : tableRows) {
-				localizeEntity(tableRow, locale);
-			}
-			uiModel.addAttribute("tablerows", tableRows);
+			uiModel.addAttribute(
+					"tablerows",
+					localizeEntities(
+							TableRow.findTableRowEntries(page == null ? 0 : (page.intValue() - 1)
+									* sizeNo, sizeNo), locale));
 			float nrOfPages = (float) TableRow.countTableRows() / sizeNo;
 			uiModel.addAttribute("maxPages",
 					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
 							: nrOfPages));
 		} else {
-			tableRows = TableRow.findAllTableRows();
-			for (TableRow tableRow : tableRows) {
-				localizeEntity(tableRow, locale);
-			}
-			uiModel.addAttribute("tablerows", tableRows);
+			uiModel.addAttribute("tablerows", localizeEntities(TableRow.findAllTableRows(), locale));
 		}
 		return "tablerows/list";
 	}
