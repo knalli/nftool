@@ -27,8 +27,8 @@ public class TaskController extends AbstractLocalizedController<Task> {
 			return "tasks/create";
 		}
 		uiModel.asMap().clear();
-		task.persist();
 		persistEntityLocalizations(task, locale);
+		task.persist();
 		return "redirect:/tasks/" + task.getId().toString();
 	}
 

@@ -26,6 +26,7 @@ public abstract class AbstractLocalizedController<T extends ExerciseEntity> {
 	}
 
 	protected T localizeEntity(T entity, Locale locale) {
+		logger.trace("Localizing ExerciseEntity.");
 		try {
 			for (Field f : entity.getClass().getDeclaredFields()) {
 				f.setAccessible(true);
@@ -38,7 +39,7 @@ public abstract class AbstractLocalizedController<T extends ExerciseEntity> {
 				}
 			}
 		} catch (Exception ex) {
-			logger.error("Error Accessing Field via Annotation.", ex);
+			logger.error("Error on filling localizations in entity.", ex);
 		}
 		return entity;
 	}
@@ -51,6 +52,7 @@ public abstract class AbstractLocalizedController<T extends ExerciseEntity> {
 	}
 
 	protected T persistEntityLocalizations(T entity, Locale locale) {
+		logger.trace("Persisting ExerciseEntities localized fields.");
 		try {
 			for (Field f : entity.getClass().getDeclaredFields()) {
 				f.setAccessible(true);
@@ -60,12 +62,13 @@ public abstract class AbstractLocalizedController<T extends ExerciseEntity> {
 				}
 			}
 		} catch (Exception ex) {
-			logger.error("Error Accessing Field via Annotation.", ex);
+			logger.error("Error on persisting entity localizations.", ex);
 		}
 		return entity;
 	}
 
 	protected T updateEntityLocalizations(T entity, Locale locale) {
+		logger.trace("Updating ExerciseEntitys localized fields.");
 		try {
 			for (Field f : entity.getClass().getDeclaredFields()) {
 				f.setAccessible(true);
@@ -74,12 +77,13 @@ public abstract class AbstractLocalizedController<T extends ExerciseEntity> {
 					i18nService.updateText(entity, f.getName(), txt, locale);
 					if (logger.isDebugEnabled()) {
 						logger.debug("Updated " + f.getName() + " of Entity "
-								+ entity.getClass().getSimpleName() + " to value " + f.get(entity));
+								+ entity.getClass().getSimpleName() + " to value '" + f.get(entity)
+								+ "'");
 					}
 				}
 			}
 		} catch (Exception ex) {
-			logger.error("Error Accessing Field via Annotation.", ex);
+			logger.error("Error on updating exercise localizations.", ex);
 		}
 		return entity;
 	}

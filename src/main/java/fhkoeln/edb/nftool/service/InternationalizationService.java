@@ -237,9 +237,18 @@ public class InternationalizationService implements Serializable {
 	@Transactional
 	public void updateText(ExerciseEntity entity, String attributeName, String text, Locale locale) {
 		Locale lang = new Locale(locale.getLanguage());
-		LocalizedLabel label = LocalizedLabel
+		List<LocalizedLabel> labels = LocalizedLabel
 				.findLocalizedLabelsByEntityUriAndAttributeNameAndLocale(createUri(entity),
-						attributeName, lang).getSingleResult();
+						attributeName, lang).getResultList();
+		if (labels.size() != 1) {
+			// logger.error("Too many results or no results! (" + labels.size() + ")");
+			// logger.debug("Could not find LocalizedLabel in DB for criterias uri="
+			// + createUri(entity) + ", attributeName=" + attributeName + ", locale=" + lang);
+			// return;
+			setText(entity, attributeName, text, locale);
+			return;
+		}
+		LocalizedLabel label = labels.get(0);
 		label.setContent(text);
 		label.merge();
 		removeLabelFromList(label);
@@ -251,8 +260,10 @@ public class InternationalizationService implements Serializable {
 		LocalizedLabel label = LocalizedLabel
 				.findLocalizedLabelsByEntityUriAndAttributeNameAndLocale(createUri(entity),
 						attributeName, locale).getSingleResult();
-		label.remove();
-		removeLabelFromList(label);
+		if (label != null) {
+			label.remove();
+			removeLabelFromList(label);
+		}
 	}
 
 }
