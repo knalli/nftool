@@ -29,7 +29,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 		// registry.addConverter(LocalizedLabel.getLocalizedLabelConverter());
 		registry.addConverter(getTaskTableConverter());
 		registry.addConverter(getExerciseConverter());
-		registry.addConverter(getTaskConverter());
+		// registry.addConverter(getTaskConverter());
 		registry.addConverter(getSetTableRowConverter());
 		super.installFormatters(registry);
 		// Register application converters and formatters

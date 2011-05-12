@@ -27,6 +27,34 @@ import fhkoeln.edb.nftool.i18n.I18nString;
 @SuppressWarnings("serial")
 public class TaskTable implements Serializable, ExerciseEntity {
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + normalform;
+		result = prime * result + ordering;
+		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TaskTable other = (TaskTable) obj;
+		if (!getId().equals(other.getId()))
+			return false;
+		if (normalform != other.normalform)
+			return false;
+		if (ordering != other.ordering)
+			return false;
+		return true;
+	}
+
 	@Transient
 	@I18nString
 	private String description;

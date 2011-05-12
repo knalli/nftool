@@ -15,7 +15,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.spr
 	<var name="i18nService" class="fhkoeln.edb.nftool.service.InternationalizationService"/>
 
 	<on-start>
-		<evaluate expression="Exercise.findExercise(1.0)" result="Exercise" />
+		<evaluate expression="Exercise.findExercise(17.0)" result="Exercise" />
 		<set name="Points.points" value="0" />
 		<set name="answerColumnsPK.points" value="2" />
 		<set name="answerColumnsNF1.points" value="2" />
@@ -44,7 +44,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.spr
 		<on-render>
 			<evaluate expression="externalContext.locale" result="viewScope.locale" />
 		</on-render>
-		<transition on="success" to="normalForm1">
+		<transition on="success" to="normalForm1" validate="true">
 			<set name="viewScope.task.solved" value="true"/>
 			<evaluate expression="Points.points = Points.points + answerColumnsPK.points"/>
 			<set name="answerColumnsPK.points" value="0" />
@@ -62,7 +62,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.spr
 		<on-render>
 			<evaluate expression="externalContext.locale" result="viewScope.locale" />
 		</on-render>
-		<transition on="success" to="normalForm2">
+		<transition on="success" to="normalForm2" validate="true">
 			<set name="viewScope.task.solved" value="true"/>
 			<evaluate expression="Points.points = Points.points + answerColumnsNF1.points"/>
 			<set name="answerColumnsNF1.points" value="0" />
@@ -116,7 +116,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.spr
 			<evaluate expression="externalContext.locale" result="viewScope.locale" />
 		</on-render>
 		<transition on="success" to="results-success" />
-		<transition on="back" to="normalForm2" validate="false" />
+		<transition on="back" to="normalForm3" validate="false" />
 	</view-state>
 
 	<!-- End state ith summary -->

@@ -2,6 +2,7 @@ package fhkoeln.edb.nftool.web;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
@@ -19,6 +20,19 @@ import fhkoeln.edb.nftool.TaskTable;
 @RequestMapping("/tasktables")
 @Controller
 public class TaskTableController extends AbstractLocalizedController<TaskTable> {
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(@Valid TaskTable taskTable, BindingResult bindingResult, Model uiModel,
+			Locale locale) {
+		if (bindingResult.hasErrors()) {
+			uiModel.addAttribute("taskTable", taskTable);
+			return "tasktables/create";
+		}
+		uiModel.asMap().clear();
+		taskTable.persist();
+		persistEntityLocalizations(taskTable, locale);
+		return "redirect:/tasktables/" + taskTable.getId().toString();
+	}
 
 	@RequestMapping(value = "/{id}", params = "form", method = RequestMethod.GET)
 	public String updateForm(@PathVariable("id") Long id, Model uiModel, Locale locale) {

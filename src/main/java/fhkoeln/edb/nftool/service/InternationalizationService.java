@@ -27,7 +27,7 @@ public class InternationalizationService implements Serializable {
 	private static final Logger logger = Logger.getLogger(InternationalizationService.class);
 
 	private static final String FALLBACK_LOCALE = Locale.ENGLISH.getLanguage();
-	private static final String LOCALE_ERROR = "TRANSLATION NOT FOUND";
+	public static final String LOCALE_ERROR = "TRANSLATION NOT FOUND";
 
 	/**
 	 * These labels are filled in initialize() after construction. The key of the map is the entity
@@ -51,6 +51,9 @@ public class InternationalizationService implements Serializable {
 		}
 		if (logger.isDebugEnabled()) {
 			logger.debug("Generated Labels Map: " + labels);
+		}
+		if (labels.size() == 0) {
+			logger.error("The Labels were empty. InternationalizationService won't be able to translate anything.");
 		}
 	}
 
@@ -127,6 +130,9 @@ public class InternationalizationService implements Serializable {
 	 */
 	@Transactional(readOnly = true)
 	public String getText(String entityUri, String attributeName, String locale) {
+		Assert.isTrue(
+				labels.size() != 0,
+				"The labels were not loaded. See Server-startup-logs if they were already empty at starting time. If so, check the corresponding DB Table.");
 		if (entityUri == null) {
 			logger.warn("You queried for Translation with no Entity Identifier");
 			return LOCALE_ERROR;
@@ -198,6 +204,8 @@ public class InternationalizationService implements Serializable {
 
 	@Transactional
 	public void setText(ExerciseEntity entity, String attributeName, String text, Locale locale) {
+		Assert.isTrue(entity.getId() != null,
+				"Could not get entity id. Maybe the entity to save the label for is not persisted!");
 		Locale lang = new Locale(locale.getLanguage());
 		LocalizedLabel label = new LocalizedLabel(text, lang);
 		label.setEntityUri(createUri(entity));
@@ -241,10 +249,6 @@ public class InternationalizationService implements Serializable {
 				.findLocalizedLabelsByEntityUriAndAttributeNameAndLocale(createUri(entity),
 						attributeName, lang).getResultList();
 		if (labels.size() != 1) {
-			// logger.error("Too many results or no results! (" + labels.size() + ")");
-			// logger.debug("Could not find LocalizedLabel in DB for criterias uri="
-			// + createUri(entity) + ", attributeName=" + attributeName + ", locale=" + lang);
-			// return;
 			setText(entity, attributeName, text, locale);
 			return;
 		}

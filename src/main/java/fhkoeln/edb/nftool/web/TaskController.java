@@ -27,8 +27,8 @@ public class TaskController extends AbstractLocalizedController<Task> {
 			return "tasks/create";
 		}
 		uiModel.asMap().clear();
-		persistEntityLocalizations(task, locale);
 		task.persist();
+		persistEntityLocalizations(task, locale);
 		return "redirect:/tasks/" + task.getId().toString();
 	}
 
@@ -46,8 +46,8 @@ public class TaskController extends AbstractLocalizedController<Task> {
 			return "tasks/update";
 		}
 		uiModel.asMap().clear();
-		updateEntityLocalizations(task, locale);
 		task.merge();
+		updateEntityLocalizations(task, locale);
 		return "redirect:/tasks/" + task.getId().toString();
 	}
 

@@ -12,6 +12,8 @@
 	<spring:theme code="keyHeaderClass" var="keyHeadClass"/>
 	<spring:theme code="headerControlClass" var="headerControlClass"/>
 	
+	<spring:eval expression="i18nService != null" var="i18nServiceExists"/>
+	
 	<c:if test="${editable}">
 		<!-- Dojo styles for editable grid -->
 <!--		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/grid/resources/Grid.css" />-->
@@ -26,7 +28,16 @@
 	
 	<c:forEach var="table" items="${tables}">
 		<table class="exercise" width="100%">
-			<caption><c:out value="${i18nService.getText(table, 'description', locale)}" /></caption>
+			<caption>
+				<c:choose>
+					<c:when test="${i18nServiceExists}">
+						<spring:eval expression="i18nService.getText(table, 'description', locale)"/>
+					</c:when>
+					<c:otherwise>
+						<c:out value="${table.description}"/>
+					</c:otherwise>
+				</c:choose>
+			</caption>
 			<thead>
 				<tr>
 					<c:forEach var="column" items="${table.tableColumns}">
@@ -36,15 +47,16 @@
 							</c:if>
 							<c:choose>
 								<c:when test="${controls}">
+
 									<c:choose>
-										<c:when test="i18nService">
+										<c:when test="${i18nServiceExists}">
 											<spring:eval var="colName" expression="i18nService.getText(column, 'name', locale)" />
-		<!--									<c:set var="colName" value="${i18nService.getText(column, 'name', locale)}" />-->
 										</c:when>
 										<c:otherwise>
 											<c:set var="colName" value="${column.name}"/>
 										</c:otherwise>
 									</c:choose>
+								
 									<label for="lblColumn${column.id}"><c:out value="${colName}" /></label>
 									<c:if test="${not editable}">
 										<c:choose>
@@ -58,9 +70,10 @@
 									</c:if>
 								</c:when>
 								<c:otherwise>
+									<!-- Print column without controls -->
 									<c:choose>
-										<c:when test="i18nService">
-											<c:out value="${i18nService.getText(column, 'name', locale)}" />
+										<c:when test="${i18nServiceExists}">
+											<spring:eval expression="i18nService.getText(column, 'name', locale)"/>
 										</c:when>
 										<c:otherwise>
 											<c:out value="${column.name}"/>
@@ -90,8 +103,8 @@
 								</c:when>
 								<c:otherwise>
 									<c:choose>
-										<c:when test="i18nService">
-											<c:out value="${i18nService.getText(row, 'content', locale)}" />
+										<c:when test="${i18nServiceExists}">
+											<spring:eval expression="i18nService.getText(row, 'content', locale)" />
 										</c:when>
 										<c:when test="${rowContent eq ''}">
 											&#160;

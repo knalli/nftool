@@ -6,6 +6,8 @@ import java.util.Locale;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
+
 import fhkoeln.edb.nftool.ExerciseEntity;
 import fhkoeln.edb.nftool.i18n.I18nString;
 import fhkoeln.edb.nftool.service.InternationalizationService;
@@ -35,7 +37,12 @@ public abstract class AbstractLocalizedController<T extends ExerciseEntity> {
 						logger.debug("Injecting localization " + entity.getClass().getSimpleName()
 								+ "." + f.getName());
 					}
-					f.set(entity, i18nService.getText(entity, f.getName(), locale));
+					final String content = i18nService.getText(entity, f.getName(), locale);
+					if (content.equals(InternationalizationService.LOCALE_ERROR)) {
+						f.set(entity, "");
+					} else {
+						f.set(entity, content);
+					}
 				}
 			}
 		} catch (Exception ex) {
@@ -52,6 +59,8 @@ public abstract class AbstractLocalizedController<T extends ExerciseEntity> {
 	}
 
 	protected T persistEntityLocalizations(T entity, Locale locale) {
+		Assert.isTrue(entity.getId() != null,
+				"Could not get entity id. Maybe the entity to save the label for is not persisted!");
 		logger.trace("Persisting ExerciseEntities localized fields.");
 		try {
 			for (Field f : entity.getClass().getDeclaredFields()) {

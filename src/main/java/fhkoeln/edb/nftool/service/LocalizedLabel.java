@@ -41,10 +41,8 @@ public class LocalizedLabel implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((attributeName == null) ? 0 : attributeName.hashCode());
-		result = prime * result
-				+ ((entityUri == null) ? 0 : entityUri.hashCode());
+		result = prime * result + ((attributeName == null) ? 0 : attributeName.hashCode());
+		result = prime * result + ((entityUri == null) ? 0 : entityUri.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
 		return result;
 	}
@@ -85,8 +83,8 @@ public class LocalizedLabel implements Serializable {
 	}
 
 	/**
-	 * URI to a specific entity: 'Exercise:1/Table:42'
-	 * Name of the entity like 'Exercise'. Defines relation of this text to the Entity.
+	 * URI to a specific entity: 'Exercise:1/Table:42' Name of the entity like 'Exercise'. Defines
+	 * relation of this text to the Entity.
 	 */
 	@NotNull
 	@Size(min = 1)
@@ -110,21 +108,17 @@ public class LocalizedLabel implements Serializable {
 	 * Text in the currently set country language.
 	 */
 	@NotNull
+	@Size(max = 4000)
 	private String content;
 
 	/*
-	 * @Transient
-	 * public static Converter<LocalizedLabel, String> getLocalizedLabelConverter() {
+	 * @Transient public static Converter<LocalizedLabel, String> getLocalizedLabelConverter() {
 	 * return new Converter<LocalizedLabel, String>() {
 	 * 
-	 * @Override
-	 * public String convert(LocalizedLabel label) {
-	 * String locale = label.getLocale().getDisplayLanguage();
-	 * return new StringBuilder().append(label.getEntityName()).append(" ")
-	 * .append(label.getAttributeName()).append(" ").append(locale).toString();
-	 * }
-	 * };
-	 * }
+	 * @Override public String convert(LocalizedLabel label) { String locale =
+	 * label.getLocale().getDisplayLanguage(); return new
+	 * StringBuilder().append(label.getEntityName()).append(" ")
+	 * .append(label.getAttributeName()).append(" ").append(locale).toString(); } }; }
 	 */
 
 	public static List<Locale> getLocales() {

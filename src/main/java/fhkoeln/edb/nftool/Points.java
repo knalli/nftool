@@ -12,6 +12,9 @@ import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import de.saxsys.roo.equals.addon.RooEquals;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
@@ -20,6 +23,7 @@ import javax.validation.constraints.Size;
 @RooEntity
 @RooSerializable
 @SuppressWarnings("serial")
+@RooEquals
 public class Points implements Serializable {
 
 	@NotNull

@@ -13,11 +13,9 @@ import java.lang.Object;
 import java.lang.String;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,17 +27,6 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect TaskTableController_Roo_Controller {
-    
-    @RequestMapping(method = RequestMethod.POST)
-    public String TaskTableController.create(@Valid TaskTable taskTable, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("taskTable", taskTable);
-            return "tasktables/create";
-        }
-        uiModel.asMap().clear();
-        taskTable.persist();
-        return "redirect:/tasktables/" + encodeUrlPathSegment(taskTable.getId().toString(), httpServletRequest);
-    }
     
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String TaskTableController.createForm(Model uiModel) {

@@ -26,8 +26,7 @@ public class AnswerColumnsValidator {
 	InternationalizationService i18nService;
 
 	/**
-	 * Check if the checked columns in the form are in the next tasks' Tables
-	 * key columns.
+	 * Check if the checked columns in the form are in the next tasks' Tables key columns.
 	 * 
 	 * @param answer
 	 *            The answer given by web form.
@@ -57,7 +56,9 @@ public class AnswerColumnsValidator {
 	protected void checkViewStateByColumnComparison(boolean containing, AnswerColumns answer,
 			ValidationContext context) {
 		logger.trace("Entering checkViewStateByColumnComparison");
-		logger.info("Validating answer: " + answer);
+		if (logger.isInfoEnabled()) {
+			logger.info("Validating answer: " + answer);
+		}
 		List<TableColumn> columns = answer.getColumns();
 		MessageContext messages = context.getMessageContext();
 		boolean result;
@@ -108,18 +109,31 @@ public class AnswerColumnsValidator {
 			Set<TaskTable> taskTables, String locale, boolean mustBeKey) {
 		logger.trace("Entering checkTablesContainsColumnsAll");
 		if (logger.isDebugEnabled()) {
-			logger.debug("Checking for Locale " + locale);
+			logger.debug("Checking Tables " + taskTables + " for Locale " + locale);
 		}
-		// List<TableColumn> columnsUnchecked = new ArrayList<TableColumn>(answerColumns.size());
+		if (taskTables.size() > 0) {
+			logger.info("Solution: The following columns have to be in the anser:");
+		} else {
+			logger.info("Could not detect solution columns: taskTables are empty.");
+		}
+		// List<TableColumn> columnsUnchecked = new
+		// ArrayList<TableColumn>(answerColumns.size());
 		// Collections.copy(columnsUnchecked, answerColumns);
 
 		List<String> answerColumnNames = getLocalizedColumnNames(answerColumns, locale);
 
 		for (TaskTable table : taskTables) {
 			Set<TableColumn> solutionColumns = table.getTableColumns();
+			if (solutionColumns.size() < 0) {
+				logger.info("No columns for this table found:" + table);
+			}
 			for (TableColumn solutionColumn : solutionColumns) {
 				if (!mustBeKey || solutionColumn.getKeyColumn()) {
 					String solutionColumnName = i18nService.getText(solutionColumn, "name", locale);
+					if (logger.isInfoEnabled()) {
+						logger.info("Solution column: " + solutionColumnName + " ("
+								+ solutionColumn.toString() + ")");
+					}
 
 					if (answerColumnNames.contains(solutionColumnName)) {
 						answerColumnNames.remove(answerColumnNames.indexOf(solutionColumnName));
@@ -154,14 +168,14 @@ public class AnswerColumnsValidator {
 			boolean mustBeKey) {
 		logger.trace("Entering checkTablesContainsColumnsNone");
 
-		if (logger.isDebugEnabled()) {
-			logger.debug("Checking for Locale " + locale);
-		}
+		/*
+		 * if (logger.isDebugEnabled()) { logger.debug("Checking for Locale " + locale); }
+		 */
 
 		Set<String> columnsIntersection = new HashSet<String>();
 
 		if (tablesPrevious.size() > 1 || taskTables.size() > 1) {
-			logger.error("No tested code for many tables in answer in this state!");
+			logger.error("Not implremented for many tables in answer in this state!");
 		}
 
 		for (TaskTable tPrev : tablesPrevious) {
@@ -188,8 +202,7 @@ public class AnswerColumnsValidator {
 	}
 
 	/**
-	 * Extracts the Tables of an Exercise in the given state. Null checks are
-	 * performed.
+	 * Extracts the Tables of an Exercise in the given state. Null checks are performed.
 	 * 
 	 * @param answer
 	 * @return

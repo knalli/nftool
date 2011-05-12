@@ -235,3 +235,38 @@ persistence setup --database HYPERSONIC_PERSISTENT --provider HIBERNATE
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-28 17:45:42
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-29 11:02:42
 addon list 
+persistence setup --database ORACLE --provider HIBERNATE
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-29 17:13:50
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-29 17:28:00
+perform assembly
+perform clean
+perform package
+quit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-29 17:30:02
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-02 10:45:37
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-02 16:50:25
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-03 13:20:56
+addon search --linesPerResult 1
+osgi ps
+osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
+osgi obr url remove --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+addon install bundle --bundleSymbolicName de.saxsys.roo.equals.addon
+pgp automatic trust
+osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
+osgi obr url remove --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+addon install bundle --bundleSymbolicName de.saxsys.roo.equals.addon
+pgp trust --keyId 0x0E5BA660
+osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
+osgi obr url remove --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+addon install bundle --bundleSymbolicName de.saxsys.roo.equals.addon
+osgi ps
+equals --class ~.Exercise
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-03 22:21:25
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-10 10:54:05
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-10 17:45:28
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-11 13:43:10
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-11 17:04:25
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-12 11:12:37

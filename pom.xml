@@ -34,7 +34,27 @@
 			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
 			<name>JBoss Repo</name>
 		</repository>
-	</repositories>
+		<repository>
+			<id>Sonatype OSGi</id>
+			<url>http://osgi.sonatype.org/content/repositories/ss-external</url>
+			<name>Sonatype OSGi Repo</name>
+		</repository>
+	<repository>
+            <id>googlecode.rooequals.repo</id>
+            <url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/
+			</url>
+            <name>Repository for Roo equals addon</name>
+        </repository>
+    <repository>
+            <id>googlecode.rooequals.snapshotrepo</id>
+            <url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/
+			</url>
+            <name>Repository for Roo equals addon</name>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>spring-maven-release</id>
@@ -151,11 +171,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.13</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -352,8 +367,23 @@
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
-
-	</dependencies>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>10.2.0.2</version>
+		</dependency>
+		
+	<dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.5</version>
+        </dependency>
+    <dependency>
+            <groupId>de.saxsys.roo</groupId>
+            <artifactId>de.saxsys.roo.equals.annotations</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+    </dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -377,7 +407,8 @@
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<version>1.0</version>
 				<dependencies>
-					<!-- NB: You must use Maven 2.0.9 or above or these are ignored (see MNG-2972) -->
+					<!-- NB: You must use Maven 2.0.9 or above or these are ignored (see 
+						MNG-2972) -->
 					<dependency>
 						<groupId>org.aspectj</groupId>
 						<artifactId>aspectjrt</artifactId>
@@ -447,7 +478,8 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.7</version>  <!-- Note 2.8 does not work with AspectJ aspect path -->
+				<version>2.7</version>
+				<!-- Note 2.8 does not work with AspectJ aspect path -->
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>false</downloadJavadocs>
