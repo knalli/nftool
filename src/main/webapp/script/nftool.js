@@ -4,17 +4,7 @@ $(function(){
 				cursor:'pointer',
 				revert: 'invalid',
 				opacity: 0.35,
-				helper:	function(event) {
-					var table = $(this).parents('table');
-					var columnNr = $(this).prevAll().length + 1;
-					//var column = $('td:nth-child('+columnNr+'), th:nth-child('+columnNr+')', table);
-					var column = $('th:nth-child('+columnNr+')', table);
-
-					var helper = $('<table></table>').append(column.clone());
-					$('td,th', helper).wrap('<tr></tr>');
-					
-					return $('<div class="draggable-helper"></div>').append(helper);
-				}
+				helper: 'clone'
 			};
 			
 			var edbUiTags = {
@@ -33,7 +23,7 @@ $(function(){
 				hoverClass: 'drophover',
 				addClasses: false,
 				over: function (event, ui) {
-					var txt = $('th', ui.helper).text();
+					var txt = $(ui.helper).text();
 					$(edbUiTags.itemDiv)
 						.append(txt)
 						.addClass('drophoveritem')
@@ -103,7 +93,7 @@ $(function(){
 			 */
 			var handleFormChange = function(item, contextElement) {
 				var context = $(contextElement);
-				var id = item.text().trim();
+				var id = $.trim(item.text());
 				var relationNr = $(droppableContainer + ' > .container').index(context.parent());
 				var containerPrefix, idPrefix;
 				if (context.hasClass('keys')) {
