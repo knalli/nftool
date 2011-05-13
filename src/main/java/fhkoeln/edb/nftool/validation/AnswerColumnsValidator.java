@@ -111,19 +111,16 @@ public class AnswerColumnsValidator {
 			logger.debug("Checking Tables " + taskTables + " for Locale " + locale);
 		}
 		if (taskTables.size() > 0) {
-			logger.info("Solution: The following columns have to be in the anser:");
+			logger.info("Solution: The following columns have to be in the answer:");
 		} else {
 			logger.info("Could not detect solution columns: taskTables are empty.");
 		}
-		// List<TableColumn> columnsUnchecked = new
-		// ArrayList<TableColumn>(answerColumns.size());
-		// Collections.copy(columnsUnchecked, answerColumns);
 
 		List<String> answerColumnNames = getLocalizedColumnNames(answerColumns, locale);
 
 		for (TaskTable table : taskTables) {
 			Set<TableColumn> solutionColumns = table.getTableColumns();
-			if (solutionColumns.size() < 0) {
+			if (logger.isInfoEnabled() && solutionColumns.size() < 0) {
 				logger.info("No columns for this table found:" + table);
 			}
 			for (TableColumn solutionColumn : solutionColumns) {
@@ -183,9 +180,6 @@ public class AnswerColumnsValidator {
 		logger.trace("Entering checkTablesContainsColumnsNone");
 
 		Set<String> columnsIntersection = new HashSet<String>();
-		List<String> intersectComplete = new ArrayList<String>();
-		List<String> relPrev = new ArrayList<String>();
-		List<String> rel = new ArrayList<String>();
 
 		/*
 		 * if (tablesPrevious.size() > 1 || taskTables.size() > 1) {
@@ -193,13 +187,13 @@ public class AnswerColumnsValidator {
 		 * logger.debug("tablesPrevious.size() = " + tablesPrevious.size() +
 		 * ", taskTables.size() = " + taskTables.size()); }
 		 */
-		int columnCounter = 0;
+		int columnCounter = 0, columnCounterPrev = 0;
 		for (TaskTable tPrev : tablesPrevious) {
+			columnCounterPrev += tPrev.getTableColumns().size();
 			Set<TableColumn> tcsPrev = tPrev.getTableColumns();
 			for (TaskTable t : taskTables) {
 				Set<TableColumn> tcs = t.getTableColumns();
 				for (TableColumn tableColumnPrev : tcsPrev) {
-					columnCounter++;
 					boolean found = false;
 					String tableColumnPrevName = i18nService.getText(tableColumnPrev, "name",
 							locale);
@@ -209,26 +203,21 @@ public class AnswerColumnsValidator {
 							found = true;
 							break;
 						}
-						rel.add(tableColumnName);
 					}
-					logger.debug("Table:" + rel.toString());
-					rel.clear();
-					relPrev.add(tableColumnPrevName);
 					if (!found) {
 						columnsIntersection.add(tableColumnPrevName);
-						intersectComplete.add(tableColumnPrevName);
-					} else {
-						intersectComplete.add(tableColumnPrevName);
 					}
 				}
-				logger.debug("PrevTable:" + relPrev.toString());
-				relPrev.clear();
 			}
 		}
-		if (answerColumns.size() == 0 && intersectComplete.size() == columnCounter)
-			// The answer was empty and columnIntersection contains all available columns.
-			// Ergo: The correct answer is: empty set!
-			return true;
+
+		for (TaskTable t : taskTables) {
+			columnCounter += t.getTableColumns().size();
+		}
+		// Check: The answer is empty and columnIntersection contains all available columns.
+		// Ergo: The answer was correct!
+		if (columnCounter == columnCounterPrev)
+			return answerColumns.size() == 0;
 		return getLocalizedColumnNames(answerColumns, locale).containsAll(columnsIntersection);
 	}
 
