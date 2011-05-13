@@ -10,6 +10,7 @@
 <!--             <property name="hibernate.ejb.naming_strategy" value="org.hibernate.dialect.Oracle10gDialect"/> -->
             <property name="hibernate.connection.charSet" value="UTF-8"/>
 <!--             <property name="hibernate.cache.use_query_cache" value="true"/> -->
+<!--             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/> -->
             <property name="" value=""/>
             <!-- Uncomment the following two properties for JBoss only -->
             <!-- property name="hibernate.validator.apply_to_ddl" value="false" /-->
