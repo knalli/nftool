@@ -67,13 +67,12 @@ public class AnswerColumnsValidator {
 			logger.error("The current exercise been has not been set. Are we in a Flow?");
 			return;
 		}
-		if (columns.size() < 1) {
-			logger.debug("No column was checked.");
-			answer.setPoints(answer.getPoints() - 1);
-			messages.addMessage(new MessageBuilder().error().source("columns")
-					.code("edb.exercise.columns.emptyanswer").build());
-			return;
-		}
+		/*
+		 * if (columns.size() < 1) { logger.debug("No column was checked.");
+		 * answer.setPoints(answer.getPoints() - 1); messages.addMessage(new
+		 * MessageBuilder().error().source("columns")
+		 * .code("edb.exercise.columns.emptyanswer").build()); return; }
+		 */
 
 		Set<TaskTable> tables = getTaskTablesFormExercise(answer.getExercise(),
 				ExerciseState.valueOf(answer.getState()));
@@ -163,26 +162,44 @@ public class AnswerColumnsValidator {
 		return answerColumnNames;
 	}
 
+	/**
+	 * Check if none of the TableColumns in anserColumns occur in taskTables, which are the
+	 * Relation(s) of the next ExerciseState.
+	 * 
+	 * @param answerColumns
+	 *            Tables in Http Answer.
+	 * @param taskTables
+	 *            Tables of current Task, NF1
+	 * @param tablesPrevious
+	 *            Tables of previous Task, PRIMARY_KEY
+	 * @param locale
+	 * @param mustBeKey
+	 *            Deprecated.
+	 * @return
+	 */
 	protected boolean checkTablesContainsColumnsNone(List<TableColumn> answerColumns,
 			Set<TaskTable> taskTables, Set<TaskTable> tablesPrevious, String locale,
 			boolean mustBeKey) {
 		logger.trace("Entering checkTablesContainsColumnsNone");
 
-		/*
-		 * if (logger.isDebugEnabled()) { logger.debug("Checking for Locale " + locale); }
-		 */
-
 		Set<String> columnsIntersection = new HashSet<String>();
+		List<String> intersectComplete = new ArrayList<String>();
+		List<String> relPrev = new ArrayList<String>();
+		List<String> rel = new ArrayList<String>();
 
-		if (tablesPrevious.size() > 1 || taskTables.size() > 1) {
-			logger.error("Not implremented for many tables in answer in this state!");
-		}
-
+		/*
+		 * if (tablesPrevious.size() > 1 || taskTables.size() > 1) {
+		 * logger.error("Not implemented for many tables in answer in this state!");
+		 * logger.debug("tablesPrevious.size() = " + tablesPrevious.size() +
+		 * ", taskTables.size() = " + taskTables.size()); }
+		 */
+		int columnCounter = 0;
 		for (TaskTable tPrev : tablesPrevious) {
 			Set<TableColumn> tcsPrev = tPrev.getTableColumns();
 			for (TaskTable t : taskTables) {
 				Set<TableColumn> tcs = t.getTableColumns();
 				for (TableColumn tableColumnPrev : tcsPrev) {
+					columnCounter++;
 					boolean found = false;
 					String tableColumnPrevName = i18nService.getText(tableColumnPrev, "name",
 							locale);
@@ -190,14 +207,28 @@ public class AnswerColumnsValidator {
 						String tableColumnName = i18nService.getText(tableColumn, "name", locale);
 						if (tableColumnName.equals(tableColumnPrevName)) {
 							found = true;
+							break;
 						}
+						rel.add(tableColumnName);
 					}
+					logger.debug("Table:" + rel.toString());
+					rel.clear();
+					relPrev.add(tableColumnPrevName);
 					if (!found) {
 						columnsIntersection.add(tableColumnPrevName);
+						intersectComplete.add(tableColumnPrevName);
+					} else {
+						intersectComplete.add(tableColumnPrevName);
 					}
 				}
+				logger.debug("PrevTable:" + relPrev.toString());
+				relPrev.clear();
 			}
 		}
+		if (answerColumns.size() == 0 && intersectComplete.size() == columnCounter)
+			// The answer was empty and columnIntersection contains all available columns.
+			// Ergo: The correct answer is: empty set!
+			return true;
 		return getLocalizedColumnNames(answerColumns, locale).containsAll(columnsIntersection);
 	}
 
