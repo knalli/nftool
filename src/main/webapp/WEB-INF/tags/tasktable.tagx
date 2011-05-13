@@ -27,7 +27,7 @@
 	</c:if>
 	
 	<c:forEach var="table" items="${tables}">
-		<table class="exercise" width="100%">
+		<table class="exercise">
 			<caption>
 				<c:choose>
 					<c:when test="${i18nServiceExists}">

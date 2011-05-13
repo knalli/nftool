@@ -52,8 +52,8 @@
 	    	<div id="main" style="" class="nftool">
 	    		<tiles:insertAttribute name="body" />
 	    		<div id="footer">				
-				  	<spring:url var="home" value="/" />
-				    <span><a href="${home}"><spring:message code="button_home"/></a></span>				    
+				  	<spring:url var="begin" value="/doexercise" />
+				    <span><a href="${begin}"><spring:message code="button_begin"/></a></span>				    
 				    <c:if test="${pageContext['request'].userPrincipal != null}">   	
 				    	/
 				    	<span>			    

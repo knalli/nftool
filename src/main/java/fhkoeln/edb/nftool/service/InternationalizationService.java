@@ -98,6 +98,7 @@ public class InternationalizationService implements Serializable {
 			return StaticHelpers.getLocaleObject(localeObj).getLanguage();
 		else {
 			logger.error("The localeObj was neither a String like 'de', nor a Locale.");
+			logger.debug(localeObj);
 			return null;
 		}
 	}
