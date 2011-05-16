@@ -5,6 +5,12 @@
     <display-name>nftool</display-name>
     
     <description>Roo generated nftool application</description>
+    
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>fhkoeln.edb.nftool</param-value>
+    </context-param>
+    
 
     
     <!-- Enable escaping of form submission contents -->
