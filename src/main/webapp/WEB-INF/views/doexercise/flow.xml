@@ -2,7 +2,8 @@
 <flow xmlns="http://www.springframework.org/schema/webflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-    	<persistence-context />
+   	<persistence-context />
+    	
 
 	<var name="Exercise" class="fhkoeln.edb.nftool.Exercise" />
 	<var name="Points" class="fhkoeln.edb.nftool.Points" />
@@ -15,7 +16,8 @@ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.spr
 	<var name="i18nService" class="fhkoeln.edb.nftool.service.InternationalizationService"/>
 
 	<on-start>
-		<evaluate expression="Exercise.findExercise(17.0)" result="Exercise" />
+		<set name="requestScope.exercise" value="requestParameters.exercise ?: 1.0" type="long" />
+		<evaluate expression="Exercise.findExercise(requestScope.exercise)" result="Exercise" />
 		<set name="Points.points" value="0" />
 		<set name="answerColumnsPK.points" value="2" />
 		<set name="answerColumnsNF1.points" value="2" />
@@ -25,6 +27,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.spr
 
 	<view-state id="intro">
 		<on-entry>
+			
 			<evaluate expression="Exercise.getTaskByState('INTRO')" result="viewScope.task" />
 		</on-entry>
 		<on-render>
