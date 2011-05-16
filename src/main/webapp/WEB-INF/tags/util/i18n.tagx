@@ -5,12 +5,13 @@
 	<jsp:directive.attribute name="entity" type="fhkoeln.edb.nftool.ExerciseEntity" required="true" description="Entity for which we should lookup the translation." />
 	<jsp:directive.attribute name="field" type="java.lang.String" required="true" description="Fieldname of the entity" />
 	<jsp:directive.attribute name="localeOverride" type="java.lang.String" required="false" description="Language to fetch." />
+	<jsp:directive.attribute name="escapeXml" type="java.lang.Boolean" required="false" />
 
 	<c:if test="${empty localeOverride}">
-		<c:out value="${i18nService.getText(entity, field, locale)}" default="'NO TRANSLATION FOUND'" />
+		<c:out escapeXml="${escapeXml}" value="${i18nService.getText(entity, field, locale)}" default="'NO TRANSLATION FOUND'" />
 	</c:if>
 	
 	<c:if test="${!(empty localeOverride)}" >
-		<c:out value="${i18nService.getText(entity, field, localeOverride)}" default="'NO TRANSLATION FOUND'" />
+		<c:out escapeXml="${escapeXml}" value="${i18nService.getText(entity, field, localeOverride)}" default="'NO TRANSLATION FOUND'" />
 	</c:if>
 </jsp:root>
