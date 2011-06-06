@@ -14,18 +14,6 @@
 	
 	<spring:eval expression="i18nService != null" var="i18nServiceExists"/>
 	
-	<c:if test="${editable}">
-		<!-- Dojo styles for editable grid -->
-<!--		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/grid/resources/Grid.css" />-->
-<!--		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/grid/resources/tundraGrid.css" />-->
-<!--		<style type="text/css">-->
-<!--		    table.exercise { margin: 0; } -->
-<!--		    html, body { width: 100%; height: 100%; margin: 0; }-->
-<!--		</style>-->
-		<!-- Dojo libs for editable grid -->
-<!--		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js" type="text/javascript"> //required for FF3 and Opera </script>-->
-	</c:if>
-	
 	<c:forEach var="table" items="${tables}">
 		<table class="exercise">
 			<caption>
@@ -90,7 +78,8 @@
 				<c:set var="colNumber" value="1" />
 				<c:set var="rowSeperator"><![CDATA[</tr><tr>]]></c:set>
 				<tr>
-					<c:forEach var="row" items="${table.tableRows}">
+					<spring:eval expression="table.tableRows" var="tableRows"/>
+					<c:forEach var="row" items="${tableRows}">
 						<c:if test="${row.rowNumber gt rowNumber}">
 							<c:set var="rowNumber" value="${rowNumber + 1}"/>
 							<c:out value="${rowSeperator}" escapeXml="false"/>

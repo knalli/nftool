@@ -66,7 +66,7 @@ public class TaskTable implements Serializable, ExerciseEntity {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "table_fk")
-	@OrderBy("id ASC")
+	// @OrderBy("keyColumn DESC")
 	private Set<TableColumn> tableColumns = new HashSet<TableColumn>();
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

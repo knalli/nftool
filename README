@@ -1,1 +1,3 @@
 This Project supports learning to build the 3rd normal form of database schemes. It`will be part of the EDB learning platform found here: http://edb.gm.fh-koeln.de/.
+
+Attention: To build/extend/modify this project, you need Spring Roo running and watching this folder.

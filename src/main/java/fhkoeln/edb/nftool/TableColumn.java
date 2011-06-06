@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -66,7 +65,6 @@ public class TableColumn implements Serializable, ExerciseEntity {
 	private String name;
 
 	@NotNull
-	@OrderBy
 	private Boolean keyColumn;
 
 	private int ordering = 0;

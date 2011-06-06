@@ -51,6 +51,7 @@ public class Exercise implements Serializable, ExerciseEntity {
 		return true;
 	}
 
+	@Transient
 	private transient static final Logger logger = Logger.getLogger(Exercise.class);
 
 	@Transient

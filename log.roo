@@ -272,3 +272,23 @@ equals --class ~.Exercise
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-12 11:12:37
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-13 08:53:59
 // Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-13 12:29:50
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-13 14:18:32
+perform package
+perform package
+perform package
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-13 17:20:42
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-16 12:10:16
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-16 16:49:23
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 09:27:48
+perform package
+perform package
+perform package
+database properties list
+persistence setup --database ORACLE --provider HIBERNATE --jndiDataSource jdbc/edbNftoolDBHL
+persistence setup --database ORACLE --provider HIBERNATE
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 14:26:52
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 14:30:51
+perform package
+perform clean
+perform package 
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 14:39:26
