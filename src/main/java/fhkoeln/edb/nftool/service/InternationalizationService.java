@@ -140,7 +140,7 @@ public class InternationalizationService implements Serializable {
 		}
 		if (logger.isDebugEnabled()) {
 			logger.debug(String
-					.format("The Service was asked about an i18n for %s and attribute %s. Target locale: %s",
+					.format("The Service was asked about an i18n for '%s' and attribute '%s'. Target locale: '%s'.",
 							entityUri, attributeName, locale));
 		}
 		if (labels == null || labels.isEmpty()) {
@@ -168,12 +168,11 @@ public class InternationalizationService implements Serializable {
 				}
 				result = entityLabels.get(0).getContent();
 			}
-			if (logger.isDebugEnabled()) {
-				if (result == null) {
-					logger.debug("Returning fallback result: " + fallback_result);
-				} else {
-					logger.debug("Returnning result: " + result);
-				}
+			if (logger.isInfoEnabled() && result == null) {
+				logger.info("Returning fallback result: " + fallback_result);
+			}
+			if (logger.isDebugEnabled() && result != null) {
+				logger.debug("Returnning result: " + result);
 			}
 			return result == null ? fallback_result : result;
 		} else {
