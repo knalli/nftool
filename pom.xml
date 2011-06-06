@@ -4,7 +4,7 @@
 	<groupId>fhkoeln.edb.nftool</groupId>
 	<artifactId>nftool</artifactId>
 	<packaging>war</packaging>
-	<version>0.2.0.RELEASE</version>
+	<version>0.3.0.RELEASE</version>
 	<name>nftool</name>
 	<properties>
 		<roo.version>1.1.2.RELEASE</roo.version>
@@ -361,20 +361,22 @@
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc14</artifactId>
             <version>10.2.0.2</version>
-            <scope>provided</scope>
+<!--             <scope>provided</scope> -->
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.5</version>
         </dependency>
-       
-    <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>10.2.0.2</version>
-        </dependency>
     </dependencies>
+	<scm>
+		<developerConnection>Sebastian Janzen</developerConnection>
+		<url>https://github.com/sja/nftool</url>
+	</scm>
+	<organization>
+		<name>FH Köln</name>
+		<url>http://www.gm.fh-koeln.de</url>
+	</organization>
 	<build>
 		<plugins>
             <plugin>
