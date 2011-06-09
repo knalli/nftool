@@ -8,10 +8,14 @@
 	<jsp:directive.attribute name="escapeXml" type="java.lang.Boolean" required="false" />
 
 	<c:if test="${empty localeOverride}">
-		<spring:eval expression="i18nService.getText(entity, field, locale)" />
+		<spring:eval var="txt" expression="i18nService.getText(entity, field, locale)" />
 	</c:if>
 	
 	<c:if test="${!(empty localeOverride)}" >
-		<spring:eval expression="i18nService.getText(entity, field, localeOverride)" />
+		<spring:eval var="txt" expression="i18nService.getText(entity, field, localeOverride)" />
 	</c:if>
+	
+	<c:set var="escapeXmlVal" value="${empty escapeXml or not escapeXml}" />	
+	<c:out value="${txt}" escapeXml="escapeXmlVal"/>
+	
 </jsp:root>

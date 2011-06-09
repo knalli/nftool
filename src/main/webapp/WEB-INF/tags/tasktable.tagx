@@ -74,39 +74,30 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:set var="rowNumber" value="1" />
-				<c:set var="colNumber" value="1" />
+				<spring:eval var="rowNumber" expression="table.tableRows.iterator().next().rowNumber"/>
 				<c:set var="rowSeperator"><![CDATA[</tr><tr>]]></c:set>
 				<tr>
 					<spring:eval expression="table.tableRows" var="tableRows"/>
 					<c:forEach var="row" items="${tableRows}">
 						<c:if test="${row.rowNumber gt rowNumber}">
-							<c:set var="rowNumber" value="${rowNumber + 1}"/>
 							<c:out value="${rowSeperator}" escapeXml="false"/>
+							<c:set var="rowNumber" value="${rowNumber + 1}"/>
 						</c:if>
 						<td>
 							<c:choose>
-								<c:when test="${editable}">
-									<input type="text" name="row${rowNumber}col${colNumber}" value="${row.content}"/>
-									<c:set var="colNumber" value="${colNumber + 1}"/>
+								<c:when test="${i18nServiceExists}">
+									<spring:eval expression="i18nService.getText(row, 'content', locale)" />
+								</c:when>
+								<c:when test="${rowContent eq ''}">
+									&#160;
+								</c:when>
+								<c:when test="${rowContent eq null}">
+									<em>NULL</em>
 								</c:when>
 								<c:otherwise>
-									<c:choose>
-										<c:when test="${i18nServiceExists}">
-											<spring:eval expression="i18nService.getText(row, 'content', locale)" />
-										</c:when>
-										<c:when test="${rowContent eq ''}">
-											&#160;
-										</c:when>
-										<c:when test="${rowContent eq null}">
-											<em>NULL</em>
-										</c:when>
-										<c:otherwise>
-											<c:out value="${row.content}"/>
-										</c:otherwise>
-									</c:choose>	
+									<c:out value="${row.content}"/>
 								</c:otherwise>
-							</c:choose>
+							</c:choose>	
 						</td>
 					</c:forEach>
 				</tr>
