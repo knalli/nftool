@@ -1,0 +1,300 @@
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2010-11-23 23:10:11
+hint
+project --topLevelPackage fhkoeln.edb.nftool
+hint
+persistence setup --provider HIBERNATE --database MYSQL --userName jpatest --password jpatest --hostName localhost
+hint
+entity --class Exercise --table EXERCISES --testAutomatically --serializable 
+field string --fieldName title
+field string --fieldName description
+help enum type
+enum type --class ExerciseState
+enum constant --name INTRO
+enum constant --name KEYS
+enum constant --name NORMALFORM1
+enum constant --name NORMALFORM2
+enum constant --name NORMALFORM3
+enum constant --name SOLVED
+entity --class Points --testAutomatically --serializable 
+field string name --notNull 
+field date --fieldName gameDate --type java.util.Date --persistenceType JPA_TIMESTAMP
+field number --fieldName points --type java.lang.Long --notNull --min 0
+field string --fieldName appKey --sizeMax 10 --notNull 
+field string --fieldName taskId
+entity --class Task --table TASKS --testAutomatically --serializable 
+field number --fieldName ordering --type java.lang.Short --notNull --primitive
+field string --fieldName description --notNull --sizeMax 200
+field string --fieldName locale --notNull --sizeMin 2 --sizeMax 2
+field enum --fieldName type --type ~.ExerciseState
+field boolean --fieldName solved --value false --transient 
+entity --class TableColumn --testAutomatically --serializable --table TABLE_COLUMNS
+field string --fieldName name --sizeMin 1 --sizeMax 60 --notNull 
+field string --fieldName locale --notNull --sizeMin 2 --sizeMax 2
+field boolean --fieldName keyColumn --notNull
+entity --class TableRow --testAutomatically --serializable --table TABLE_ROWS
+field number --fieldName rowNumber --type java.lang.Integer --notNull 
+field string --fieldName content --sizeMax 100 --notNull 
+field string --fieldName locale --notNull --sizeMin 2 --sizeMax 2
+entity --class TaskTable --testAutomatically --serializable --table TASK_TABLES
+field number --fieldName ordering --type java.lang.Short --primitive 
+field number --fieldName normalform --type java.lang.Short --primitive 
+field string --fieldName description --sizeMax 150 --notNull 
+class --class ~.service.InternationalizationService
+field set --fieldName tasks --element ~.Task --cardinality ONE_TO_MANY
+field set --fieldName tasks --element ~.Task --cardinality ONE_TO_MANY --class ~.Exercise
+field set --fieldName tasks --element ~.TaskTable --cardinality ONE_TO_MANY --class ~.Task
+// [failed] field set --fieldName exercise --element ~.Exercise --cardinality MANY_TO_ONE  --class ~.Task
+field reference --fieldName exercise --type ~.Exercise --cardinality MANY_TO_ONE --class ~.Task
+field set --fieldName tableColumns --element ~.TableColumn --cardinality ONE_TO_MANY --class ~.TaskTable
+field set --fieldName tableRows --element ~.TableRow --cardinality ONE_TO_MANY --class ~.TaskTable
+field reference --fieldName task --type ~.Task --cardinality MANY_TO_ONE --class ~.TaskTable
+field set --fieldName tableRows --element ~.TableRow --cardinality ONE_TO_MANY --class ~.TableColumn
+field reference --fieldName taskTable --type ~.TaskTable --cardinality MANY_TO_ONE --class ~.TableColumn
+field reference --fieldName taskTable --type ~.TaskTable --cardinality MANY_TO_ONE --class ~.TableRow
+field reference --fieldName taskColumn --type ~.TableColumn --cardinality MANY_TO_ONE --class ~.TableRow
+hint
+entity --class ~.i18n.LocalizedLabel
+// [failed] entity --class ~.i18n.LocalizedLabel
+// [failed] entity --class ~.i18n.LocalizedLabel --testAutomatically 
+field string --fieldName entityName --notNull --sizeMax 20
+field number --fieldName attributeId --type java.lang.Long
+field other --fieldName locale --type java.util.Locale
+// [failed] field string --fieldName value --notNull 
+field string --fieldName content --notNull 
+hint
+finder list
+finder add --finderName findLocalizedLabelsByEntityNameAndAttributeIdAndLocale
+finder add --finderName findTableColumnsByTaskTableAndKeyColumn --class ~.TableColumn
+finder add --finderName findTableColumnsByKeyColumn
+// [failed] finder add --finderName findTaskByType --class ~.Task
+finder list
+finder add --finderName findTasksByType --class ~.Task
+hint
+help
+web flow
+help
+web mvc install language --code de
+web mvc install language --code en
+help
+poll now
+controller all --package ~.web
+help
+perform tests
+perform tests
+perform tests
+perform tests
+perform clean
+perform eclipse
+quit
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2010-11-24 00:30:49
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2010-11-24 00:40:42
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2010-11-24 00:40:46
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2010-11-24 00:41:04
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2010-11-24 00:41:39
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2010-11-26 14:46:25
+logging setup --level DEBUG --package PROJECT 
+// [failed] finder list --class Exercise
+finder list --class ~.Exercise
+finder list --class ~.Task
+// [failed] finder add --finderName findTaskByExerciseAndType
+finder add --finderName findTasksByExerciseAndType
+web flow --flowName doexercise
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2010-12-01 18:00:45
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2010-12-12 18:26:14
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2010-12-12 19:09:37
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2010-12-12 19:15:01
+logging setup --level DEBUG 
+logging setup --level WARN 
+logging setup --level DEBUG --package WEB 
+logging setup --level DEBUG --package ALL_SPRING 
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2010-12-17 16:37:03
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2011-01-09 22:31:23
+// [failed] test integration --entity ~.service.InternationalizationService
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2011-01-11 22:25:57
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log opened at 2011-01-13 08:55:57
+// Spring Roo 1.1.0.RELEASE [rev 793f2b0] log closed at 2011-01-13 08:56:40
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-13 09:21:12
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-13 09:26:18
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-13 09:26:24
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-13 09:27:49
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-13 09:27:57
+perform tests
+// [failed] finder list --class fhkoeln.edb.nftool.Exercise 
+finder list --class fhkoeln.edb.nftool.Exercise 
+finder list --class fhkoeln.edb.nftool.Exercise --depth 2
+finder list --class fhkoeln.edb.nftool.Exercise --depth 1 --filter ExerciseState
+finder list --class fhkoeln.edb.nftool.Exercise --depth 1 --filter "ExerciseState"
+finder list --class fhkoeln.edb.nftool.Exercise --depth 1
+finder list --class fhkoeln.edb.nftool.Exercise --depth 1 --filter tasks
+finder list --class fhkoeln.edb.nftool.Exercise --depth 2 --filter tasks
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-13 14:03:30
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-13 14:03:36
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-13 14:26:29
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-17 11:26:36
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-18 22:43:56
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-26 19:07:48
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-26 19:10:36
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-26 19:10:44
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-26 19:11:18
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-26 19:11:24
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-26 19:11:43
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-26 19:11:48
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-26 19:13:03
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-26 19:13:08
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-26 19:17:34
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-26 19:17:41
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-26 20:09:48
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-26 20:09:54
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-26 20:59:07
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-26 20:59:14
+backup
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-27 18:17:22
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-01-31 11:18:41
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-01-31 14:36:49
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-02-02 14:06:22
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-02-02 15:04:45
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-02-02 15:04:53
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-02-02 22:42:01
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-02-07 17:03:11
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-02-07 17:03:42
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-02-07 17:03:52
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-02-08 23:16:58
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-02-18 17:44:33
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-02-19 00:36:24
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-02-21 09:36:00
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-02-21 21:48:39
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-02-21 21:48:54
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-02-21 22:06:01
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-02-23 09:11:15
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-02-23 22:57:49
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-02-25 10:28:32
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-02-26 21:51:25
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log opened at 2011-02-28 10:21:58
+backup
+// Spring Roo 1.1.1.RELEASE [rev 156ccd6] log closed at 2011-02-28 10:55:49
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-02-28 10:56:28
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-02-28 17:34:58
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-03-08 09:14:22
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-03-08 13:58:14
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-03-08 22:36:36
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-03-08 23:19:52
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-03-09 09:52:18
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-03-09 16:48:27
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-13 14:30:20
+quit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-13 14:40:28
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-13 14:43:02
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.url.stream
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.propfiles
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.dbre
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.tostring
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.javabean
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.web.selenium
+osgi obr url remove --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr url add --url http://spring-roo-repository.springsource.org/repository.xml
+osgi obr start --bundleSymbolicName org.springframework.roo.addon.roobot.client
+// [failed] addon upgrade all 
+pgp trust --keyId 0x587B796C
+help
+quit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-13 14:56:55
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-13 14:57:02
+persistence setup --database HYPERSONIC_PERSISTENT --provider HIBERNATE
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-13 16:08:44
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-13 16:14:14
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-13 17:50:27
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-15 14:04:34
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-15 16:16:07
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-15 17:43:42
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-18 15:20:21
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-18 17:49:37
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-19 08:49:13
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-19 20:15:08
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-21 13:53:53
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-21 16:40:18
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-26 09:35:52
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-26 17:16:47
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-26 17:16:58
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-26 17:20:18
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-26 17:33:37
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-26 17:40:13
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-27 19:56:28
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-27 22:49:30
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-28 08:47:23
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-28 17:45:42
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-29 11:02:42
+addon list 
+persistence setup --database ORACLE --provider HIBERNATE
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-29 17:13:50
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-04-29 17:28:00
+perform assembly
+perform clean
+perform package
+quit
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-04-29 17:30:02
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-02 10:45:37
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-02 16:50:25
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-03 13:20:56
+addon search --linesPerResult 1
+osgi ps
+osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
+osgi obr url remove --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+addon install bundle --bundleSymbolicName de.saxsys.roo.equals.addon
+pgp automatic trust
+osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
+osgi obr url remove --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+addon install bundle --bundleSymbolicName de.saxsys.roo.equals.addon
+pgp trust --keyId 0x0E5BA660
+osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
+osgi obr url remove --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
+addon install bundle --bundleSymbolicName de.saxsys.roo.equals.addon
+osgi ps
+equals --class ~.Exercise
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-03 22:21:25
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-10 10:54:05
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-10 17:45:28
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-11 13:43:10
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-11 17:04:25
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-12 11:12:37
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-13 08:53:59
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-13 12:29:50
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-13 14:18:32
+perform package
+perform package
+perform package
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-13 17:20:42
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-16 12:10:16
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-16 16:49:23
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 09:27:48
+perform package
+perform package
+perform package
+database properties list
+persistence setup --database ORACLE --provider HIBERNATE --jndiDataSource jdbc/edbNftoolDBHL
+persistence setup --database ORACLE --provider HIBERNATE
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 14:26:52
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-05-18 14:30:51
+perform package
+perform clean
+perform package 
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-05-18 14:39:26
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log opened at 2011-06-06 11:04:25
+perform package
+perform package
+perform package
+perform package
+// Spring Roo 1.1.2.RELEASE [rev fbc33bb] log closed at 2011-06-06 11:36:33

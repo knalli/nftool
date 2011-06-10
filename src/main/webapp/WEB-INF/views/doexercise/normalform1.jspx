@@ -1,0 +1,26 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:form="http://www.springframework.org/tags/form" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+	<jsp:output omit-xml-declaration="yes"/>
+	<div id="_title">
+		<h1><util:i18n entity="${Exercise}" field="title"/></h1>
+		<p class="description">
+			<util:i18n escapeXml="false" entity="${Exercise}" field="description"/>
+		</p>
+		<p class="points"><spring:message htmlEscape="false" code="webflow_results_points_intermediate" arguments="${Points.points}" /></p>
+		<p class="description yellow-gradient"><util:i18n entity="${task}" field="description"/></p>
+		
+		<form:form method="POST" commandName="answerColumnsNF1" cssClass="columns" >
+			<form:errors cssClass="errors red-gradient" delimiter="&lt;p/&gt;" path="*"/>
+			<div class="tables">
+				<roo:tasktable tables="${task.taskTables}" controls="true" locked="${task.solved}"/>
+			</div>
+			<div class="submit">
+				<spring:message var="proceed" code="button_proceed" />
+				<spring:message var="back" code="button_back" />
+				<input type="submit" id="back" name="_eventId_back" value="${back}"/>
+				<input type="submit" id="success" name="_eventId_success" value="${proceed}" />
+			</div>		
+		</form:form>
+	</div>
+</div>

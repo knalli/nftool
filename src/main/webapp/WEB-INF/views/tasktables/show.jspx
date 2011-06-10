@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_fhkoeln_edb_nftool_TaskTable" object="${tasktable}" path="/tasktables" z="H8V3Uc9QYwWmW2VSLA/1hRq3+68=">
+        <field:display field="ordering" id="s_fhkoeln_edb_nftool_TaskTable_ordering" object="${tasktable}" z="yvXCJ02f3h6Vx4H6Tgxaq6Iw0Yg="/>
+        <field:display field="normalform" id="s_fhkoeln_edb_nftool_TaskTable_normalform" object="${tasktable}" z="EXoaNbO9/WhXUxtyELlEPZ35JvQ="/>
+        
+        
+        
+        
+    <field:display field="description" id="s_fhkoeln_edb_nftool_TaskTable_description" object="${tasktable}" z="w6gPPNBsaXTFNeV+xgssg/UFkiM="/>
+    <field:display field="tableRows" id="s_fhkoeln_edb_nftool_TaskTable_tableRows" object="${tasktable}" z="0IBkQvt8PSTNS92EwSteUyhCJXA="/>
+        <field:display field="tableColumns" id="s_fhkoeln_edb_nftool_TaskTable_tableColumns" object="${tasktable}" z="TNCKwsdIR0ExiSt6kVpVZrlmREc="/>
+    </page:show>
+</div>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_fhkoeln_edb_nftool_TableRow" modelAttribute="tableRow" path="/tablerows" versionField="Version" z="0EXVXXdDB4Fzl2ZakHBuZkcIOmo=">
+        <field:input field="rowNumber" id="c_fhkoeln_edb_nftool_TableRow_rowNumber" required="true" validationMessageCode="field_invalid_integer" z="SLn+tvfuCtswn/AOgVtIsidkgBE="/>
+    <field:input field="content" id="c_fhkoeln_edb_nftool_TableRow_content" z="AahdpJMLShqBQh1Q0MyPQswUXVs="/>
+    </form:update>
+</div>

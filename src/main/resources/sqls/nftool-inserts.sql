@@ -1,0 +1,12 @@
+INSERT INTO table_rows (id, row_number, table_fk, column_fk) VALUES(9,  3, 1, 1);
+	INSERT INTO table_rows_i18n (id, locale, table_row, content) VALUES (17, 'de_DE', 9, '102');
+	INSERT INTO table_rows_i18n (id, locale, table_row, content) VALUES (18, 'en_EN', 9, '102');
+INSERT INTO table_rows (id,row_number, table_fk, column_fk) VALUES(10,  3, 1, 2);
+	INSERT INTO table_rows_i18n (id, locale, table_row, content) VALUES (19, 'de_DE', 10, 'Helge Schneider - Es rappelt im Karton!');
+	INSERT INTO table_rows_i18n (id, locale, table_row, content) VALUES (20, 'en_EN', 10, 'Helge Schneider - Es rappelt im Karton!');
+INSERT INTO table_rows (id,row_number, table_fk, column_fk) VALUES(11,  3, 1, 3);
+	INSERT INTO table_rows_i18n (id, locale, table_row, content) VALUES (21, 'de_DE', 11, '2001');
+	INSERT INTO table_rows_i18n (id, locale, table_row, content) VALUES (22, 'en_EN', 11, '2001');
+INSERT INTO table_rows (id,row_number, table_fk, column_fk) VALUES(12,  3, 1, 4);
+	INSERT INTO table_rows_i18n (id, locale, table_row, content) VALUES (23, 'de_DE', 12, 'Musik Musik Musik, Der Sensemann (Eierlikoer), Hoffnung');
+	INSERT INTO table_rows_i18n (id, locale, table_row, content) VALUES (24, 'en_EN', 12, 'Musik Musik Musik, Der Sensemann (Eierlikoer), Hoffnung');

@@ -1,0 +1,21 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:output omit-xml-declaration="yes" />
+
+	<jsp:directive.attribute name="entity" type="fhkoeln.edb.nftool.ExerciseEntity" required="true" description="Entity for which we should lookup the translation." />
+	<jsp:directive.attribute name="field" type="java.lang.String" required="true" description="Fieldname of the entity" />
+	<jsp:directive.attribute name="localeOverride" type="java.lang.String" required="false" description="Language to fetch." />
+	<jsp:directive.attribute name="escapeXml" type="java.lang.Boolean" required="false" />
+
+	<c:if test="${empty localeOverride}">
+		<spring:eval var="txt" expression="i18nService.getText(entity, field, locale)" />
+	</c:if>
+	
+	<c:if test="${!(empty localeOverride)}" >
+		<spring:eval var="txt" expression="i18nService.getText(entity, field, localeOverride)" />
+	</c:if>
+	
+	<c:set var="escapeXmlVal" value="${empty escapeXml or not escapeXml}" />	
+	<c:out value="${txt}" escapeXml="escapeXmlVal"/>
+	
+</jsp:root>

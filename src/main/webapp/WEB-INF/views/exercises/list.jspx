@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_fhkoeln_edb_nftool_Exercise" items="${exercises}" z="gFL7RZsw8XiDs1kAwXPGBkEqXNQ=">
+        <table:table data="${exercises}" id="l_fhkoeln_edb_nftool_Exercise" path="/exercises" z="t1ovq8zdG6+lckRhHYYig+i0xgU=">
+            <table:column id="c_fhkoeln_edb_nftool_Exercise_description" property="description" z="Tb726DK2vlq2ZB2jVOhwm/D8eK4="/>
+            
+            <table:column id="c_fhkoeln_edb_nftool_Exercise_title" property="title" z="oiMnJifiS/umeTAmGoSroaQdV+Q="/>
+        <table:column id="c_fhkoeln_edb_nftool_Exercise_tasks" property="tasks" z="uk9Uw7PlxpXddSUGpIC2t+Ks71Y="/>
+        </table:table>
+    </page:list>
+</div>

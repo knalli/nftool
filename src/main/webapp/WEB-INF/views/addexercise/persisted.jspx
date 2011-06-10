@@ -1,0 +1,9 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:form="http://www.springframework.org/tags/form">
+	<jsp:output omit-xml-declaration="yes"/>
+	
+	<div id="_title">
+		<h1>Persisted!</h1>
+	</div>
+
+</div>

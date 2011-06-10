@@ -1,0 +1,39 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:form="http://www.springframework.org/tags/form" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+	version="2.0">
+	<jsp:output omit-xml-declaration="yes"/>
+	
+	
+	<div id="_title">
+		<h1>Neue Aufgabe erstellen</h1>
+<!--		<util:i18n content="${Exercise.title}" entity="Exercise" field="title"/>-->
+	</div>
+	<form:form modelAttribute="newExercise" action="exercise">
+		
+		<spring:hasBindErrors name="newExercise">
+			<p>Ungültige Eingabe!</p>
+		</spring:hasBindErrors>
+		<p>
+			Bitte wählen Sie die Sprache, in der die neue Aufgabe erfasst werden soll:<br />
+			<form:select items="${locales}" path="locale" />
+		</p>
+		<p>
+			Bitte geben Sie den Titel der neuen Aufgabe ein:<br />
+			<form:input path="exercise.title"/>
+		</p>
+		
+		<p>
+			Bite geben Sie, kommasepariert, die Spalten der einleitenden Tabelle ein:<br />
+<!--			<textarea rows="4" cols="50" name="columnNames">Spalte 1</textarea>-->
+			<form:textarea path="columnNames" />
+		</p>
+<!--		<p>-->
+<!--			Bitte geben Sie eine einleitende Beschreibung der Aufgabe ein:<br />-->
+<!--			<form:textarea path="currentTask.description" rows="4" cols="50" />-->
+<!--		</p>-->
+		
+		<input type="submit" value="Submit" />
+		
+	</form:form>
+</div>

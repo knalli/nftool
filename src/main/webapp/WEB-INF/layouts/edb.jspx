@@ -1,0 +1,78 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:output omit-xml-declaration="yes" doctype-root-element="html"
+        doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+        doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />  
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+ 	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" >  
+	
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />		
+
+		<spring:theme code="styleSheet" var="styleSheet"/>	
+		<spring:url value="/${styleSheet}" var="css_url"/>
+		<spring:theme code="styleSheetIE" var="styleSheetIE"/>	
+		<spring:url value="/${styleSheetIE}" var="ie_css_url"/>
+		
+		<spring:theme code="jsJQuery" var="jquery"/>
+		<spring:theme code="jsJQueryUI" var="jquery_ui"/>	
+		<spring:theme code="jsEdb" var="js_edb"/>	
+		<spring:theme code="jsNftool" var="js_nftool"/>	
+		<spring:url value="/${jquery}" var="jquery_url"/>
+		<spring:url value="/${jquery_ui}" var="jquery_ui_url"/>
+		<spring:url value="/${js_edb}" var="js_edb_url"/>
+		<spring:url value="/${js_nftool}" var="js_nftool_url"/>
+		<spring:url value="/static/images/favicon.ico" var="favicon" />
+
+		<link rel="stylesheet" type="text/css" media="screen" href="${css_url}" />
+		<link rel="SHORTCUT ICON" href="${favicon}" />
+		
+		<![CDATA[<!--[if lt IE 9]>
+			<link rel="stylesheet" type="text/css" media="screen" href="${ie_css_url}" />
+		<![endif]-->]]>
+		
+		<script type="text/javascript" src="${jquery_url}"><!-- //required for FF3 and Opera --></script>
+		<script type="text/javascript" src="${jquery_ui_url}"><!-- //required for FF3 and Opera --></script>
+		<script type="text/javascript" src="${js_edb_url}"><!-- //required for FF3 and Opera --></script>
+		<script type="text/javascript" src="${js_nftool_url}"><!-- //required for FF3 and Opera --></script>
+		
+		<spring:message code="application_name" var="app_name"/>
+		<title><spring:message code="welcome_h3" arguments="${app_name}" /></title>
+	</head>
+   	<body>		
+   		<div id="wrapper">
+		    <tiles:insertAttribute name="menu" ignore="true" />   
+	    	<div id="main" style="" class="nftool">
+	    		<tiles:insertAttribute name="body" />
+	    		<div id="footer">				
+				  	<spring:url var="begin" value="/doexercise" />
+				    <span><a href="${begin}"><spring:message code="button_begin"/></a></span>				    
+				    <c:if test="${pageContext['request'].userPrincipal != null}">   	
+				    	/
+				    	<span>			    
+						    <spring:url var="logout" value="/static/j_spring_security_logout" />
+						    <a href="${logout}"><spring:message code="security_logout" /></a>
+					    </span>					    
+					</c:if>
+				    
+				    <span id="language">
+					    <c:out value=" | "/>
+					    <spring:message code="global_language"/>
+					    <c:out value=": "/>
+					  	<util:language label="English" locale="en"/>
+					    <util:language label="Deutsch" locale="de"/>
+				    </span>
+    				
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+</jsp:root>

@@ -1,0 +1,107 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:form="http://www.springframework.org/tags/form" 
+	version="2.0">
+	<jsp:output omit-xml-declaration="yes"/>
+	
+	<jsp:directive.attribute name="tables" type="java.util.Set" required="true" description="The table(s) to be printed."/>
+	<jsp:directive.attribute name="controls" type="java.lang.Boolean" required="true" description="Add header controls?"/>
+	<jsp:directive.attribute name="locked" type="java.lang.Boolean" description="Allow control modification?"/>
+	<jsp:directive.attribute name="editable" type="java.lang.Boolean" required="false" description="Should the table be a Dojo DataGrid"/>
+	
+	<spring:theme code="keyColumnClass" var="keyClass"/>
+	<spring:theme code="keyHeaderClass" var="keyHeadClass"/>
+	<spring:theme code="headerControlClass" var="headerControlClass"/>
+	
+	<spring:eval expression="i18nService != null" var="i18nServiceExists"/>
+	
+	<c:forEach var="table" items="${tables}">
+		<table class="exercise">
+			<caption>
+				<c:choose>
+					<c:when test="${i18nServiceExists}">
+						<spring:eval expression="i18nService.getText(table, 'description', locale)"/>
+					</c:when>
+					<c:otherwise>
+						<c:out value="${table.description}"/>
+					</c:otherwise>
+				</c:choose>
+			</caption>
+			<thead>
+				<tr>
+					<c:forEach var="column" items="${table.tableColumns}">
+						<th class="${column.keyColumn ? keyHeadClass : ''} ${controls ? headerControlClass : ''} blue-gradient">
+							<c:if test="${column.keyColumn}">
+								<span class="${keyClass}">&#160;</span>							
+							</c:if>
+							<c:choose>
+								<c:when test="${controls}">
+
+									<c:choose>
+										<c:when test="${i18nServiceExists}">
+											<spring:eval var="colName" expression="i18nService.getText(column, 'name', locale)" />
+										</c:when>
+										<c:otherwise>
+											<c:set var="colName" value="${column.name}"/>
+										</c:otherwise>
+									</c:choose>
+								
+									<label for="lblColumn${column.id}"><c:out value="${colName}" /></label>
+									<c:if test="${not editable}">
+										<c:choose>
+											<c:when test="${locked}">
+												<form:checkbox path="columnIds" id="lblColumn${column.id}" value="${column.id}" disabled="true" />						
+											</c:when>
+											<c:otherwise>
+												<form:checkbox path="columnIds" id="lblColumn${column.id}" value="${column.id}" />
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+								</c:when>
+								<c:otherwise>
+									<!-- Print column without controls -->
+									<c:choose>
+										<c:when test="${i18nServiceExists}">
+											<spring:eval expression="i18nService.getText(column, 'name', locale)"/>
+										</c:when>
+										<c:otherwise>
+											<c:out value="${column.name}"/>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</th>
+					</c:forEach>
+				</tr>
+			</thead>
+			<tbody>
+				<spring:eval var="rowNumber" expression="table.tableRows.iterator().next().rowNumber"/>
+				<c:set var="rowSeperator"><![CDATA[</tr><tr>]]></c:set>
+				<tr>
+					<spring:eval expression="table.tableRows" var="tableRows"/>
+					<c:forEach var="row" items="${tableRows}">
+						<c:if test="${row.rowNumber gt rowNumber}">
+							<c:out value="${rowSeperator}" escapeXml="false"/>
+							<c:set var="rowNumber" value="${rowNumber + 1}"/>
+						</c:if>
+						<td>
+							<c:choose>
+								<c:when test="${i18nServiceExists}">
+									<spring:eval expression="i18nService.getText(row, 'content', locale)" />
+								</c:when>
+								<c:when test="${rowContent eq ''}">
+									&#160;
+								</c:when>
+								<c:when test="${rowContent eq null}">
+									<em>NULL</em>
+								</c:when>
+								<c:otherwise>
+									<c:out value="${row.content}"/>
+								</c:otherwise>
+							</c:choose>	
+						</td>
+					</c:forEach>
+				</tr>
+			</tbody>
+		</table>
+	</c:forEach>
+ </jsp:root>

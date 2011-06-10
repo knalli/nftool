@@ -1,0 +1,11 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+	<jsp:output omit-xml-declaration="yes"/>
+	<spring:message var="title" code="webflow_endstate_title" />
+	<div id="_title">
+		<h1><util:i18n entity="${Exercise}" field="title"/></h1>
+	
+		<p><spring:message htmlEscape="false" code="webflow_endstate_message" /></p>
+		<spring:message htmlEscape="false" code="webflow_results_points" arguments="${Points.points}" />
+	</div>
+</div>
